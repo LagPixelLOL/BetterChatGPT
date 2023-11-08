@@ -110,21 +110,15 @@ const useSubmit = () => {
         let partial = '';
         while (reading && useStore.getState().generating) {
           const { done, value } = await reader.read();
-          let debug_str_sse = partial + new TextDecoder().decode(value)
-          console.log('"' + debug_str_sse + '"')
           const result = parseEventSource(
-            debug_str_sse
+            new TextDecoder().decode(value)
           );
-          console.log('"' + result + '"')
-          partial = '';
 
           if (result === '[DONE]' || done) {
             reading = false;
           } else {
             const resultString = result.reduce((output: string, curr) => {
-              if (typeof curr === 'string') {
-                partial += curr;
-              } else {
+              if (typeof curr !== 'string') {
                 const content = curr.choices[0].delta.content;
                 if (content) output += content;
               }
