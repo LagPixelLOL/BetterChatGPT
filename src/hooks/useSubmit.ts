@@ -111,9 +111,11 @@ const useSubmit = () => {
         while (reading && useStore.getState().generating) {
           const { done, value } = await reader.read();
           let debug_str_sse = partial + new TextDecoder().decode(value)
+          console.log('"' + debug_str_sse + '"')
           const result = parseEventSource(
             debug_str_sse
           );
+          console.log('"' + result + '"')
           partial = '';
 
           if (result === '[DONE]' || done) {
