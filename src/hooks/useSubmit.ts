@@ -110,8 +110,9 @@ const useSubmit = () => {
         let partial = '';
         while (reading && useStore.getState().generating) {
           const { done, value } = await reader.read();
+          let debug_str_sse = partial + new TextDecoder().decode(value)
           const result = parseEventSource(
-            partial + new TextDecoder().decode(value)
+            debug_str_sse
           );
           partial = '';
 
