@@ -21,13 +21,13 @@ const Menu = () => {
 
   useEffect(() => {
     if (window.innerWidth < 768) setHideSideMenu(true);
-    window.addEventListener('resize', () => {
-      if (
-        windowWidthRef.current !== window.innerWidth &&
-        window.innerWidth < 768
-      )
-        setHideSideMenu(true);
-    });
+    // window.addEventListener('resize', () => {
+    //   if (
+    //     windowWidthRef.current !== window.innerWidth &&
+    //     window.innerWidth < 768
+    //   )
+    //     setHideSideMenu(true);
+    // });
   }, []);
 
   const handleMouseDown = () => {
@@ -106,7 +106,7 @@ const Menu = () => {
           )}
         </div>
         <div
-          className='absolute top-0 right-0 h-full w-2 cursor-ew-resize'
+          className='absolute top-0 right-0 h-full w-2 resize-none' // cursor-ew-resize
           onMouseDown={handleMouseDown}
         />
       </div>

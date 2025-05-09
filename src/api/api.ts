@@ -50,13 +50,16 @@ export const getChatCompletion = async (
   }
   endpoint = endpoint.trim();
 
+  const isGemini25ProPaid = config.model === "google/gemini-2.5-pro-preview";
   const response = await fetch(endpoint, {
     method: 'POST',
     headers,
     body: JSON.stringify({
       messages,
       ...config,
-      max_tokens: undefined,
+      max_tokens: config.model.includes('/') || config.model.startsWith('gemini-') ? undefined : 4096,
+      reasoning: isGemini25ProPaid ? {max_tokens: 0} : undefined,
+      provider: isGemini25ProPaid ? {only: ["Google"]} : undefined,
     }),
   });
   if (!response.ok) throw new Error(await response.text());
@@ -105,13 +108,17 @@ export const getChatCompletionStream = async (
     }
   }
   endpoint = endpoint.trim();
+
+  const isGemini25ProPaid = config.model === "google/gemini-2.5-pro-preview";
   const response = await fetch(endpoint, {
     method: 'POST',
     headers,
     body: JSON.stringify({
       messages,
       ...config,
-      max_tokens: undefined,
+      max_tokens: config.model.includes('/') || config.model.startsWith('gemini-') ? undefined : 4096,
+      reasoning: isGemini25ProPaid ? {max_tokens: 0} : undefined,
+      provider: isGemini25ProPaid ? {only: ["Google"]} : undefined,
       stream: true,
     }),
   });

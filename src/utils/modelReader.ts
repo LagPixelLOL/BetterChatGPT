@@ -190,8 +190,7 @@ export const loadModels = async (): Promise<{
     modelDisplayNames[model.id] = model.id;
   });
 
-  modelsJson.data.forEach((model) => {
-    const modelId = model.id.split('/').pop() as string;
+  const processModelWithId = (model: any, modelId: string) => {
     modelOptions.push(modelId);
     modelMaxToken[modelId] = model.context_length;
     modelCost[modelId] = {
@@ -209,7 +208,7 @@ export const loadModels = async (): Promise<{
 
     // Detect image capabilities
     var inputModality = model.architecture.modality.split('->');
-    
+
     if (parseFloat(model.pricing.image) > 0 || (inputModality && inputModality.length >= 1 && inputModality[0].includes('image'))) {
       modelTypes[modelId] = 'image';
       modelCost[modelId].image = {
@@ -221,6 +220,14 @@ export const loadModels = async (): Promise<{
     }
     modelStreamSupport[modelId] = model.is_stream_supported;
     modelDisplayNames[modelId] = modelId;
+  };
+
+  modelsJson.data.forEach((model) => {
+    const trimmedId = model.id.split('/').pop() as string;
+    processModelWithId(model, trimmedId);
+    if (model.id !== trimmedId) {
+      processModelWithId(model, model.id);
+    }
   });
 
   // Sort modelOptions to prioritize gpt-4.5 models at the top, followed by custom models, gpt-4o models, o1 models, and then other OpenAI models
