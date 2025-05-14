@@ -14,10 +14,10 @@ const Menu = () => {
   const hideSideMenu = useStore((state) => state.hideSideMenu);
   const setHideSideMenu = useStore((state) => state.setHideSideMenu);
   const menuWidth = useStore((state) => state.menuWidth);
-  const setMenuWidth = useStore((state) => state.setMenuWidth);
+  // const setMenuWidth = useStore((state) => state.setMenuWidth);
 
-  const windowWidthRef = useRef<number>(window.innerWidth);
-  const isResizing = useRef<boolean>(false);
+  // const windowWidthRef = useRef<number>(window.innerWidth);
+  // const isResizing = useRef<boolean>(false);
 
   useEffect(() => {
     if (window.innerWidth < 768) setHideSideMenu(true);
@@ -30,32 +30,32 @@ const Menu = () => {
     // });
   }, []);
 
-  const handleMouseDown = () => {
-    isResizing.current = true;
-  };
+  // const handleMouseDown = () => {
+  //   isResizing.current = true;
+  // };
 
-  const handleMouseMove = (e: MouseEvent) => {
-    if (isResizing.current) {
-      const newWidth = e.clientX;
-      if (newWidth > 100 && newWidth < window.innerWidth * 0.75) {
-        setMenuWidth(newWidth);
-      }
-    }
-  };
+  // const handleMouseMove = (e: MouseEvent) => {
+  //   if (isResizing.current) {
+  //     const newWidth = e.clientX;
+  //     if (newWidth > 100 && newWidth < window.innerWidth * 0.75) {
+  //       setMenuWidth(newWidth);
+  //     }
+  //   }
+  // };
 
-  const handleMouseUp = () => {
-    isResizing.current = false;
-  };
+  // const handleMouseUp = () => {
+  //   isResizing.current = false;
+  // };
 
-  useEffect(() => {
-    window.addEventListener('mousemove', handleMouseMove);
-    window.addEventListener('mouseup', handleMouseUp);
+  // useEffect(() => {
+  //   window.addEventListener('mousemove', handleMouseMove);
+  //   window.addEventListener('mouseup', handleMouseUp);
 
-    return () => {
-      window.removeEventListener('mousemove', handleMouseMove);
-      window.removeEventListener('mouseup', handleMouseUp);
-    };
-  }, []);
+  //   return () => {
+  //     window.removeEventListener('mousemove', handleMouseMove);
+  //     window.removeEventListener('mouseup', handleMouseUp);
+  //   };
+  // }, []);
 
   return (
     <>
@@ -105,10 +105,12 @@ const Menu = () => {
             <DownArrow className='h-4 w-4' />
           )}
         </div>
+        {/*
         <div
-          className='absolute top-0 right-0 h-full w-2 resize-none' // cursor-ew-resize
+          className='absolute top-0 right-0 h-full w-2 cursor-ew-resize'
           onMouseDown={handleMouseDown}
         />
+        */}
       </div>
       <div
         id='menu-backdrop'
