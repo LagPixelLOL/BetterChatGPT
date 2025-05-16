@@ -145,7 +145,7 @@ const useSubmit = () => {
           !data.choices[0].message ||
           !data.choices[0].message.content
         ) {
-          throw new Error(t('errors.failedToRetrieveData') as string);
+          throw new Error(t('errors.failedToRetrieveData') as string + '\n\nData: ' + JSON.stringify(data));
         }
 
         const updatedChats: ChatInterface[] = JSON.parse(
@@ -206,8 +206,12 @@ const useSubmit = () => {
                 if (typeof curr === 'string') {
                   partial += curr;
                 } else {
-                  const content = curr.choices[0]?.delta?.content ?? null;
-                  if (content) output += content;
+                  try {
+                    const content = curr.choices[0].delta.content;
+                    if (content) output += content;
+                  } catch (e: unknown) {
+                    throw new Error(t('errors.failedToRetrieveData') as string + '\n\nMessage: ' + (e as Error).message + '\n\nData: ' + JSON.stringify(curr));
+                  }
                 }
                 return output;
               }, '');
