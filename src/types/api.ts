@@ -14,6 +14,7 @@ export interface EventSourceDataChoices {
     role?: string;
   };
   finish_reason?: string;
+  native_finish_reason?: string;
   index: number;
 }
 

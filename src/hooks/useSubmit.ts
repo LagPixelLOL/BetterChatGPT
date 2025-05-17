@@ -112,6 +112,9 @@ const useSubmit = () => {
       );
       if (messages.length === 0)
         throw new Error(t('errors.messageExceedMaxToken') as string);
+
+      let finishReason: any;
+
       if (!isStreamSupported) {
         if (!apiKey || apiKey.length === 0) {
           // official endpoint
@@ -138,14 +141,17 @@ const useSubmit = () => {
           );
         }
 
-        if (
-          !data ||
-          !data.choices ||
-          !data.choices[0] ||
-          !data.choices[0].message ||
-          !data.choices[0].message.content
-        ) {
+        if (data?.choices?.[0]?.message?.content == null) {
           throw new Error(t('errors.failedToRetrieveData') as string + '\n\nData: ' + JSON.stringify(data));
+        }
+
+        const choice = data.choices[0];
+        finishReason = choice.finish_reason;
+        if (!finishReason || finishReason === 'stop' || finishReason === 'content_filter') {
+          const nativeFinishReason = choice?.native_finish_reason;
+          if (typeof nativeFinishReason === 'string') {
+            finishReason = nativeFinishReason.toLowerCase();
+          }
         }
 
         const updatedChats: ChatInterface[] = JSON.parse(
@@ -155,7 +161,7 @@ const useSubmit = () => {
         (
           updatedMessages[updatedMessages.length - 1]
             .content[0] as TextContentInterface
-        ).text += data.choices[0].message.content;
+        ).text += choice.message.content;
         setChats(updatedChats);
       } else {
         // no api key (free)
@@ -207,8 +213,18 @@ const useSubmit = () => {
                   partial += curr;
                 } else {
                   try {
-                    const content = curr.choices[0].delta.content;
+                    const choice = curr.choices[0];
+                    const content = choice.delta.content;
                     if (content) output += content;
+                    if (!finishReason) {
+                      finishReason = choice.finish_reason;
+                      if (!finishReason || finishReason === 'stop' || finishReason === 'content_filter') {
+                        const nativeFinishReason = choice?.native_finish_reason;
+                        if (typeof nativeFinishReason === 'string') {
+                          finishReason = nativeFinishReason.toLowerCase();
+                        }
+                      }
+                    }
                   } catch (e: unknown) {
                     throw new Error(t('errors.failedToRetrieveData') as string + '\n\nMessage: ' + (e as Error).message + '\n\nData: ' + JSON.stringify(curr));
                   }
@@ -296,6 +312,10 @@ const useSubmit = () => {
             content: [{ type: 'text', text: title } as TextContentInterface],
           });
         }
+      }
+
+      if (finishReason !== 'stop') {
+        throw new Error('Finish reason is not "stop".\n\nFinish reason: ' + finishReason);
       }
     } catch (e: unknown) {
       const err = (e as Error).message;

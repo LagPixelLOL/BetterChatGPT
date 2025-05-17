@@ -58,7 +58,7 @@ export const getChatCompletion = async (
       messages,
       ...config,
       max_tokens: config.model.includes('/') || config.model.startsWith('gemini-') ? undefined : 4096,
-      reasoning: isGemini25ProPaid ? {max_tokens: 0} : undefined,
+      // reasoning: isGemini25ProPaid ? {max_tokens: 0} : undefined,
       provider: isGemini25ProPaid ? {only: ["Google"]} : undefined,
     }),
   });
@@ -117,7 +117,7 @@ export const getChatCompletionStream = async (
       messages,
       ...config,
       max_tokens: config.model.includes('/') || config.model.startsWith('gemini-') ? undefined : 4096,
-      reasoning: isGemini25ProPaid ? {max_tokens: 0} : undefined,
+      // reasoning: isGemini25ProPaid ? {max_tokens: 0} : undefined,
       provider: isGemini25ProPaid ? {only: ["Google"]} : undefined,
       stream: true,
     }),
