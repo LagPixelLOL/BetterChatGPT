@@ -4,6 +4,7 @@ import {
   MessageInterface,
 } from '@type/chat';
 import { isAzureEndpoint } from '@utils/api';
+import { officialAPIEndpoint } from '@constants/auth';
 import { ModelOptions } from '@utils/modelReader';
 
 export const getChatCompletion = async (
@@ -50,14 +51,17 @@ export const getChatCompletion = async (
   }
   endpoint = endpoint.trim();
 
-  const isGemini25ProPaid = config.model === "google/gemini-2.5-pro-preview";
+  const isOfficialOAIEndpoint = endpoint === officialAPIEndpoint;
+  const maxTokens = config.model.includes('/') || config.model.startsWith('gemini-') ? undefined : 4096;
+  const isGemini25ProPaid = config.model.startsWith("google/gemini-2.5-pro-preview");
   const response = await fetch(endpoint, {
     method: 'POST',
     headers,
     body: JSON.stringify({
       messages,
       ...config,
-      max_tokens: config.model.includes('/') || config.model.startsWith('gemini-') ? undefined : 4096,
+      max_tokens: isOfficialOAIEndpoint ? undefined : maxTokens,
+      max_completion_tokens: isOfficialOAIEndpoint ? maxTokens : undefined,
       // reasoning: isGemini25ProPaid ? {max_tokens: 0} : undefined,
       provider: isGemini25ProPaid ? {only: ["Google"]} : undefined,
     }),
@@ -109,14 +113,17 @@ export const getChatCompletionStream = async (
   }
   endpoint = endpoint.trim();
 
-  const isGemini25ProPaid = config.model === "google/gemini-2.5-pro-preview";
+  const isOfficialOAIEndpoint = endpoint === officialAPIEndpoint;
+  const maxTokens = config.model.includes('/') || config.model.startsWith('gemini-') ? undefined : 4096;
+  const isGemini25ProPaid = config.model.startsWith("google/gemini-2.5-pro-preview");
   const response = await fetch(endpoint, {
     method: 'POST',
     headers,
     body: JSON.stringify({
       messages,
       ...config,
-      max_tokens: config.model.includes('/') || config.model.startsWith('gemini-') ? undefined : 4096,
+      max_tokens: isOfficialOAIEndpoint ? undefined : maxTokens,
+      max_completion_tokens: isOfficialOAIEndpoint ? maxTokens : undefined,
       // reasoning: isGemini25ProPaid ? {max_tokens: 0} : undefined,
       provider: isGemini25ProPaid ? {only: ["Google"]} : undefined,
       stream: true,
