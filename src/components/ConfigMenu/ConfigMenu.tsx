@@ -53,7 +53,7 @@ const ConfigMenu = ({
       handleConfirm={handleConfirm}
       handleClickBackdrop={handleConfirm}
     >
-      <div className='p-6 border-b border-gray-200 dark:border-gray-600'>
+      <div className='p-6 border-b border-gray-200 dark:border-gray-600 w-[90vw] max-w-full text-sm text-gray-900 dark:text-gray-300'>
         <ModelSelector
           _model={_model}
           _setModel={_setModel}

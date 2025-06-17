@@ -53,7 +53,7 @@ export const getChatCompletion = async (
 
   const isOfficialOAIEndpoint = endpoint === officialAPIEndpoint;
   const maxTokens = config.model.includes('/') || config.model.startsWith('gemini-') ? undefined : 4096;
-  const isGemini25ProPaid = config.model.startsWith("google/gemini-2.5-pro-preview");
+  const isGemini25ProPaid = config.model.startsWith("google/gemini-2.5-pro");
   const response = await fetch(endpoint, {
     method: 'POST',
     headers,
@@ -62,7 +62,7 @@ export const getChatCompletion = async (
       ...config,
       max_tokens: isOfficialOAIEndpoint ? undefined : maxTokens,
       max_completion_tokens: isOfficialOAIEndpoint ? maxTokens : undefined,
-      // reasoning: isGemini25ProPaid ? {max_tokens: 0} : undefined,
+      reasoning: isGemini25ProPaid ? {enabled: true} : undefined,
       provider: isGemini25ProPaid ? {only: ["Google"]} : undefined,
     }),
   });
@@ -115,7 +115,7 @@ export const getChatCompletionStream = async (
 
   const isOfficialOAIEndpoint = endpoint === officialAPIEndpoint;
   const maxTokens = config.model.includes('/') || config.model.startsWith('gemini-') ? undefined : 4096;
-  const isGemini25ProPaid = config.model.startsWith("google/gemini-2.5-pro-preview");
+  const isGemini25ProPaid = config.model.startsWith("google/gemini-2.5-pro");
   const response = await fetch(endpoint, {
     method: 'POST',
     headers,
@@ -124,7 +124,7 @@ export const getChatCompletionStream = async (
       ...config,
       max_tokens: isOfficialOAIEndpoint ? undefined : maxTokens,
       max_completion_tokens: isOfficialOAIEndpoint ? maxTokens : undefined,
-      // reasoning: isGemini25ProPaid ? {max_tokens: 0} : undefined,
+      reasoning: isGemini25ProPaid ? {enabled: true} : undefined,
       provider: isGemini25ProPaid ? {only: ["Google"]} : undefined,
       stream: true,
     }),
