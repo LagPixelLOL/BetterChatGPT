@@ -4,7 +4,11 @@ import {
   MessageInterface,
 } from '@type/chat';
 import { isAzureEndpoint } from '@utils/api';
-import { officialAPIEndpoint } from '@constants/auth';
+import {
+  officialAPIEndpoint,
+  customAPIEndpoint,
+  openRouterAPIEndpoint,
+} from '@constants/auth';
 import { ModelOptions } from '@utils/modelReader';
 
 export const getChatCompletion = async (
@@ -15,6 +19,16 @@ export const getChatCompletion = async (
   customHeaders?: Record<string, string>,
   apiVersionToUse?: string
 ) => {
+  config = structuredClone(config);
+  endpoint = endpoint.trim();
+
+  const isOpenRouterEndpoint = endpoint === openRouterAPIEndpoint;
+  const isOfficialOAIEndpoint = !isOpenRouterEndpoint && (endpoint === officialAPIEndpoint || endpoint === customAPIEndpoint);
+
+  if (!isOpenRouterEndpoint) {
+    config.model = config.model.split('/').slice(1).join('/');
+  }
+
   const headers: HeadersInit = {
     'Content-Type': 'application/json',
     ...customHeaders,
@@ -49,11 +63,9 @@ export const getChatCompletion = async (
       endpoint += path;
     }
   }
-  endpoint = endpoint.trim();
 
-  const isOfficialOAIEndpoint = endpoint === officialAPIEndpoint;
-  const maxTokens = config.model.includes('/') || config.model.startsWith('gemini-') ? undefined : 4096;
-  const isGemini25ProPaid = config.model.startsWith("google/gemini-2.5-pro");
+  const maxTokens = isOpenRouterEndpoint || config.model.startsWith('gemini-') ? undefined : 4096;
+  const isGemini25ProPaidAndOpenRouterEndpoint = config.model.startsWith('google/gemini-2.5-pro');
   const response = await fetch(endpoint, {
     method: 'POST',
     headers,
@@ -62,8 +74,8 @@ export const getChatCompletion = async (
       ...config,
       max_tokens: isOfficialOAIEndpoint ? undefined : maxTokens,
       max_completion_tokens: isOfficialOAIEndpoint ? maxTokens : undefined,
-      reasoning: isGemini25ProPaid ? {enabled: true} : undefined,
-      provider: isGemini25ProPaid ? {only: ["Google"]} : undefined,
+      reasoning: isGemini25ProPaidAndOpenRouterEndpoint ? {enabled: true} : undefined,
+      provider: isGemini25ProPaidAndOpenRouterEndpoint ? {only: ['Google']} : undefined,
     }),
   });
   if (!response.ok) throw new Error(await response.text());
@@ -80,6 +92,16 @@ export const getChatCompletionStream = async (
   customHeaders?: Record<string, string>,
   apiVersionToUse?: string
 ) => {
+  config = structuredClone(config);
+  endpoint = endpoint.trim();
+
+  const isOpenRouterEndpoint = endpoint === openRouterAPIEndpoint;
+  const isOfficialOAIEndpoint = !isOpenRouterEndpoint && (endpoint === officialAPIEndpoint || endpoint === customAPIEndpoint);
+
+  if (!isOpenRouterEndpoint) {
+    config.model = config.model.split('/').slice(1).join('/');
+  }
+
   const headers: HeadersInit = {
     'Content-Type': 'application/json',
     ...customHeaders,
@@ -111,11 +133,9 @@ export const getChatCompletionStream = async (
       endpoint += path;
     }
   }
-  endpoint = endpoint.trim();
 
-  const isOfficialOAIEndpoint = endpoint === officialAPIEndpoint;
-  const maxTokens = config.model.includes('/') || config.model.startsWith('gemini-') ? undefined : 4096;
-  const isGemini25ProPaid = config.model.startsWith("google/gemini-2.5-pro");
+  const maxTokens = isOpenRouterEndpoint || config.model.startsWith('gemini-') ? undefined : 4096;
+  const isGemini25ProPaidAndOpenRouterEndpoint = config.model.startsWith('google/gemini-2.5-pro');
   const response = await fetch(endpoint, {
     method: 'POST',
     headers,
@@ -124,8 +144,8 @@ export const getChatCompletionStream = async (
       ...config,
       max_tokens: isOfficialOAIEndpoint ? undefined : maxTokens,
       max_completion_tokens: isOfficialOAIEndpoint ? maxTokens : undefined,
-      reasoning: isGemini25ProPaid ? {enabled: true} : undefined,
-      provider: isGemini25ProPaid ? {only: ["Google"]} : undefined,
+      reasoning: isGemini25ProPaidAndOpenRouterEndpoint ? {enabled: true} : undefined,
+      provider: isGemini25ProPaidAndOpenRouterEndpoint ? {only: ['Google']} : undefined,
       stream: true,
     }),
   });
