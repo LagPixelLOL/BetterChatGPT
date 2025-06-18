@@ -2542,55 +2542,6 @@
         "input_modalities": [
           "text"
         ],
-        "instruct_type": null,
-        "modality": "text->text",
-        "output_modalities": [
-          "text"
-        ],
-        "tokenizer": "DeepSeek"
-      },
-      "canonical_slug": "deepseek/deepseek-prover-v2",
-      "context_length": 163840,
-      "created": 1746013094,
-      "description": "DeepSeek Prover V2 is a 671B parameter model, speculated to be geared towards logic and mathematics. Likely an upgrade from [DeepSeek-Prover-V1.5](https://huggingface.co/deepseek-ai/DeepSeek-Prover-V1.5-RL) Not much is known about the model yet, as DeepSeek released it on Hugging Face without an announcement or description.",
-      "hugging_face_id": "deepseek-ai/DeepSeek-Prover-V2-671B",
-      "id": "deepseek/deepseek-prover-v2:free",
-      "name": "DeepSeek: DeepSeek Prover V2 (free)",
-      "per_request_limits": null,
-      "pricing": {
-        "completion": "0",
-        "image": "0",
-        "internal_reasoning": "0",
-        "prompt": "0",
-        "request": "0",
-        "web_search": "0"
-      },
-      "supported_parameters": [
-        "max_tokens",
-        "temperature",
-        "top_p",
-        "stop",
-        "frequency_penalty",
-        "presence_penalty",
-        "seed",
-        "top_k",
-        "min_p",
-        "repetition_penalty",
-        "logprobs",
-        "logit_bias",
-        "top_logprobs"
-      ],
-      "top_provider": {
-        "context_length": 163840,
-        "is_moderated": false,
-        "max_completion_tokens": null
-      }
-    },
-    {
-      "architecture": {
-        "input_modalities": [
-          "text"
-        ],
         "instruct_type": "deepseek-r1",
         "modality": "text->text",
         "output_modalities": [
@@ -4334,6 +4285,57 @@
         "input_cache_write": "0.0000003833",
         "internal_reasoning": "0",
         "prompt": "0.0000003",
+        "request": "0",
+        "web_search": "0"
+      },
+      "supported_parameters": [
+        "tools",
+        "tool_choice",
+        "max_tokens",
+        "temperature",
+        "top_p",
+        "reasoning",
+        "include_reasoning",
+        "structured_outputs",
+        "response_format",
+        "stop",
+        "frequency_penalty",
+        "presence_penalty",
+        "seed"
+      ],
+      "top_provider": {
+        "context_length": 1048576,
+        "is_moderated": false,
+        "max_completion_tokens": 65535
+      }
+    },
+    {
+      "architecture": {
+        "input_modalities": [
+          "file",
+          "image",
+          "text"
+        ],
+        "instruct_type": null,
+        "modality": "text+image->text",
+        "output_modalities": [
+          "text"
+        ],
+        "tokenizer": "Gemini"
+      },
+      "canonical_slug": "google/gemini-2.5-flash-lite-preview-06-17",
+      "context_length": 1048576,
+      "created": 1750173831,
+      "description": "Gemini 2.5 Flash-Lite is a lightweight reasoning model in the Gemini 2.5 family, optimized for ultra-low latency and cost efficiency. It offers improved throughput, faster token generation, and better performance across common benchmarks compared to earlier Flash models. By default, \"thinking\" (i.e. multi-pass reasoning) is disabled to prioritize speed, but developers can enable it via the [Reasoning API parameter](https://openrouter.ai/docs/use-cases/reasoning-tokens) to selectively trade off cost for intelligence. ",
+      "hugging_face_id": "",
+      "id": "google/gemini-2.5-flash-lite-preview-06-17",
+      "name": "Google: Gemini 2.5 Flash Lite Preview 06-17",
+      "per_request_limits": null,
+      "pricing": {
+        "completion": "0.0000004",
+        "image": "0",
+        "internal_reasoning": "0",
+        "prompt": "0.0000001",
         "request": "0",
         "web_search": "0"
       },
@@ -6607,7 +6609,7 @@
         "tokenizer": "Llama3"
       },
       "canonical_slug": "meta-llama/llama-3.3-70b-instruct",
-      "context_length": 131000,
+      "context_length": 131072,
       "created": 1733506137,
       "description": "The Meta Llama 3.3 multilingual large language model (LLM) is a pretrained and instruction tuned generative model in 70B (text in/text out). The Llama 3.3 instruction tuned text only model is optimized for multilingual dialogue use cases and outperforms many of the available open source and closed chat models on common industry benchmarks.\n\nSupported languages: English, German, French, Italian, Portuguese, Hindi, Spanish, and Thai.\n\n[Model Card](https://github.com/meta-llama/llama-models/blob/main/models/llama3_3/MODEL_CARD.md)",
       "hugging_face_id": "meta-llama/Llama-3.3-70B-Instruct",
@@ -6615,7 +6617,7 @@
       "name": "Meta: Llama 3.3 70B Instruct",
       "per_request_limits": null,
       "pricing": {
-        "completion": "0.0000003",
+        "completion": "0.00000025",
         "image": "0",
         "internal_reasoning": "0",
         "prompt": "0.00000005",
@@ -6642,9 +6644,9 @@
         "structured_outputs"
       ],
       "top_provider": {
-        "context_length": 131000,
+        "context_length": 131072,
         "is_moderated": false,
-        "max_completion_tokens": 131000
+        "max_completion_tokens": 16384
       }
     },
     {
@@ -6917,7 +6919,7 @@
         "tokenizer": "Llama4"
       },
       "canonical_slug": "meta-llama/llama-4-scout-17b-16e-instruct",
-      "context_length": 200000,
+      "context_length": 128000,
       "created": 1743881519,
       "description": "Llama 4 Scout 17B Instruct (16E) is a mixture-of-experts (MoE) language model developed by Meta, activating 17 billion parameters out of a total of 109B. It supports native multimodal input (text and image) and multilingual output (text and code) across 12 supported languages. Designed for assistant-style interaction and visual reasoning, Scout uses 16 experts per forward pass and features a context length of 10 million tokens, with a training corpus of ~40 trillion tokens.\n\nBuilt for high efficiency and local or commercial deployment, Llama 4 Scout incorporates early fusion for seamless modality integration. It is instruction-tuned for use in multilingual chat, captioning, and image understanding tasks. Released under the Llama 4 Community License, it was last trained on data up to August 2024 and launched publicly on April 5, 2025.",
       "hugging_face_id": "meta-llama/Llama-4-Scout-17B-16E-Instruct",
@@ -6952,7 +6954,7 @@
         "tool_choice"
       ],
       "top_provider": {
-        "context_length": 200000,
+        "context_length": 128000,
         "is_moderated": false,
         "max_completion_tokens": null
       }
@@ -7523,6 +7525,99 @@
         "context_length": 4096,
         "is_moderated": false,
         "max_completion_tokens": 2048
+      }
+    },
+    {
+      "architecture": {
+        "input_modalities": [
+          "text"
+        ],
+        "instruct_type": null,
+        "modality": "text->text",
+        "output_modalities": [
+          "text"
+        ],
+        "tokenizer": "Other"
+      },
+      "canonical_slug": "minimax/minimax-m1",
+      "context_length": 1000000,
+      "created": 1750200414,
+      "description": "MiniMax-M1 is a large-scale, open-weight reasoning model designed for extended context and high-efficiency inference. It leverages a hybrid Mixture-of-Experts (MoE) architecture paired with a custom \"lightning attention\" mechanism, allowing it to process long sequences—up to 1 million tokens—while maintaining competitive FLOP efficiency. With 456 billion total parameters and 45.9B active per token, this variant is optimized for complex, multi-step reasoning tasks.\n\nTrained via a custom reinforcement learning pipeline (CISPO), M1 excels in long-context understanding, software engineering, agentic tool use, and mathematical reasoning. Benchmarks show strong performance across FullStackBench, SWE-bench, MATH, GPQA, and TAU-Bench, often outperforming other open models like DeepSeek R1 and Qwen3-235B.",
+      "hugging_face_id": "",
+      "id": "minimax/minimax-m1",
+      "name": "MiniMax: MiniMax M1",
+      "per_request_limits": null,
+      "pricing": {
+        "completion": "0.00000165",
+        "image": "0",
+        "internal_reasoning": "0",
+        "prompt": "0.0000003",
+        "request": "0",
+        "web_search": "0"
+      },
+      "supported_parameters": [
+        "max_tokens",
+        "temperature",
+        "top_p",
+        "reasoning",
+        "include_reasoning"
+      ],
+      "top_provider": {
+        "context_length": 1000000,
+        "is_moderated": false,
+        "max_completion_tokens": 40000
+      }
+    },
+    {
+      "architecture": {
+        "input_modalities": [
+          "text"
+        ],
+        "instruct_type": null,
+        "modality": "text->text",
+        "output_modalities": [
+          "text"
+        ],
+        "tokenizer": "Other"
+      },
+      "canonical_slug": "minimax/minimax-m1",
+      "context_length": 128000,
+      "created": 1750200414,
+      "description": "MiniMax-M1 is a large-scale, open-weight reasoning model designed for extended context and high-efficiency inference. It leverages a hybrid Mixture-of-Experts (MoE) architecture paired with a custom \"lightning attention\" mechanism, allowing it to process long sequences—up to 1 million tokens—while maintaining competitive FLOP efficiency. With 456 billion total parameters and 45.9B active per token, this variant is optimized for complex, multi-step reasoning tasks.\n\nTrained via a custom reinforcement learning pipeline (CISPO), M1 excels in long-context understanding, software engineering, agentic tool use, and mathematical reasoning. Benchmarks show strong performance across FullStackBench, SWE-bench, MATH, GPQA, and TAU-Bench, often outperforming other open models like DeepSeek R1 and Qwen3-235B.",
+      "hugging_face_id": "",
+      "id": "minimax/minimax-m1:extended",
+      "name": "MiniMax: MiniMax M1 (extended)",
+      "per_request_limits": null,
+      "pricing": {
+        "completion": "0.0000022",
+        "image": "0",
+        "internal_reasoning": "0",
+        "prompt": "0.00000055",
+        "request": "0",
+        "web_search": "0"
+      },
+      "supported_parameters": [
+        "tools",
+        "tool_choice",
+        "max_tokens",
+        "temperature",
+        "top_p",
+        "reasoning",
+        "include_reasoning",
+        "structured_outputs",
+        "stop",
+        "frequency_penalty",
+        "presence_penalty",
+        "seed",
+        "top_k",
+        "min_p",
+        "repetition_penalty",
+        "logit_bias"
+      ],
+      "top_provider": {
+        "context_length": 128000,
+        "is_moderated": false,
+        "max_completion_tokens": 40000
       }
     },
     {
@@ -8599,7 +8694,7 @@
       "name": "Mistral: Mistral Nemo",
       "per_request_limits": null,
       "pricing": {
-        "completion": "0.000000023",
+        "completion": "0.00000002",
         "image": "0",
         "internal_reasoning": "0",
         "prompt": "0.00000001",
@@ -9057,7 +9152,7 @@
         "tokenizer": "Mistral"
       },
       "canonical_slug": "mistralai/pixtral-large-2411",
-      "context_length": 131072,
+      "context_length": 32768,
       "created": 1731977388,
       "description": "Pixtral Large is a 124B parameter, open-weight, multimodal model built on top of [Mistral Large 2](/mistralai/mistral-large-2411). The model is able to understand documents, charts and natural images.\n\nThe model is available under the Mistral Research License (MRL) for research and educational use, and the Mistral Commercial License for experimentation, testing, and production for commercial purposes.\n\n",
       "hugging_face_id": "",
@@ -9086,7 +9181,7 @@
         "seed"
       ],
       "top_provider": {
-        "context_length": 131072,
+        "context_length": 32768,
         "is_moderated": false,
         "max_completion_tokens": null
       }
