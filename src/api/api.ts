@@ -74,8 +74,8 @@ export const getChatCompletion = async (
       ...config,
       max_tokens: isOfficialOAIEndpoint ? undefined : maxTokens,
       max_completion_tokens: isOfficialOAIEndpoint ? maxTokens : undefined,
-      reasoning: isGemini25ProPaidAndOpenRouterEndpoint ? {enabled: true} : undefined,
-      provider: isGemini25ProPaidAndOpenRouterEndpoint ? {only: ['Google']} : undefined,
+      // reasoning: isGemini25ProPaidAndOpenRouterEndpoint ? {enabled: true} : undefined,
+      provider: isGemini25ProPaidAndOpenRouterEndpoint ? {ignore: ['google-ai-studio']} : undefined,
     }),
   });
   if (!response.ok) throw new Error(await response.text());
@@ -144,8 +144,8 @@ export const getChatCompletionStream = async (
       ...config,
       max_tokens: isOfficialOAIEndpoint ? undefined : maxTokens,
       max_completion_tokens: isOfficialOAIEndpoint ? maxTokens : undefined,
-      reasoning: isGemini25ProPaidAndOpenRouterEndpoint ? {enabled: true} : undefined,
-      provider: isGemini25ProPaidAndOpenRouterEndpoint ? {only: ['Google']} : undefined,
+      // reasoning: isGemini25ProPaidAndOpenRouterEndpoint ? {enabled: true} : undefined,
+      provider: isGemini25ProPaidAndOpenRouterEndpoint ? {ignore: ['google-ai-studio']} : undefined,
       stream: true,
     }),
   });
