@@ -163,7 +163,7 @@ const ContentView = memo(
                 <img
                   src={image.image_url.url}
                   alt={`uploaded-${index}`}
-                  className='h-20 cursor-pointer'
+                  className='h-20 object-contain w-auto cursor-pointer'
                   onClick={() => handleImageClick(image.image_url.url)}
                 />
               </div>

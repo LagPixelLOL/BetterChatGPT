@@ -470,7 +470,7 @@ const EditViewButtons = memo(
                     <img
                       src={image.image_url.url}
                       alt={`uploaded-${index}`}
-                      className='h-10'
+                      className='h-20 object-contain w-auto'
                     />
                     <div className='flex flex-row gap-3'>
                       <select

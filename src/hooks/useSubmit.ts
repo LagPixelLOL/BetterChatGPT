@@ -318,7 +318,7 @@ const useSubmit = () => {
         }
       }
 
-      if (finishReason != null && finishReason !== 'stop') {
+      if (finishReason != null && finishReason !== 'stop' && finishReason !== 'completed') {
         throw new Error('Finish reason is not "stop".\n\nFinish reason: ' + finishReason);
       }
     } catch (e: unknown) {
