@@ -75,7 +75,7 @@ const useSubmit = () => {
     const chats = useStore.getState().chats;
     if (generating || !chats) return;
 
-    const updatedChats: ChatInterface[] = JSON.parse(JSON.stringify(chats));
+    const updatedChats: ChatInterface[] = structuredClone(chats);
 
     updatedChats[currentChatIndex].messages.push({
       role: 'assistant',
@@ -154,14 +154,18 @@ const useSubmit = () => {
           }
         }
 
-        const updatedChats: ChatInterface[] = JSON.parse(
-          JSON.stringify(useStore.getState().chats)
-        );
+        const messageObj = choice.message;
+
+        const updatedChats: ChatInterface[] = structuredClone(useStore.getState().chats as ChatInterface[]);
         const updatedMessages = updatedChats[currentChatIndex].messages;
-        (
-          updatedMessages[updatedMessages.length - 1]
-            .content[0] as TextContentInterface
-        ).text += choice.message.content;
+        const updatedMessage = updatedMessages[updatedMessages.length - 1];
+        (updatedMessage.content[0] as TextContentInterface).text += messageObj.content;
+        const reasoning = messageObj?.reasoning ? messageObj.reasoning : '';
+        if (updatedMessage.reasoning_content) {
+          updatedMessage.reasoning_content += reasoning;
+        } else {
+          updatedMessage.reasoning_content = reasoning;
+        }
         setChats(updatedChats);
       } else {
         // no api key (free)
@@ -208,7 +212,7 @@ const useSubmit = () => {
             if (result === '[DONE]' || done) {
               reading = false;
             } else {
-              const resultString = result.reduce((output: string, curr) => {
+              const resultObj = result.reduce((output, curr) => {
                 if (typeof curr === 'string') {
                   partial += curr;
                 } else {
@@ -218,8 +222,11 @@ const useSubmit = () => {
                   }
                   try {
                     const choice = curr.choices[0];
-                    const content = choice.delta.content;
-                    if (content) output += content;
+                    const delta = choice.delta;
+                    const content = delta.content;
+                    const reasoning = delta.reasoning;
+                    if (content) output.content += content;
+                    if (reasoning) output.reasoning += reasoning;
                     if (!finishReason) {
                       finishReason = choice.finish_reason;
                       if (!finishReason || finishReason === 'stop' || finishReason === 'content_filter') {
@@ -234,16 +241,17 @@ const useSubmit = () => {
                   }
                 }
                 return output;
-              }, '');
+              }, {content: '', reasoning: ''});
 
-              const updatedChats: ChatInterface[] = JSON.parse(
-                JSON.stringify(useStore.getState().chats)
-              );
+              const updatedChats: ChatInterface[] = structuredClone(useStore.getState().chats as ChatInterface[]);
               const updatedMessages = updatedChats[currentChatIndex].messages;
-              (
-                updatedMessages[updatedMessages.length - 1]
-                  .content[0] as TextContentInterface
-              ).text += resultString;
+              const updatedMessage = updatedMessages[updatedMessages.length - 1];
+              (updatedMessage.content[0] as TextContentInterface).text += resultObj.content;
+              if (updatedMessage.reasoning_content) {
+                updatedMessage.reasoning_content += resultObj.reasoning;
+              } else {
+                updatedMessage.reasoning_content = resultObj.reasoning;
+              }
               setChats(updatedChats);
             }
           }

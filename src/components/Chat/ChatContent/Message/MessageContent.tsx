@@ -3,16 +3,14 @@ import useStore from '@store/store';
 
 import ContentView from './View/ContentView';
 import EditView from './View/EditView';
-import { ContentInterface } from '@type/chat';
+import { MessageInterface } from '@type/chat';
 
 const MessageContent = ({
-  role,
-  content,
+  message,
   messageIndex,
   sticky = false,
 }: {
-  role: string;
-  content: ContentInterface[];
+  message: MessageInterface;
   messageIndex: number;
   sticky?: boolean;
 }) => {
@@ -24,15 +22,14 @@ const MessageContent = ({
       {advancedMode && <div className='flex flex-grow flex-col gap-3'></div>}
       {isEdit ? (
         <EditView
-          content={content}
+          content={message.content}
           setIsEdit={setIsEdit}
           messageIndex={messageIndex}
           sticky={sticky}
         />
       ) : (
         <ContentView
-          role={role}
-          content={content}
+          message={message}
           setIsEdit={setIsEdit}
           messageIndex={messageIndex}
         />

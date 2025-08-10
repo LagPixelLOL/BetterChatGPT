@@ -70,7 +70,7 @@ export const getChatCompletion = async (
     method: 'POST',
     headers,
     body: JSON.stringify({
-      messages,
+      messages: messages.map(({ reasoning_content, ...rest }) => rest),
       ...config,
       max_tokens: isOfficialOAIEndpoint ? undefined : maxTokens,
       max_completion_tokens: isOfficialOAIEndpoint ? maxTokens : undefined,
@@ -140,7 +140,7 @@ export const getChatCompletionStream = async (
     method: 'POST',
     headers,
     body: JSON.stringify({
-      messages,
+      messages: messages.map(({ reasoning_content, ...rest }) => rest),
       ...config,
       max_tokens: isOfficialOAIEndpoint ? undefined : maxTokens,
       max_completion_tokens: isOfficialOAIEndpoint ? maxTokens : undefined,

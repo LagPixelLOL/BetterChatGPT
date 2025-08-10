@@ -13,7 +13,7 @@ import useSubmit from '@hooks/useSubmit';
 import DownloadChat from './DownloadChat';
 import CloneChat from './CloneChat';
 import ShareGPT from '@components/ShareGPT';
-import { ImageContentInterface, TextContentInterface } from '@type/chat';
+import { TextContentInterface, MessageInterface } from '@type/chat';
 import countTokens, { limitMessageTokens } from '@utils/messageUtils';
 import { defaultModel, reduceMessagesToTotalToken } from '@constants/chat';
 import { toast } from 'react-toastify';
@@ -127,8 +127,7 @@ const ChatContent = () => {
                 (advancedMode || index !== 0 || message.role !== 'system') && (
                   <React.Fragment key={index}>
                     <Message
-                      role={message.role}
-                      content={message.content}
+                      message={message}
                       messageIndex={index}
                     />
                     {!generating && advancedMode && (
@@ -140,11 +139,10 @@ const ChatContent = () => {
           </div>
 
           <Message
-            role={inputRole}
             // For now we always initizlize a new message with an empty text content.
             // It is possible to send a message to the API without a TextContentInterface,
             // but the UI would need to be modified to allow the user to control the order of text and image content
-            content={[{ type: 'text', text: '' } as TextContentInterface]}
+            message={{role: inputRole, content: [{ type: 'text', text: '' } as TextContentInterface]} as MessageInterface}
             messageIndex={stickyIndex}
             sticky
           />
