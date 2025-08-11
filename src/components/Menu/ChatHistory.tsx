@@ -1,5 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react';
 
+import { v4 as uuidv4 } from 'uuid';
+
 import useInitialiseNewChat from '@hooks/useInitialiseNewChat';
 
 import ChatIcon from '@icon/ChatIcon';
@@ -145,6 +147,7 @@ const ChatHistory = React.memo(
         }
 
         const clonedChat = JSON.parse(JSON.stringify(chats[index]));
+        clonedChat.id = uuidv4();
         clonedChat.title = title;
 
         const updatedChats: ChatInterface[] = JSON.parse(JSON.stringify(chats));

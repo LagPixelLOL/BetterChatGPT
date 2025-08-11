@@ -8,6 +8,7 @@ import StopGeneratingButton from '@components/StopGeneratingButton/StopGeneratin
 const Chat = () => {
   const hideSideMenu = useStore((state) => state.hideSideMenu);
   const menuWidth = useStore((state) => state.menuWidth);
+  const currentChatId = useStore((state) => state.chats ? state.chats[state.currentChatIndex].id : null);
 
   return (
     <div
@@ -16,7 +17,7 @@ const Chat = () => {
     >
       <MobileBar />
       <main className='relative h-full w-full transition-width flex flex-col overflow-hidden items-stretch flex-1'>
-        <ChatContent />
+        <ChatContent key={currentChatId} />
         <StopGeneratingButton />
       </main>
     </div>

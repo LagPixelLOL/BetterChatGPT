@@ -1,5 +1,5 @@
-import React, { useEffect, useRef } from 'react';
-import ScrollToBottom from 'react-scroll-to-bottom';
+import React, { useEffect, useRef, useCallback } from 'react';
+import ScrollToBottom, { useScrollTo, useScrollToBottom, useObserveScrollPosition } from 'react-scroll-to-bottom';
 import useStore from '@store/store';
 import { useTranslation } from 'react-i18next';
 
@@ -13,10 +13,49 @@ import useSubmit from '@hooks/useSubmit';
 import DownloadChat from './DownloadChat';
 import CloneChat from './CloneChat';
 import ShareGPT from '@components/ShareGPT';
-import { TextContentInterface, MessageInterface } from '@type/chat';
+import { TextContentInterface, MessageInterface, ChatInterface } from '@type/chat';
 import countTokens, { limitMessageTokens } from '@utils/messageUtils';
 import { defaultModel, reduceMessagesToTotalToken } from '@constants/chat';
 import { toast } from 'react-toastify';
+
+const ScrollController = () => {
+  const scrollTo = useScrollTo();
+  const scrollToBottom = useScrollToBottom();
+  const setChats = useStore((state) => state.setChats);
+  const currentChatIndex = useStore((state) => state.currentChatIndex);
+
+  const firstCallRef = useRef(true);
+  const debounceTimerRef = useRef<NodeJS.Timeout | undefined>(undefined);
+
+  const observer = useCallback(({ scrollTop }: { scrollTop: number }) => {
+    const updateChatScrollTop = () => {
+      const updatedChats = structuredClone(useStore.getState().chats) as ChatInterface[];
+      updatedChats[currentChatIndex].scrollTop = scrollTop;
+      setChats(updatedChats);
+    };
+
+    if (firstCallRef.current) {
+      firstCallRef.current = false;
+      const chatScrollTop = useStore.getState().chats?.[currentChatIndex].scrollTop;
+      if (typeof chatScrollTop === 'number') {
+        // @ts-ignore
+        scrollTo(chatScrollTop, { behavior: 'auto' });
+      } else {
+        // @ts-ignore
+        scrollToBottom({ behavior: 'auto' });
+      }
+      clearTimeout(debounceTimerRef.current);
+      updateChatScrollTop();
+    } else {
+      clearTimeout(debounceTimerRef.current);
+      debounceTimerRef.current = setTimeout(updateChatScrollTop, 100);
+    }
+  }, [scrollTo, scrollToBottom, currentChatIndex]);
+
+  useObserveScrollPosition(observer);
+
+  return null;
+};
 
 const ChatContent = () => {
   const { t } = useTranslation();
@@ -101,8 +140,9 @@ const ChatContent = () => {
   const { error } = useSubmit();
 
   // Custom scroller function to control auto-scroll behavior
+  const firstLoadTimeRef = useRef(Date.now());
   const customScroller = ({ maxValue }: { maxValue: number; minValue: number; offsetHeight: number; scrollHeight: number; scrollTop: number }) => {
-    return autoScroll ? maxValue : 0;
+    return autoScroll && Date.now() - firstLoadTimeRef.current > 1000 ? maxValue : 0;
   };
 
   return (
@@ -111,6 +151,8 @@ const ChatContent = () => {
         className='h-full dark:bg-gray-800'
         followButtonClassName='hidden'
         scroller={customScroller}
+        initialScrollBehavior='auto'
+        checkInterval={100}
       >
         <ScrollToBottomButton />
         <div className='flex flex-col items-center text-sm dark:bg-gray-800'>
@@ -178,6 +220,7 @@ const ChatContent = () => {
           </div>
           <div className='w-full h-36'></div>
         </div>
+        <ScrollController />
       </ScrollToBottom>
     </div>
   );

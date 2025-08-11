@@ -57,6 +57,7 @@ export interface ChatInterface {
   config: ConfigInterface;
   titleSet: boolean;
   imageDetail: ImageDetail;
+  scrollTop?: number;
 }
 
 export interface ConfigInterface {
