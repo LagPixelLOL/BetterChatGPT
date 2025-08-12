@@ -1,6 +1,8 @@
 import React from 'react';
 import useStore from '@store/store';
 
+import { v4 as uuidv4 } from 'uuid';
+
 import PlusIcon from '@icon/PlusIcon';
 
 import { ChatInterface, TextContentInterface } from '@type/chat';
@@ -38,8 +40,9 @@ const NewMessageButton = React.memo(
           JSON.stringify(useStore.getState().chats)
         );
         updatedChats[currentChatIndex].messages.splice(messageIndex + 1, 0, {
-          content: [{ type: 'text', text: '' } as TextContentInterface],
+          id: uuidv4(),
           role: 'user',
+          content: [{ type: 'text', text: '' } as TextContentInterface],
         });
         setChats(updatedChats);
       }

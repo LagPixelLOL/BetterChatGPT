@@ -45,6 +45,7 @@ export const generateDefaultChat = (
     useStore.getState().defaultSystemMessage.length > 0
       ? [
           {
+            id: uuidv4(),
             role: 'system',
             content: [
               {

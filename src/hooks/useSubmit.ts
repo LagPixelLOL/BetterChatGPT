@@ -13,6 +13,8 @@ import { _defaultChatConfig } from '@constants/chat';
 import { officialAPIEndpoint } from '@constants/auth';
 import { modelStreamSupport } from '@constants/modelLoader';
 
+import { v4 as uuidv4 } from 'uuid';
+
 const useSubmit = () => {
   const { t, i18n } = useTranslation('api');
   const error = useStore((state) => state.error);
@@ -78,6 +80,7 @@ const useSubmit = () => {
     const updatedChats: ChatInterface[] = structuredClone(chats);
 
     updatedChats[currentChatIndex].messages.push({
+      id: uuidv4(),
       role: 'assistant',
       content: [
         {
@@ -292,6 +295,7 @@ const useSubmit = () => {
           currChats[currentChatIndex].messages[messages_length - 2].content;
 
         const message: MessageInterface = {
+          id: uuidv4(),
           role: 'user',
           content: [
             ...user_message,
@@ -320,6 +324,7 @@ const useSubmit = () => {
         if (countTotalTokens) {
           const model = _defaultChatConfig.model;
           updateTotalTokenUsed(model, [message], {
+            id: uuidv4(),
             role: 'assistant',
             content: [{ type: 'text', text: title } as TextContentInterface],
           });

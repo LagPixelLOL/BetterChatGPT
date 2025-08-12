@@ -44,6 +44,7 @@ const ChatHistory = React.memo(
     setLastSelectedIndex: (index: number) => void;
   }) => {
     const initialiseNewChat = useInitialiseNewChat();
+    const currentChatIndex = useStore((state) => state.currentChatIndex);
     const setCurrentChatIndex = useStore((state) => state.setCurrentChatIndex);
     const setChats = useStore((state) => state.setChats);
     const active = useStore((state) => state.currentChatIndex === chatIndex);
@@ -75,7 +76,7 @@ const ChatHistory = React.memo(
           updatedChats.splice(index, 1);
         });
       if (updatedChats.length > 0) {
-        setCurrentChatIndex(0);
+        setCurrentChatIndex(currentChatIndex < updatedChats.length ? currentChatIndex : updatedChats.length - 1);
         setChats(updatedChats);
       } else {
         initialiseNewChat();

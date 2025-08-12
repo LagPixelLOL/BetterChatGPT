@@ -1,8 +1,10 @@
 import React, { memo, useEffect, useState, useRef, ChangeEvent } from 'react';
+
 import { useTranslation } from 'react-i18next';
 import useStore from '@store/store';
-
 import useSubmit from '@hooks/useSubmit';
+
+import { v4 as uuidv4 } from 'uuid';
 
 import {
   ChatInterface,
@@ -179,7 +181,7 @@ const EditView = ({
     const updatedMessages = updatedChats[currentChatIndex].messages;
 
     if (sticky) {
-      updatedMessages.push({ role: inputRole, content: _content });
+      updatedMessages.push({ id: uuidv4(), role: inputRole, content: _content });
       _setContent([
         {
           type: 'text',
@@ -245,7 +247,7 @@ const EditView = ({
 
     if (sticky) {
       if (hasTextContent || hasImageContent) {
-        updatedMessages.push({ role: inputRole, content: _content });
+        updatedMessages.push({ id: uuidv4(), role: inputRole, content: _content });
       }
       _setContent([
         {

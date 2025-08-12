@@ -44,6 +44,7 @@ export interface ContentInterface {
 }
 
 export interface MessageInterface {
+  id: string;
   role: Role;
   reasoning_content?: string;
   content: ContentInterface[];

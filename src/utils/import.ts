@@ -204,6 +204,7 @@ export const convertOpenAIToBetterChatGPTFormat = (
           if (textContent.length > 0) {
             // Insert each message at the beginning of the array to maintain order from root to deepest node
             messages.unshift({
+              id: uuidv4(),
               role,
               content: [{ type: 'text', text: textContent }],
             });
@@ -216,7 +217,7 @@ export const convertOpenAIToBetterChatGPTFormat = (
           }
         } else if (isContentInterface(content)) {
           // Insert each message at the beginning of the array
-          messages.unshift({ role, content: [content] });
+          messages.unshift({ id: uuidv4(), role, content: [content] });
           messageIds.push(deepestNode.id);
           console.log(`Node with id ${deepestNode.id} added to messages.`);
         } else {
@@ -324,6 +325,7 @@ export const convertOpenAIToBetterChatGPTFormat = (
 
         if (contentElements.length > 0) {
           messages.push({
+            id: uuidv4(),
             role,
             content: contentElements,
           });

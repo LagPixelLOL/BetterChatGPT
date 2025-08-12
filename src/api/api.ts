@@ -64,13 +64,13 @@ export const getChatCompletion = async (
     }
   }
 
-  const maxTokens = isOpenRouterEndpoint || config.model.startsWith('gemini-') ? undefined : 4096;
+  const maxTokens = isOfficialOAIEndpoint || isOpenRouterEndpoint || config.model.startsWith('gemini-') ? undefined : 4096;
   const isGemini25ProPaidAndOpenRouterEndpoint = config.model.startsWith('google/gemini-2.5-pro');
   const response = await fetch(endpoint, {
     method: 'POST',
     headers,
     body: JSON.stringify({
-      messages: messages.map(({ reasoning_content, ...rest }) => rest),
+      messages: messages.map(({ id, reasoning_content, ...rest }) => rest),
       ...config,
       max_tokens: isOfficialOAIEndpoint ? undefined : maxTokens,
       max_completion_tokens: isOfficialOAIEndpoint ? maxTokens : undefined,
@@ -134,13 +134,13 @@ export const getChatCompletionStream = async (
     }
   }
 
-  const maxTokens = isOpenRouterEndpoint || config.model.startsWith('gemini-') ? undefined : 4096;
+  const maxTokens = isOfficialOAIEndpoint || isOpenRouterEndpoint || config.model.startsWith('gemini-') ? undefined : 4096;
   const isGemini25ProPaidAndOpenRouterEndpoint = config.model.startsWith('google/gemini-2.5-pro');
   const response = await fetch(endpoint, {
     method: 'POST',
     headers,
     body: JSON.stringify({
-      messages: messages.map(({ reasoning_content, ...rest }) => rest),
+      messages: messages.map(({ id, reasoning_content, ...rest }) => rest),
       ...config,
       max_tokens: isOfficialOAIEndpoint ? undefined : maxTokens,
       max_completion_tokens: isOfficialOAIEndpoint ? maxTokens : undefined,

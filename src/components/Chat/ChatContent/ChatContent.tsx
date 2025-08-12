@@ -167,7 +167,7 @@ const ChatContent = () => {
             {messagesLimited?.map(
               (message, index) =>
                 (advancedMode || index !== 0 || message.role !== 'system') && (
-                  <React.Fragment key={index}>
+                  <React.Fragment key={message.id}>
                     <Message
                       message={message}
                       messageIndex={index}
@@ -184,7 +184,7 @@ const ChatContent = () => {
             // For now we always initizlize a new message with an empty text content.
             // It is possible to send a message to the API without a TextContentInterface,
             // but the UI would need to be modified to allow the user to control the order of text and image content
-            message={{role: inputRole, content: [{ type: 'text', text: '' } as TextContentInterface]} as MessageInterface}
+            message={{id: 'e183a43b-e44f-49a8-8c74-733a6802276b', role: inputRole, content: [{ type: 'text', text: '' } as TextContentInterface]} as MessageInterface}
             messageIndex={stickyIndex}
             sticky
           />

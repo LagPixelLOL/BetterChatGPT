@@ -64,7 +64,7 @@ const MarkdownRenderer = memo(({ text }: { text: string }) => {
           },
         ],
       ]}
-      linkTarget="_new"
+      linkTarget='_new'
       components={{
         code,
         p,
@@ -73,7 +73,7 @@ const MarkdownRenderer = memo(({ text }: { text: string }) => {
       {inlineLatex ? preprocessLaTeX(text) : text}
     </ReactMarkdown>
   ) : (
-    <span className="whitespace-pre-wrap">{text}</span>
+    <span className='whitespace-pre-wrap'>{text}</span>
   );
 });
 
@@ -159,34 +159,34 @@ const ContentView = memo(
     return (
       <>
         {showReasoningBox && (
-          <div className="mb-3 border border-gray-300 dark:border-gray-600 rounded overflow-hidden">
+          <div className='mb-3 border border-gray-300 dark:border-gray-600 rounded overflow-hidden'>
             <button
               onClick={() => setShowReasoning(!showReasoning)}
-              className="btn w-full px-3 py-2 flex justify-between items-center text-left bg-gray-100 dark:bg-gray-800 hover:bg-gray-200 dark:hover:bg-gray-700"
+              className='btn w-full px-3 py-2 flex justify-between items-center text-left bg-gray-100 dark:bg-gray-800 hover:bg-gray-200 dark:hover:bg-gray-700'
             >
               <span>{showReasoning ? 'Hide Reasoning' : 'Show Reasoning'}</span>
               <span>{showReasoning ? <UpChevronArrow /> : <DownChevronArrow />}</span>
             </button>
             {showReasoning && (
-              <div className="p-3 bg-white dark:bg-gray-900 border-t border-gray-300 dark:border-gray-600 whitespace-pre-wrap">
+              <div className='p-3 bg-white dark:bg-gray-900 border-t border-gray-300 dark:border-gray-600 whitespace-pre-wrap'>
                 <MarkdownRenderer text={currentReasoningContent} />
               </div>
             )}
           </div>
         )}
 
-        <div className="markdown prose w-full md:max-w-full break-words dark:prose-invert dark share-gpt-message">
+        <div className='markdown prose w-full md:max-w-full break-words dark:prose-invert dark share-gpt-message'>
           <MarkdownRenderer text={currentTextContent} />
         </div>
 
         {validImageContents.length > 0 && (
-          <div className="flex gap-4">
+          <div className='flex gap-4'>
             {validImageContents.map((image, index) => (
-              <div key={index} className="image-container">
+              <div key={index} className='image-container'>
                 <img
                   src={image.image_url.url}
                   alt={`uploaded-${index}`}
-                  className="h-20 object-contain w-auto cursor-pointer"
+                  className='h-20 object-contain w-auto cursor-pointer'
                   onClick={() => handleImageClick(image.image_url.url)}
                 />
               </div>
@@ -196,22 +196,22 @@ const ContentView = memo(
 
         {zoomedImage && (
           <PopupModal
-            title=""
+            title=''
             setIsModalOpen={handleCloseZoom}
             handleConfirm={handleCloseZoom}
             cancelButton={false}
           >
-            <div className="flex justify-center">
+            <div className='flex justify-center'>
               <img
                 src={zoomedImage}
-                alt="Zoomed"
-                className="max-w-full max-h-full"
+                alt='Zoomed'
+                className='max-w-full max-h-full'
               />
             </div>
           </PopupModal>
         )}
 
-        <div className="flex justify-end gap-2 w-full mt-2">
+        <div className='flex justify-end gap-2 w-full mt-2'>
           {isDelete || (
             <>
               {!useStore.getState().generating &&
@@ -233,15 +233,15 @@ const ContentView = memo(
           {isDelete && (
             <>
               <button
-                className="p-1 hover:text-white"
-                aria-label="cancel"
+                className='p-1 hover:text-white'
+                aria-label='cancel'
                 onClick={() => setIsDelete(false)}
               >
                 <CrossIcon />
               </button>
               <button
-                className="p-1 hover:text-white"
-                aria-label="confirm"
+                className='p-1 hover:text-white'
+                aria-label='confirm'
                 onClick={handleDelete}
               >
                 <TickIcon />
@@ -277,7 +277,7 @@ const p = memo(
     > &
       ReactMarkdownProps
   ) => {
-    return <p className="whitespace-pre-wrap">{props?.children}</p>;
+    return <p className='whitespace-pre-wrap'>{props?.children}</p>;
   }
 );
 
