@@ -9,11 +9,20 @@ const Chat = () => {
   const hideSideMenu = useStore((state) => state.hideSideMenu);
   const menuWidth = useStore((state) => state.menuWidth);
   const currentChatId = useStore((state) => state.chats ? state.chats[state.currentChatIndex].id : null);
+  const isMobile =
+    /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini|playbook|silk/i.test(
+      navigator.userAgent
+    );
 
   return (
     <div
       className={`flex h-full flex-1 flex-col`}
-      style={{ paddingLeft: hideSideMenu ? '0' : `${menuWidth}px` }}
+      style={{
+       paddingLeft:
+         !isMobile && !hideSideMenu
+           ? `${menuWidth}px`
+           : '0',
+     }}
     >
       <MobileBar />
       <main className='relative h-full w-full transition-width flex flex-col overflow-hidden items-stretch flex-1'>
