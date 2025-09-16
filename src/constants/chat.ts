@@ -39,6 +39,7 @@ export const _defaultChatConfig: ConfigInterface = {
   top_p: 0.9,
   presence_penalty: 0,
   frequency_penalty: 0,
+  reasoning_effort: 'high',
 };
 
 export const generateDefaultChat = (

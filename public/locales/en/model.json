@@ -28,9 +28,17 @@
   "resetToDefault": "Reset To Default",
   "imageDetail": {
     "label": "Image Detail",
-    "low": "low",
-    "high": "high",
-    "auto": "auto"
+    "low": "Low",
+    "high": "High",
+    "auto": "Auto"
+  },
+  "reasoningEffort": {
+    "label": "Reasoning Effort",
+    "none": "None",
+    "minimal": "Minimal",
+    "low": "Low",
+    "medium": "Medium",
+    "high": "High"
   },
   "customModels": {
     "title": "Custom Models",

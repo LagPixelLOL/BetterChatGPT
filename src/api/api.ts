@@ -8,8 +8,97 @@ import {
   officialAPIEndpoint,
   customAPIEndpoint,
   openRouterAPIEndpoint,
+  anthropicEndpoint,
 } from '@constants/auth';
 import { ModelOptions } from '@utils/modelReader';
+
+function preprocess(
+  endpoint: string,
+  config: ConfigInterface,
+): {
+  endpoint: string,
+  config: ConfigInterface,
+  isOfficialOAIEndpoint: boolean,
+  isOpenRouterEndpoint: boolean,
+  isAnthropicEndpoint: boolean,
+} {
+  endpoint = endpoint.trim();
+  config = structuredClone(config);
+
+  const isOfficialOAIEndpoint = endpoint === officialAPIEndpoint || endpoint === customAPIEndpoint;
+  const isOpenRouterEndpoint = endpoint === openRouterAPIEndpoint;
+  const isAnthropicEndpoint = endpoint === anthropicEndpoint;
+
+  if (!isOpenRouterEndpoint) {
+    config.model = config.model.split('/').slice(1).join('/');
+  }
+
+  return {
+    endpoint,
+    config,
+    isOfficialOAIEndpoint,
+    isOpenRouterEndpoint,
+    isAnthropicEndpoint,
+  }
+}
+
+function assemblePayload(
+  messages: MessageInterface[],
+  config: ConfigInterface,
+  isOfficialOAIEndpoint: boolean,
+  isOpenRouterEndpoint: boolean,
+  isAnthropicEndpoint: boolean,
+  stream: boolean=false,
+): string {
+  const maxTokens = isOfficialOAIEndpoint || isOpenRouterEndpoint || isAnthropicEndpoint || config.model.startsWith('gemini-') ? undefined : 32768;
+  const isGemini25ProPaidAndOpenRouterEndpoint = config.model.startsWith('google/gemini-2.5-pro');
+
+  if (isOpenRouterEndpoint) {
+    var { reasoning_effort: reasoningEffort, ...modifiedConfig }: any = config;
+    if (reasoningEffort === 'none') {
+      modifiedConfig.reasoning = { enabled: false };
+    } else {
+      modifiedConfig.reasoning = { effort: reasoningEffort };
+    }
+  } else if (isAnthropicEndpoint) {
+    var { reasoning_effort: reasoningEffort, ...modifiedConfig }: any = config;
+    let thinkingBudget: { type: string, budget_tokens?: number };
+    switch (reasoningEffort) {
+      case 'none':
+        thinkingBudget = { 'type': 'disabled' };
+        break;
+      case 'minimal':
+        thinkingBudget = { 'type': 'disabled' };
+        break;
+      case 'low':
+        thinkingBudget = { 'type': 'enabled', 'budget_tokens': 1024 };
+        break;
+      case 'medium':
+        thinkingBudget = { 'type': 'enabled', 'budget_tokens': 4096 };
+        break;
+      case 'high':
+        thinkingBudget = { 'type': 'enabled', 'budget_tokens': 32768 };
+        break;
+      default:
+        throw Error(`Invalid reasoning effort: ${reasoningEffort}`);
+    }
+    modifiedConfig.thinking = thinkingBudget;
+  } else {
+    var modifiedConfig: any = config;
+    if (modifiedConfig.reasoning_effort === 'none') {
+      modifiedConfig.reasoning_effort = 'minimal';
+    }
+  }
+
+  return JSON.stringify({
+    messages: messages.map(({ id, reasoning_content, ...rest }) => rest),
+    ...modifiedConfig,
+    max_tokens: isOfficialOAIEndpoint ? undefined : maxTokens,
+    max_completion_tokens: isOfficialOAIEndpoint ? maxTokens : undefined,
+    provider: isGemini25ProPaidAndOpenRouterEndpoint ? {ignore: ['google-ai-studio']} : undefined,
+    stream,
+  })
+}
 
 export const getChatCompletion = async (
   endpoint: string,
@@ -17,17 +106,9 @@ export const getChatCompletion = async (
   config: ConfigInterface,
   apiKey?: string,
   customHeaders?: Record<string, string>,
-  apiVersionToUse?: string
+  apiVersionToUse?: string,
 ) => {
-  config = structuredClone(config);
-  endpoint = endpoint.trim();
-
-  const isOpenRouterEndpoint = endpoint === openRouterAPIEndpoint;
-  const isOfficialOAIEndpoint = !isOpenRouterEndpoint && (endpoint === officialAPIEndpoint || endpoint === customAPIEndpoint);
-
-  if (!isOpenRouterEndpoint) {
-    config.model = config.model.split('/').slice(1).join('/');
-  }
+  var { endpoint, config, isOfficialOAIEndpoint, isOpenRouterEndpoint, isAnthropicEndpoint } = preprocess(endpoint, config);
 
   const headers: HeadersInit = {
     'Content-Type': 'application/json',
@@ -64,19 +145,10 @@ export const getChatCompletion = async (
     }
   }
 
-  const maxTokens = isOfficialOAIEndpoint || isOpenRouterEndpoint || config.model.startsWith('gemini-') ? undefined : 4096;
-  const isGemini25ProPaidAndOpenRouterEndpoint = config.model.startsWith('google/gemini-2.5-pro');
   const response = await fetch(endpoint, {
     method: 'POST',
     headers,
-    body: JSON.stringify({
-      messages: messages.map(({ id, reasoning_content, ...rest }) => rest),
-      ...config,
-      max_tokens: isOfficialOAIEndpoint ? undefined : maxTokens,
-      max_completion_tokens: isOfficialOAIEndpoint ? maxTokens : undefined,
-      // reasoning: isGemini25ProPaidAndOpenRouterEndpoint ? {enabled: true} : undefined,
-      provider: isGemini25ProPaidAndOpenRouterEndpoint ? {ignore: ['google-ai-studio']} : undefined,
-    }),
+    body: assemblePayload(messages, config, isOfficialOAIEndpoint, isOpenRouterEndpoint, isAnthropicEndpoint),
   });
   if (!response.ok) throw new Error(await response.text());
 
@@ -90,17 +162,9 @@ export const getChatCompletionStream = async (
   config: ConfigInterface,
   apiKey?: string,
   customHeaders?: Record<string, string>,
-  apiVersionToUse?: string
+  apiVersionToUse?: string,
 ) => {
-  config = structuredClone(config);
-  endpoint = endpoint.trim();
-
-  const isOpenRouterEndpoint = endpoint === openRouterAPIEndpoint;
-  const isOfficialOAIEndpoint = !isOpenRouterEndpoint && (endpoint === officialAPIEndpoint || endpoint === customAPIEndpoint);
-
-  if (!isOpenRouterEndpoint) {
-    config.model = config.model.split('/').slice(1).join('/');
-  }
+  var { endpoint, config, isOfficialOAIEndpoint, isOpenRouterEndpoint, isAnthropicEndpoint } = preprocess(endpoint, config);
 
   const headers: HeadersInit = {
     'Content-Type': 'application/json',
@@ -134,28 +198,17 @@ export const getChatCompletionStream = async (
     }
   }
 
-  const maxTokens = isOfficialOAIEndpoint || isOpenRouterEndpoint || config.model.startsWith('gemini-') ? undefined : 4096;
-  const isGemini25ProPaidAndOpenRouterEndpoint = config.model.startsWith('google/gemini-2.5-pro');
   const response = await fetch(endpoint, {
     method: 'POST',
     headers,
-    body: JSON.stringify({
-      messages: messages.map(({ id, reasoning_content, ...rest }) => rest),
-      ...config,
-      max_tokens: isOfficialOAIEndpoint ? undefined : maxTokens,
-      max_completion_tokens: isOfficialOAIEndpoint ? maxTokens : undefined,
-      // reasoning: isGemini25ProPaidAndOpenRouterEndpoint ? {enabled: true} : undefined,
-      provider: isGemini25ProPaidAndOpenRouterEndpoint ? {ignore: ['google-ai-studio']} : undefined,
-      stream: true,
-    }),
+    body: assemblePayload(messages, config, isOfficialOAIEndpoint, isOpenRouterEndpoint, isAnthropicEndpoint, true),
   });
   if (response.status === 404 || response.status === 405) {
     const text = await response.text();
 
     if (text.includes('model_not_found')) {
       throw new Error(
-        text +
-          '\nMessage from Better ChatGPT:\nPlease ensure that you have access to the GPT-4 API!'
+        text + '\nMessage from Better ChatGPT:\nPlease ensure that you have access to the GPT-4 API!'
       );
     } else {
       throw new Error(
@@ -168,8 +221,7 @@ export const getChatCompletionStream = async (
     const text = await response.text();
     let error = text;
     if (text.includes('insufficient_quota')) {
-      error +=
-        '\nMessage from Better ChatGPT:\nWe recommend changing your API endpoint or API key';
+      error += '\nMessage from Better ChatGPT:\nWe recommend changing your API endpoint or API key';
     } else if (response.status === 429) {
       error += '\nRate limited!';
     }

@@ -49,6 +49,7 @@ const ApiMenu = ({
       title={t('api') as string}
       setIsModalOpen={setIsModalOpen}
       handleConfirm={handleSave}
+      handleClickBackdrop={handleSave}
     >
       <div className='p-6 border-b border-gray-200 dark:border-gray-600'>
         <label className='flex gap-2 text-gray-900 dark:text-gray-300 text-sm items-center mb-4'>

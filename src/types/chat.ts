@@ -5,8 +5,8 @@ import { Theme } from './theme';
 // The types in this file must mimick the structure of the the API request
 
 export type Content = 'text' | 'image_url';
-export type ImageDetail = 'low' | 'high' | 'auto';
-export const imageDetails: ImageDetail[] = ['low', 'high', 'auto'];
+export type ImageDetail = 'auto' | 'low' | 'high';
+export type ReasoningEffort = 'none' | 'minimal' | 'low' | 'medium' | 'high';
 export type Role = 'user' | 'assistant' | 'system';
 export const roles: Role[] = ['user', 'assistant', 'system'];
 
@@ -65,9 +65,10 @@ export interface ConfigInterface {
   model: ModelOptions;
   max_tokens: number;
   temperature: number;
-  presence_penalty: number;
   top_p: number;
+  presence_penalty: number;
   frequency_penalty: number;
+  reasoning_effort: ReasoningEffort;
 }
 
 export interface ChatHistoryInterface {

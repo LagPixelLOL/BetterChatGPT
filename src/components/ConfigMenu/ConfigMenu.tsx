@@ -1,11 +1,43 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import PopupModal from '@components/PopupModal';
-import { ConfigInterface, ImageDetail } from '@type/chat';
+import { ConfigInterface, ImageDetail, ReasoningEffort } from '@type/chat';
 import Select from 'react-select';
 import { modelOptions, modelMaxToken } from '@constants/modelLoader';
 import { ModelOptions } from '@utils/modelReader';
 import useStore from '@store/store';
+
+const CUSTOM_STYLES = {
+  control: (provided: any) => ({
+    ...provided,
+    backgroundColor: '#2D3748', // Dark background color
+    color: '#E2E8F0', // Light text color
+  }),
+  menu: (provided: any) => ({
+    ...provided,
+    backgroundColor: '#2D3748', // Dark background color
+  }),
+  option: (provided: any, state: any) => ({
+    ...provided,
+    'backgroundColor': state.isSelected ? '#4A5568' : '#2D3748', // Darker background for selected option
+    'color': '#E2E8F0', // Light text color
+    '&:hover': {
+      backgroundColor: '#4A5568', // Darker background on hover
+    },
+  }),
+  singleValue: (provided: any) => ({
+    ...provided,
+    color: '#E2E8F0', // Light text color
+  }),
+  input: (provided: any) => ({
+    ...provided,
+    color: '#E2E8F0', // Light text color for input
+  }),
+  placeholder: (provided: any) => ({
+    ...provided,
+    color: '#A0AEC0', // Light gray color for placeholder
+  }),
+};
 
 const ConfigMenu = ({
   setIsModalOpen,
@@ -31,6 +63,7 @@ const ConfigMenu = ({
     config.frequency_penalty
   );
   const [_imageDetail, _setImageDetail] = useState<ImageDetail>(imageDetail);
+  const [_reasoningEffort, _setReasoningEffort] = useState<ReasoningEffort>(config.reasoning_effort);
   const { t } = useTranslation('model');
 
   const handleConfirm = () => {
@@ -41,6 +74,7 @@ const ConfigMenu = ({
       presence_penalty: _presencePenalty,
       top_p: _topP,
       frequency_penalty: _frequencyPenalty,
+      reasoning_effort: _reasoningEffort,
     });
     setImageDetail(_imageDetail);
     setIsModalOpen(false);
@@ -81,6 +115,10 @@ const ConfigMenu = ({
           _imageDetail={_imageDetail}
           _setImageDetail={_setImageDetail}
         />
+        <ReasoningEffortSelector
+          _reasoningEffort={_reasoningEffort}
+          _setReasoningEffort={_setReasoningEffort}
+        />
       </div>
     </PopupModal>
   );
@@ -115,38 +153,6 @@ export const ModelSelector = ({
     };
   });
 
-  const customStyles = {
-    control: (provided: any) => ({
-      ...provided,
-      backgroundColor: '#2D3748', // Dark background color
-      color: '#E2E8F0', // Light text color
-    }),
-    menu: (provided: any) => ({
-      ...provided,
-      backgroundColor: '#2D3748', // Dark background color
-    }),
-    option: (provided: any, state: any) => ({
-      ...provided,
-      'backgroundColor': state.isSelected ? '#4A5568' : '#2D3748', // Darker background for selected option
-      'color': '#E2E8F0', // Light text color
-      '&:hover': {
-        backgroundColor: '#4A5568', // Darker background on hover
-      },
-    }),
-    singleValue: (provided: any) => ({
-      ...provided,
-      color: '#E2E8F0', // Light text color
-    }),
-    input: (provided: any) => ({
-      ...provided,
-      color: '#E2E8F0', // Light text color for input
-    }),
-    placeholder: (provided: any) => ({
-      ...provided,
-      color: '#A0AEC0', // Light gray color for placeholder
-    }),
-  };
-
   return (
     <div className='mb-4'>
       <label className='block text-sm font-medium text-gray-900 dark:text-white'>
@@ -165,7 +171,7 @@ export const ModelSelector = ({
         options={modelOptionsFormatted}
         className='basic-single'
         classNamePrefix='select'
-        styles={customStyles}
+        styles={CUSTOM_STYLES}
       />
     </div>
   );
@@ -355,42 +361,10 @@ export const ImageDetailSelector = ({
   const { t } = useTranslation('model');
 
   const imageDetailOptions = [
+    { value: 'auto', label: t('imageDetail.auto') },
     { value: 'low', label: t('imageDetail.low') },
     { value: 'high', label: t('imageDetail.high') },
-    { value: 'auto', label: t('imageDetail.auto') },
   ];
-
-  const customStyles = {
-    control: (provided: any) => ({
-      ...provided,
-      backgroundColor: '#2D3748', // Dark background color
-      color: '#E2E8F0', // Light text color
-    }),
-    menu: (provided: any) => ({
-      ...provided,
-      backgroundColor: '#2D3748', // Dark background color
-    }),
-    option: (provided: any, state: any) => ({
-      ...provided,
-      'backgroundColor': state.isSelected ? '#4A5568' : '#2D3748', // Darker background for selected option
-      'color': '#E2E8F0', // Light text color
-      '&:hover': {
-        backgroundColor: '#4A5568', // Darker background on hover
-      },
-    }),
-    singleValue: (provided: any) => ({
-      ...provided,
-      color: '#E2E8F0', // Light text color
-    }),
-    input: (provided: any) => ({
-      ...provided,
-      color: '#E2E8F0', // Light text color for input
-    }),
-    placeholder: (provided: any) => ({
-      ...provided,
-      color: '#A0AEC0', // Light gray color for placeholder
-    }),
-  };
 
   return (
     <div className='mt-5 pt-5 border-t border-gray-500'>
@@ -407,7 +381,45 @@ export const ImageDetailSelector = ({
         options={imageDetailOptions}
         className='basic-single'
         classNamePrefix='select'
-        styles={customStyles}
+        styles={CUSTOM_STYLES}
+      />
+    </div>
+  );
+};
+
+export const ReasoningEffortSelector = ({
+  _reasoningEffort,
+  _setReasoningEffort,
+}: {
+  _reasoningEffort: ReasoningEffort;
+  _setReasoningEffort: React.Dispatch<React.SetStateAction<ReasoningEffort>>;
+}) => {
+  const { t } = useTranslation('model');
+
+  const reasoningEffortOptions = [
+    { value: 'none', label: t('reasoningEffort.none') },
+    { value: 'minimal', label: t('reasoningEffort.minimal') },
+    { value: 'low', label: t('reasoningEffort.low') },
+    { value: 'medium', label: t('reasoningEffort.medium') },
+    { value: 'high', label: t('reasoningEffort.high') },
+  ];
+
+  return (
+    <div className='mt-5 pt-5 border-t border-gray-500'>
+      <label className='block text-sm font-medium text-gray-900 dark:text-white'>
+        {t('reasoningEffort.label')}
+      </label>
+      <Select
+        value={reasoningEffortOptions.find(
+          (option) => option.value === _reasoningEffort
+        )}
+        onChange={(selectedOption) =>
+          _setReasoningEffort(selectedOption?.value as ReasoningEffort)
+        }
+        options={reasoningEffortOptions}
+        className='basic-single'
+        classNamePrefix='select'
+        styles={CUSTOM_STYLES}
       />
     </div>
   );

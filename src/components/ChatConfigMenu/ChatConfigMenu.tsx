@@ -5,13 +5,14 @@ import { useTranslation } from 'react-i18next';
 import Select from 'react-select';
 import PopupModal from '@components/PopupModal';
 import {
-  FrequencyPenaltySlider,
-  ImageDetailSelector,
-  MaxTokenSlider,
   ModelSelector,
-  PresencePenaltySlider,
+  MaxTokenSlider,
   TemperatureSlider,
   TopPSlider,
+  PresencePenaltySlider,
+  FrequencyPenaltySlider,
+  ImageDetailSelector,
+  ReasoningEffortSelector,
 } from '@components/ConfigMenu/ConfigMenu';
 
 import {
@@ -20,7 +21,7 @@ import {
   _defaultSystemMessage,
 } from '@constants/chat';
 import { ModelOptions } from '@utils/modelReader';
-import { ImageDetail } from '@type/chat';
+import { ImageDetail, ReasoningEffort } from '@type/chat';
 
 const ChatConfigMenu = () => {
   const { t } = useTranslation('model');
@@ -69,6 +70,7 @@ const ChatConfigPopup = ({
   const [_imageDetail, _setImageDetail] = useState<ImageDetail>(
     useStore.getState().defaultImageDetail
   );
+  const [_reasoningEffort, _setReasoningEffort] = useState<ReasoningEffort>(config.reasoning_effort);
 
   const { t } = useTranslation('model');
 
@@ -80,6 +82,7 @@ const ChatConfigPopup = ({
       top_p: _topP,
       presence_penalty: _presencePenalty,
       frequency_penalty: _frequencyPenalty,
+      reasoning_effort: _reasoningEffort,
     });
     setDefaultSystemMessage(_systemMessage);
     setDefaultImageDetail(_imageDetail);
@@ -103,6 +106,7 @@ const ChatConfigPopup = ({
       title={t('defaultChatConfig') as string}
       setIsModalOpen={setIsModalOpen}
       handleConfirm={handleSave}
+      handleClickBackdrop={handleSave}
     >
       <div className='p-6 border-b border-gray-200 dark:border-gray-600 w-[90vw] max-w-full text-sm text-gray-900 dark:text-gray-300'>
         <DefaultSystemChat
@@ -136,7 +140,11 @@ const ChatConfigPopup = ({
           _imageDetail={_imageDetail}
           _setImageDetail={_setImageDetail}
         />
-        
+        <ReasoningEffortSelector
+          _reasoningEffort={_reasoningEffort}
+          _setReasoningEffort={_setReasoningEffort}
+        />
+
         <div
           className='btn btn-neutral cursor-pointer mt-5'
           onClick={handleReset}
