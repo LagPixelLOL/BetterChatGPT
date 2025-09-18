@@ -3,7 +3,6 @@
   "private": true,
   "version": "1.27.0",
   "type": "module",
-  "homepage": "./",
   "main": "electron/index.cjs",
   "author": "Jing Hua <betterchatgpt@mail.tjh.sg>",
   "contributors": [

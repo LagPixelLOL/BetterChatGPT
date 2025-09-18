@@ -86,7 +86,7 @@ function assemblePayload(
   } else {
     var modifiedConfig: any = config;
     if (modifiedConfig.reasoning_effort === 'none') {
-      modifiedConfig.reasoning_effort = 'minimal';
+      modifiedConfig.reasoning_effort = undefined;
     }
   }
 

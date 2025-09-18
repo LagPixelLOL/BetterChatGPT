@@ -49,6 +49,7 @@ const ChatHistory = React.memo(
     const setChats = useStore((state) => state.setChats);
     const active = useStore((state) => state.currentChatIndex === chatIndex);
     const generating = useStore((state) => state.generating);
+    const setError = useStore((state) => state.setError);
 
     const [isDelete, setIsDelete] = useState<boolean>(false);
     const [isEdit, setIsEdit] = useState<boolean>(false);
@@ -96,7 +97,10 @@ const ChatHistory = React.memo(
       e.stopPropagation();
 
       if (isEdit) editTitle();
-      else if (isDelete) deleteChat();
+      else if (isDelete) {
+        deleteChat();
+        setError('');
+      }
     };
 
     const handleCross = () => {
@@ -173,7 +177,10 @@ const ChatHistory = React.memo(
             : 'cursor-pointer opacity-100'
         } ${selectedChats.includes(chatIndex) ? 'bg-blue-500' : ''}`}
         onClick={() => {
-          if (!generating) setCurrentChatIndex(chatIndex);
+          if (!generating && chatIndex !== currentChatIndex) {
+            setCurrentChatIndex(chatIndex);
+            setError('');
+          }
         }}
         draggable
         onDragStart={handleDragStart}

@@ -36,9 +36,10 @@ const ApiPopup = () => {
   return isModalOpen ? (
     <PopupModal
       title='Setup your API key'
-      handleConfirm={handleConfirm}
       setIsModalOpen={setIsModalOpen}
       cancelButton={false}
+      handleConfirm={handleConfirm}
+      handleClickBackdrop={handleConfirm}
     >
       <div className='p-6 border-b border-gray-200 dark:border-gray-600'>
         <div className='flex gap-2 items-center justify-center mt-2'>

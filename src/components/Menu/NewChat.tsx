@@ -10,6 +10,7 @@ const NewChat = ({ folder }: { folder?: string }) => {
   const { t } = useTranslation();
   const addChat = useAddChat();
   const generating = useStore((state) => state.generating);
+  const setError = useStore((state) => state.setError);
 
   return (
     <a
@@ -21,7 +22,10 @@ const NewChat = ({ folder }: { folder?: string }) => {
         folder ? 'justify-start' : 'py-2 px-2 gap-3 mb-2 border border-white/20'
       }`}
       onClick={() => {
-        if (!generating) addChat(folder);
+        if (!generating) {
+          addChat(folder);
+          setError('');
+        }
       }}
       title={folder ? String(t('newChat')) : ''}
     >
