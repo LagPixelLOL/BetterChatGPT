@@ -24,7 +24,7 @@ const ApiPopup = () => {
       setError(t('noApiKeyWarning', { ns: 'api' }) as string);
     } else {
       setError('');
-      setApiKey(_apiKey);
+      setApiKey(_apiKey.trim());
       setIsModalOpen(false);
     }
   };

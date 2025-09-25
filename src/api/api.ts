@@ -3,14 +3,13 @@ import {
   ConfigInterface,
   MessageInterface,
 } from '@type/chat';
-import { isAzureEndpoint } from '@utils/api';
 import {
   officialAPIEndpoint,
-  customAPIEndpoint,
   openRouterAPIEndpoint,
   anthropicEndpoint,
 } from '@constants/auth';
 import { ModelOptions } from '@utils/modelReader';
+import { checkIsResponsesApi } from '@utils/api';
 
 function preprocess(
   endpoint: string,
@@ -18,6 +17,7 @@ function preprocess(
 ): {
   endpoint: string,
   config: ConfigInterface,
+  isResponsesApi: boolean,
   isOfficialOAIEndpoint: boolean,
   isOpenRouterEndpoint: boolean,
   isAnthropicEndpoint: boolean,
@@ -25,9 +25,25 @@ function preprocess(
   endpoint = endpoint.trim();
   config = structuredClone(config);
 
-  const isOfficialOAIEndpoint = endpoint === officialAPIEndpoint || endpoint === customAPIEndpoint;
-  const isOpenRouterEndpoint = endpoint === openRouterAPIEndpoint;
-  const isAnthropicEndpoint = endpoint === anthropicEndpoint;
+  const isResponsesApi = checkIsResponsesApi(endpoint);
+
+  let isOfficialOAIEndpoint = false;
+  let isOpenRouterEndpoint = false;
+  let isAnthropicEndpoint = false;
+
+  switch (endpoint) {
+    case officialAPIEndpoint:
+      isOfficialOAIEndpoint = true;
+      break;
+    case openRouterAPIEndpoint:
+      isOpenRouterEndpoint = true;
+      break;
+    case anthropicEndpoint:
+      isAnthropicEndpoint = true;
+      break;
+    default:
+      break;
+  }
 
   if (!isOpenRouterEndpoint) {
     config.model = config.model.split('/').slice(1).join('/');
@@ -36,6 +52,7 @@ function preprocess(
   return {
     endpoint,
     config,
+    isResponsesApi,
     isOfficialOAIEndpoint,
     isOpenRouterEndpoint,
     isAnthropicEndpoint,
@@ -45,6 +62,7 @@ function preprocess(
 function assemblePayload(
   messages: MessageInterface[],
   config: ConfigInterface,
+  isResponsesApi: boolean,
   isOfficialOAIEndpoint: boolean,
   isOpenRouterEndpoint: boolean,
   isAnthropicEndpoint: boolean,
@@ -52,52 +70,94 @@ function assemblePayload(
 ): string {
   const maxTokens = isOfficialOAIEndpoint || isOpenRouterEndpoint || isAnthropicEndpoint || config.model.startsWith('gemini-') ? undefined : 32768;
   const isGemini25ProPaidAndOpenRouterEndpoint = config.model.startsWith('google/gemini-2.5-pro');
+  let modifiedMessages: any[] = messages.map(({ id, reasoning_content, ...rest }) => rest);
 
-  if (isOpenRouterEndpoint) {
-    var { reasoning_effort: reasoningEffort, ...modifiedConfig }: any = config;
-    if (reasoningEffort === 'none') {
-      modifiedConfig.reasoning = { enabled: false };
-    } else {
-      modifiedConfig.reasoning = { effort: reasoningEffort };
+  if (isResponsesApi) {
+    if (!isOfficialOAIEndpoint) throw Error('Only the official OpenAI API endpoint is supported for the responses API format!');
+    modifiedMessages = modifiedMessages.map(({ ...message }) => {
+      message.content = message.content.map(({ ...content }) => {
+        switch (content.type) {
+          case 'text':
+            content.type = message.role === 'assistant' ? 'output_text' : 'input_text';
+            break;
+          case 'image_url':
+            content.type = 'input_image';
+            let { url, detail } = content.image_url;
+            content.image_url = url;
+            content.detail = detail;
+        }
+        return content
+      });
+      return message
+    });
+    var { reasoning_effort: reasoningEffort, presence_penalty: _, frequency_penalty: _, ...modifiedConfig }: any = config;
+    if (reasoningEffort !== 'none') {
+      modifiedConfig.reasoning = { effort: reasoningEffort, summary: 'auto' };
     }
-  } else if (isAnthropicEndpoint) {
-    var { reasoning_effort: reasoningEffort, ...modifiedConfig }: any = config;
-    let thinkingBudget: { type: string, budget_tokens?: number };
-    switch (reasoningEffort) {
-      case 'none':
-        thinkingBudget = { 'type': 'disabled' };
-        break;
-      case 'minimal':
-        thinkingBudget = { 'type': 'disabled' };
-        break;
-      case 'low':
-        thinkingBudget = { 'type': 'enabled', 'budget_tokens': 1024 };
-        break;
-      case 'medium':
-        thinkingBudget = { 'type': 'enabled', 'budget_tokens': 4096 };
-        break;
-      case 'high':
-        thinkingBudget = { 'type': 'enabled', 'budget_tokens': 32768 };
-        break;
-      default:
-        throw Error(`Invalid reasoning effort: ${reasoningEffort}`);
+    if (stream) {
+      modifiedConfig.stream_options = { include_obfuscation: false };
     }
-    modifiedConfig.thinking = thinkingBudget;
+    modifiedConfig.store = false;
   } else {
-    var modifiedConfig: any = config;
-    if (modifiedConfig.reasoning_effort === 'none') {
-      modifiedConfig.reasoning_effort = undefined;
+    if (isOpenRouterEndpoint) {
+      var { reasoning_effort: reasoningEffort, ...modifiedConfig }: any = config;
+      if (reasoningEffort === 'none') {
+        modifiedConfig.reasoning = { enabled: false };
+      } else {
+        modifiedConfig.reasoning = { effort: reasoningEffort };
+      }
+    } else if (isAnthropicEndpoint) {
+      var { reasoning_effort: reasoningEffort, ...modifiedConfig }: any = config;
+      let thinkingBudget: { type: string, budget_tokens?: number };
+      switch (reasoningEffort) {
+        case 'none':
+          thinkingBudget = { 'type': 'disabled' };
+          break;
+        case 'minimal':
+          thinkingBudget = { 'type': 'disabled' };
+          break;
+        case 'low':
+          thinkingBudget = { 'type': 'enabled', 'budget_tokens': 1024 };
+          break;
+        case 'medium':
+          thinkingBudget = { 'type': 'enabled', 'budget_tokens': 4096 };
+          break;
+        case 'high':
+          thinkingBudget = { 'type': 'enabled', 'budget_tokens': 32768 };
+          break;
+        default:
+          throw Error(`Invalid reasoning effort: ${reasoningEffort}`);
+      }
+      modifiedConfig.thinking = thinkingBudget;
+    } else {
+      var { ...modifiedConfig }: any = config;
+      if (modifiedConfig.reasoning_effort === 'none') {
+        modifiedConfig.reasoning_effort = undefined;
+      }
     }
   }
 
-  return JSON.stringify({
-    messages: messages.map(({ id, reasoning_content, ...rest }) => rest),
+  delete modifiedConfig.max_tokens;
+
+  let payload = {
     ...modifiedConfig,
-    max_tokens: isOfficialOAIEndpoint ? undefined : maxTokens,
-    max_completion_tokens: isOfficialOAIEndpoint ? maxTokens : undefined,
-    provider: isGemini25ProPaidAndOpenRouterEndpoint ? {ignore: ['google-ai-studio']} : undefined,
+    provider: isGemini25ProPaidAndOpenRouterEndpoint ? { ignore: ['google-ai-studio'] } : undefined,
     stream,
-  })
+  };
+
+  if (isResponsesApi) {
+    payload.input = modifiedMessages;
+    payload.max_output_tokens = maxTokens;
+  } else {
+    payload.messages = modifiedMessages;
+    if (isOfficialOAIEndpoint) {
+      payload.max_completion_tokens = maxTokens;
+    } else {
+      payload.max_tokens = maxTokens;
+    }
+  }
+
+  return JSON.stringify(payload)
 }
 
 export const getChatCompletion = async (
@@ -108,7 +168,7 @@ export const getChatCompletion = async (
   customHeaders?: Record<string, string>,
   apiVersionToUse?: string,
 ) => {
-  var { endpoint, config, isOfficialOAIEndpoint, isOpenRouterEndpoint, isAnthropicEndpoint } = preprocess(endpoint, config);
+  var { endpoint, config, isResponsesApi, isOfficialOAIEndpoint, isOpenRouterEndpoint, isAnthropicEndpoint } = preprocess(endpoint, config);
 
   const headers: HeadersInit = {
     'Content-Type': 'application/json',
@@ -116,39 +176,10 @@ export const getChatCompletion = async (
   };
   if (apiKey) headers.Authorization = `Bearer ${apiKey}`;
 
-  if (isAzureEndpoint(endpoint) && apiKey) {
-    headers['api-key'] = apiKey;
-
-    const modelmapping: Partial<Record<ModelOptions, string>> = {
-      'gpt-3.5-turbo': 'gpt-35-turbo',
-      'gpt-3.5-turbo-16k': 'gpt-35-turbo-16k',
-      'gpt-3.5-turbo-1106': 'gpt-35-turbo-1106',
-      'gpt-3.5-turbo-0125': 'gpt-35-turbo-0125',
-    };
-
-    const model = modelmapping[config.model] || config.model;
-
-    // set api version to 2023-07-01-preview for gpt-4 and gpt-4-32k, otherwise use 2023-03-15-preview
-    const apiVersion =
-      apiVersionToUse ??
-      (model === 'gpt-4' || model === 'gpt-4-32k'
-        ? '2023-07-01-preview'
-        : '2023-03-15-preview');
-
-    const path = `openai/deployments/${model}/chat/completions?api-version=${apiVersion}`;
-
-    if (!endpoint.endsWith(path)) {
-      if (!endpoint.endsWith('/')) {
-        endpoint += '/';
-      }
-      endpoint += path;
-    }
-  }
-
   const response = await fetch(endpoint, {
     method: 'POST',
     headers,
-    body: assemblePayload(messages, config, isOfficialOAIEndpoint, isOpenRouterEndpoint, isAnthropicEndpoint),
+    body: assemblePayload(messages, config, isResponsesApi, isOfficialOAIEndpoint, isOpenRouterEndpoint, isAnthropicEndpoint),
   });
   if (!response.ok) throw new Error(await response.text());
 
@@ -164,7 +195,7 @@ export const getChatCompletionStream = async (
   customHeaders?: Record<string, string>,
   apiVersionToUse?: string,
 ) => {
-  var { endpoint, config, isOfficialOAIEndpoint, isOpenRouterEndpoint, isAnthropicEndpoint } = preprocess(endpoint, config);
+  var { endpoint, config, isResponsesApi, isOfficialOAIEndpoint, isOpenRouterEndpoint, isAnthropicEndpoint } = preprocess(endpoint, config);
 
   const headers: HeadersInit = {
     'Content-Type': 'application/json',
@@ -172,36 +203,10 @@ export const getChatCompletionStream = async (
   };
   if (apiKey) headers.Authorization = `Bearer ${apiKey}`;
 
-  if (isAzureEndpoint(endpoint) && apiKey) {
-    headers['api-key'] = apiKey;
-
-    const modelmapping: Partial<Record<ModelOptions, string>> = {
-      'gpt-3.5-turbo': 'gpt-35-turbo',
-      'gpt-3.5-turbo-16k': 'gpt-35-turbo-16k',
-    };
-
-    const model = modelmapping[config.model] || config.model;
-
-    // set api version to 2023-07-01-preview for gpt-4 and gpt-4-32k, otherwise use 2023-03-15-preview
-    const apiVersion =
-      apiVersionToUse ??
-      (model === 'gpt-4' || model === 'gpt-4-32k'
-        ? '2023-07-01-preview'
-        : '2023-03-15-preview');
-    const path = `openai/deployments/${model}/chat/completions?api-version=${apiVersion}`;
-
-    if (!endpoint.endsWith(path)) {
-      if (!endpoint.endsWith('/')) {
-        endpoint += '/';
-      }
-      endpoint += path;
-    }
-  }
-
   const response = await fetch(endpoint, {
     method: 'POST',
     headers,
-    body: assemblePayload(messages, config, isOfficialOAIEndpoint, isOpenRouterEndpoint, isAnthropicEndpoint, true),
+    body: assemblePayload(messages, config, isResponsesApi, isOfficialOAIEndpoint, isOpenRouterEndpoint, isAnthropicEndpoint, true),
   });
   if (response.status === 404 || response.status === 405) {
     const text = await response.text();

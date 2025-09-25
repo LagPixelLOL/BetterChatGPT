@@ -32,9 +32,9 @@ const ApiMenu = ({
   const [_apiVersion, _setApiVersion] = useState<string>(apiVersion || '');
 
   const handleSave = () => {
-    setApiKey(_apiKey);
-    setApiEndpoint(_apiEndpoint);
-    setApiVersion(_apiVersion);
+    setApiKey(_apiKey.trim());
+    setApiEndpoint(_apiEndpoint.trim());
+    setApiVersion(_apiVersion.trim());
     setIsModalOpen(false);
   };
 

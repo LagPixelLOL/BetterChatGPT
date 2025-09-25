@@ -130,16 +130,15 @@ const EditView = ({
   };
 
   const handleImageUrlChange = () => {
-    if (imageUrl.trim() === '') return;
-    const updatedChats: ChatInterface[] = JSON.parse(
-      JSON.stringify(useStore.getState().chats)
-    );
+    const imageUrlTrimmed = imageUrl.trim();
+    if (!imageUrlTrimmed) return;
+    const updatedChats: ChatInterface[] = structuredClone(useStore.getState().chats) ?? [];
     const chat = updatedChats[currentChatIndex];
     const newImage: ImageContentInterface = {
       type: 'image_url',
       image_url: {
         detail: chat.imageDetail,
-        url: imageUrl,
+        url: imageUrlTrimmed,
       },
     };
 

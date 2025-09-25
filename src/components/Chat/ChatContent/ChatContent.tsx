@@ -139,8 +139,6 @@ const ChatContent = () => {
 
   const { error } = useSubmit();
 
-    console.log('asdfasdfasdf ' + error);
-
   // Custom scroller function to control auto-scroll behavior
   const firstLoadTimeRef = useRef(Date.now());
   const customScroller = ({ maxValue }: { maxValue: number; minValue: number; offsetHeight: number; scrollHeight: number; scrollTop: number }) => {

@@ -9,7 +9,7 @@ import {
 import { getChatCompletion, getChatCompletionStream } from '@api/api';
 import { parseEventSource } from '@api/helper';
 import { limitMessageTokens, updateTotalTokenUsed } from '@utils/messageUtils';
-import { _defaultChatConfig } from '@constants/chat';
+import { checkIsResponsesApi } from '@utils/api';
 import { officialAPIEndpoint } from '@constants/auth';
 import { modelStreamSupport } from '@constants/modelLoader';
 
@@ -26,51 +26,48 @@ const useSubmit = () => {
   const currentChatIndex = useStore((state) => state.currentChatIndex);
   const setChats = useStore((state) => state.setChats);
 
+  const isOfficialOAIEndpoint = apiEndpoint === officialAPIEndpoint;
+  const isResponsesApi = checkIsResponsesApi(apiEndpoint);
+
   const generateTitle = async (
     message: MessageInterface[],
     modelConfig: ConfigInterface
   ): Promise<string> => {
     let data;
     try {
-      if (!apiKey || apiKey.length === 0) {
-        // official endpoint
-        if (apiEndpoint === officialAPIEndpoint) {
-          throw new Error(t('noApiKeyWarning') as string);
-        }
-        const titleChatConfig = {
-          ..._defaultChatConfig, // Spread the original config
-          model: useStore.getState().titleModel ?? _defaultChatConfig.model, // Override the model property
-        };
-        // other endpoints
-        data = await getChatCompletion(
-          useStore.getState().apiEndpoint,
-          message,
-          titleChatConfig,
-          undefined,
-          undefined,
-          useStore.getState().apiVersion
-        );
-      } else if (apiKey) {
-        const titleChatConfig = {
-          ...modelConfig, // Spread the original config
-          model: useStore.getState().titleModel ?? modelConfig.model, // Override the model property
-        };
-        // own apikey
-        data = await getChatCompletion(
-          useStore.getState().apiEndpoint,
-          message,
-          titleChatConfig,
-          apiKey,
-          undefined,
-          useStore.getState().apiVersion
-        );
+      if (!apiKey && isOfficialOAIEndpoint) {
+        throw new Error(t('noApiKeyWarning') as string);
       }
+      const titleChatConfig = {
+        ...modelConfig,
+        model: useStore.getState().titleModel ?? modelConfig.model,
+      };
+      data = await getChatCompletion(
+        useStore.getState().apiEndpoint,
+        message,
+        titleChatConfig,
+        apiKey ? apiKey : undefined,
+        undefined,
+        useStore.getState().apiVersion,
+      );
     } catch (error: unknown) {
       throw new Error(
         `${t('errors.errorGeneratingTitle')}\n${(error as Error).message}`
       );
     }
-    return data.choices[0].message.content;
+    if (isResponsesApi) {
+      let output = data?.output;
+      if (!Array.isArray(output)) {
+        return '';
+      }
+      return output.reduce((prev, curr) => {
+        if (curr?.type !== 'message') return prev;
+        const messageText = curr?.content?.[0]?.text ?? '';
+        return prev + messageText;
+      }, '');
+    } else {
+      return data?.choices?.[0]?.message?.content ?? '';
+    }
   };
 
   const handleSubmit = async () => {
@@ -116,88 +113,76 @@ const useSubmit = () => {
       if (messages.length === 0)
         throw new Error(t('errors.messageExceedMaxToken') as string);
 
-      let finishReason: any;
+      if (!apiKey && isOfficialOAIEndpoint) {
+        throw new Error(t('noApiKeyWarning') as string);
+      }
 
+      let finishReason: string | undefined;
       if (!isStreamSupported) {
-        if (!apiKey || apiKey.length === 0) {
-          // official endpoint
-          if (apiEndpoint === officialAPIEndpoint) {
-            throw new Error(t('noApiKeyWarning') as string);
+        data = await getChatCompletion(
+          useStore.getState().apiEndpoint,
+          messages,
+          chats[currentChatIndex].config,
+          apiKey ? apiKey : undefined,
+          undefined,
+          useStore.getState().apiVersion
+        );
+
+        let reasoningContent: string;
+        let messageContent: string;
+        if (isResponsesApi) {
+          const output = data?.output;
+          if (!Array.isArray(output)) {
+            throw new Error(t('errors.failedToRetrieveData') as string + '\n\nData: ' + JSON.stringify(data));
           }
-          // other endpoints
-          data = await getChatCompletion(
-            useStore.getState().apiEndpoint,
-            messages,
-            chats[currentChatIndex].config,
-            undefined,
-            undefined,
-            useStore.getState().apiVersion
-          );
-        } else if (apiKey) {
-          data = await getChatCompletion(
-            useStore.getState().apiEndpoint,
-            messages,
-            chats[currentChatIndex].config,
-            apiKey,
-            undefined,
-            useStore.getState().apiVersion
-          );
-        }
 
-        if (data?.choices?.[0]?.message?.content == null) {
-          throw new Error(t('errors.failedToRetrieveData') as string + '\n\nData: ' + JSON.stringify(data));
-        }
+          finishReason = data?.incomplete_details?.reason ?? data.status;
 
-        const choice = data.choices[0];
-        finishReason = choice.finish_reason;
-        if (!finishReason || finishReason === 'stop' || finishReason === 'content_filter') {
-          const nativeFinishReason = choice?.native_finish_reason;
-          if (typeof nativeFinishReason === 'string') {
-            finishReason = nativeFinishReason.toLowerCase();
+          ({ reasoningContent, messageContent } = output.reduce((prev, curr) => {
+            if (!curr?.type) return prev;
+            switch (curr.type) {
+              case 'reasoning':
+                prev.reasoningContent += curr?.summary?.[0]?.text ?? '';
+                break;
+              case 'message':
+                prev.messageContent += curr?.content?.[0]?.text ?? '';
+            }
+            return prev;
+          }, { reasoningContent: '', messageContent: '' }));
+        } else {
+          const choice = data?.choices?.[0];
+          if (!choice) {
+            throw new Error(t('errors.failedToRetrieveData') as string + '\n\nData: ' + JSON.stringify(data));
           }
-        }
 
-        const messageObj = choice.message;
+          finishReason = choice.finish_reason;
+          if (!finishReason || finishReason === 'stop' || finishReason === 'content_filter') {
+            const nativeFinishReason = choice?.native_finish_reason;
+            if (typeof nativeFinishReason === 'string') {
+              finishReason = nativeFinishReason.toLowerCase();
+            }
+          }
+
+          const messageObj = choice.message;
+          reasoningContent = messageObj?.reasoning ?? '';
+          messageContent = messageObj.content;
+        }
 
         const updatedChats: ChatInterface[] = structuredClone(useStore.getState().chats as ChatInterface[]);
         const updatedMessages = updatedChats[currentChatIndex].messages;
         const updatedMessage = updatedMessages[updatedMessages.length - 1];
-        (updatedMessage.content[0] as TextContentInterface).text += messageObj.content;
-        const reasoning = messageObj?.reasoning ? messageObj.reasoning : '';
-        if (updatedMessage.reasoning_content) {
-          updatedMessage.reasoning_content += reasoning;
-        } else {
-          updatedMessage.reasoning_content = reasoning;
-        }
+        updatedMessage.reasoning_content = reasoningContent;
+        (updatedMessage.content[0] as TextContentInterface).text = messageContent;
         setChats(updatedChats);
       } else {
-        // no api key (free)
-        if (!apiKey || apiKey.length === 0) {
-          // official endpoint
-          if (apiEndpoint === officialAPIEndpoint) {
-            throw new Error(t('noApiKeyWarning') as string);
-          }
-
-          // other endpoints
-          stream = await getChatCompletionStream(
-            useStore.getState().apiEndpoint,
-            messages,
-            chats[currentChatIndex].config,
-            undefined,
-            undefined,
-            useStore.getState().apiVersion
-          );
-        } else if (apiKey) {
-          // own apikey
-          stream = await getChatCompletionStream(
-            useStore.getState().apiEndpoint,
-            messages,
-            chats[currentChatIndex].config,
-            apiKey,
-            undefined,
-            useStore.getState().apiVersion
-          );
-        }
+        stream = await getChatCompletionStream(
+          useStore.getState().apiEndpoint,
+          messages,
+          chats[currentChatIndex].config,
+          apiKey ? apiKey : undefined,
+          undefined,
+          useStore.getState().apiVersion
+        );
 
         if (stream) {
           if (stream.locked)
@@ -215,27 +200,41 @@ const useSubmit = () => {
             if (result === '[DONE]' || done) {
               reading = false;
             } else {
-              const resultObj = result.reduce((output, curr) => {
+              const { reasoningContent, messageContent } = result.reduce((prev, curr) => {
                 if (typeof curr === 'string') {
                   partial += curr;
                 } else {
-                  if (!curr.choices?.[0]?.delta) {
-                    // cover the case where we get some element which doesnt have text data, e.g. usage stats
-                    return output;
-                  }
                   try {
-                    const choice = curr.choices[0];
-                    const delta = choice.delta;
-                    const content = delta.content;
-                    const reasoning = delta.reasoning;
-                    if (content) output.content += content;
-                    if (reasoning) output.reasoning += reasoning;
-                    if (!finishReason) {
-                      finishReason = choice.finish_reason;
-                      if (!finishReason || finishReason === 'stop' || finishReason === 'content_filter') {
-                        const nativeFinishReason = choice?.native_finish_reason;
-                        if (typeof nativeFinishReason === 'string') {
-                          finishReason = nativeFinishReason.toLowerCase();
+                    if (isResponsesApi) {
+                      switch (curr?.type) {
+                        case 'response.reasoning_summary_text.delta':
+                          prev.reasoningContent += curr.delta;
+                          break;
+                        case 'response.output_text.delta':
+                          prev.messageContent += curr.delta;
+                          break;
+                        case 'response.incomplete':
+                          finishReason = curr.response.incomplete_details?.reason ?? curr.response.status;
+                      }
+                    } else {
+                      const choice = curr?.choices?.[0];
+                      const delta = choice?.delta;
+                      if (!delta) {
+                        // cover the case where we get some element which doesnt have text data, e.g. usage stats
+                        return prev;
+                      }
+                      const reasoningContent = delta.reasoning;
+                      if (reasoningContent) prev.reasoningContent += reasoningContent;
+                      const messageContent = delta.content;
+                      if (messageContent) prev.messageContent += messageContent;
+
+                      if (!finishReason) {
+                        finishReason = choice.finish_reason;
+                        if (!finishReason || finishReason === 'stop' || finishReason === 'content_filter') {
+                          const nativeFinishReason = choice?.native_finish_reason;
+                          if (typeof nativeFinishReason === 'string') {
+                            finishReason = nativeFinishReason.toLowerCase();
+                          }
                         }
                       }
                     }
@@ -243,18 +242,18 @@ const useSubmit = () => {
                     throw new Error(t('errors.failedToRetrieveData') as string + '\n\nMessage: ' + (e as Error).message + '\n\nData: ' + JSON.stringify(curr));
                   }
                 }
-                return output;
-              }, {content: '', reasoning: ''});
+                return prev;
+              }, { reasoningContent: '', messageContent: '' });
 
               const updatedChats: ChatInterface[] = structuredClone(useStore.getState().chats as ChatInterface[]);
               const updatedMessages = updatedChats[currentChatIndex].messages;
               const updatedMessage = updatedMessages[updatedMessages.length - 1];
-              (updatedMessage.content[0] as TextContentInterface).text += resultObj.content;
               if (updatedMessage.reasoning_content) {
-                updatedMessage.reasoning_content += resultObj.reasoning;
+                updatedMessage.reasoning_content += reasoningContent;
               } else {
-                updatedMessage.reasoning_content = resultObj.reasoning;
+                updatedMessage.reasoning_content = reasoningContent;
               }
+              (updatedMessage.content[0] as TextContentInterface).text += messageContent;
               setChats(updatedChats);
             }
           }
@@ -280,6 +279,10 @@ const useSubmit = () => {
           messages.slice(0, -1),
           messages[messages.length - 1]
         );
+      }
+
+      if (finishReason && finishReason !== 'stop' && finishReason !== 'completed') {
+        throw new Error('Finish reason is not "stop".\n\nFinish reason: ' + finishReason);
       }
 
       // generate title for new chats
@@ -322,17 +325,13 @@ const useSubmit = () => {
 
         // update tokens used for generating title
         if (countTotalTokens) {
-          const model = _defaultChatConfig.model;
+          const model = updatedChats[currentChatIndex].config.model;
           updateTotalTokenUsed(model, [message], {
             id: uuidv4(),
             role: 'assistant',
             content: [{ type: 'text', text: title } as TextContentInterface],
           });
         }
-      }
-
-      if (finishReason != null && finishReason !== 'stop' && finishReason !== 'completed') {
-        throw new Error('Finish reason is not "stop".\n\nFinish reason: ' + finishReason);
       }
     } catch (e: unknown) {
       const err = (e as Error).message;
