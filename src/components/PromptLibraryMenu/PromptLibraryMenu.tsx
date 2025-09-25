@@ -40,7 +40,7 @@ const PromptLibraryMenuPopUp = ({
   const prompts = useStore((state) => state.prompts);
 
   const [_prompts, _setPrompts] = useState<Prompt[]>(
-    JSON.parse(JSON.stringify(prompts))
+    structuredClone(prompts)
   );
   const container = useRef<HTMLDivElement>(null);
 
@@ -56,7 +56,7 @@ const PromptLibraryMenuPopUp = ({
   };
 
   const addPrompt = () => {
-    const updatedPrompts: Prompt[] = JSON.parse(JSON.stringify(_prompts));
+    const updatedPrompts: Prompt[] = structuredClone(_prompts);
     updatedPrompts.push({
       id: uuidv4(),
       name: '',
@@ -66,7 +66,7 @@ const PromptLibraryMenuPopUp = ({
   };
 
   const deletePrompt = (index: number) => {
-    const updatedPrompts: Prompt[] = JSON.parse(JSON.stringify(_prompts));
+    const updatedPrompts: Prompt[] = structuredClone(_prompts);
     updatedPrompts.splice(index, 1);
     _setPrompts(updatedPrompts);
   };

@@ -151,11 +151,11 @@ const ChatHistory = React.memo(
           title = `Copy ${i} of ${chats[index].title}`;
         }
 
-        const clonedChat = JSON.parse(JSON.stringify(chats[index]));
+        const clonedChat = structuredClone(chats[index]);
         clonedChat.id = uuidv4();
         clonedChat.title = title;
 
-        const updatedChats: ChatInterface[] = JSON.parse(JSON.stringify(chats));
+        const updatedChats: ChatInterface[] = structuredClone(chats);
         updatedChats.unshift(clonedChat);
 
         setChats(updatedChats);

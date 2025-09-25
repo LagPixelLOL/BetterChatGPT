@@ -206,15 +206,16 @@ const useSubmit = () => {
                 } else {
                   try {
                     if (isResponsesApi) {
-                      switch (curr?.type) {
+                      const currResp: any = curr;
+                      switch (currResp?.type) {
                         case 'response.reasoning_summary_text.delta':
-                          prev.reasoningContent += curr.delta;
+                          prev.reasoningContent += currResp.delta;
                           break;
                         case 'response.output_text.delta':
-                          prev.messageContent += curr.delta;
+                          prev.messageContent += currResp.delta;
                           break;
                         case 'response.incomplete':
-                          finishReason = curr.response.incomplete_details?.reason ?? curr.response.status;
+                          finishReason = currResp.response.incomplete_details?.reason ?? currResp.response.status;
                       }
                     } else {
                       const choice = curr?.choices?.[0];

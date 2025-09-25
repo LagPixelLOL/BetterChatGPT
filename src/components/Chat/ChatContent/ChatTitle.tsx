@@ -24,17 +24,21 @@ const ChatTitle = React.memo(() => {
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
 
   const setConfig = (config: ConfigInterface) => {
-    const updatedChats: ChatInterface[] = JSON.parse(
-      JSON.stringify(useStore.getState().chats)
-    );
+    const chats = useStore.getState().chats;
+    if (!chats || currentChatIndex < 0 || currentChatIndex >= chats.length) {
+      return;
+    }
+    const updatedChats: ChatInterface[] = structuredClone(chats);
     updatedChats[currentChatIndex].config = config;
     setChats(updatedChats);
   };
 
   const setImageDetail = (imageDetail: ImageDetail) => {
-    const updatedChats: ChatInterface[] = JSON.parse(
-      JSON.stringify(useStore.getState().chats)
-    );
+    const chats = useStore.getState().chats;
+    if (!chats || currentChatIndex < 0 || currentChatIndex >= chats.length) {
+      return;
+    }
+    const updatedChats: ChatInterface[] = structuredClone(chats);
     updatedChats[currentChatIndex].imageDetail = imageDetail;
     setChats(updatedChats);
   };
@@ -52,7 +56,7 @@ const ChatTitle = React.memo(() => {
   useEffect(() => {
     const chats = useStore.getState().chats;
     if (chats && chats.length > 0 && currentChatIndex !== -1 && !chat?.config) {
-      const updatedChats: ChatInterface[] = JSON.parse(JSON.stringify(chats));
+      const updatedChats: ChatInterface[] = structuredClone(chats);
       updatedChats[currentChatIndex].config = { ..._defaultChatConfig };
       setChats(updatedChats);
     }

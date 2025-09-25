@@ -10,7 +10,7 @@ const useAddChat = () => {
   const addChat = (folder?:string) => {
     const chats = useStore.getState().chats;
     if (chats) {
-      const updatedChats: ChatInterface[] = JSON.parse(JSON.stringify(chats));
+      const updatedChats: ChatInterface[] = structuredClone(chats);
       let titleIndex = 1;
       let title = `New Chat ${titleIndex}`;
 

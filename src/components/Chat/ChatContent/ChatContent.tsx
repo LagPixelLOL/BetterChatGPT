@@ -29,7 +29,9 @@ const ScrollController = () => {
 
   const observer = useCallback(({ scrollTop }: { scrollTop: number }) => {
     const updateChatScrollTop = () => {
-      const updatedChats = structuredClone(useStore.getState().chats) as ChatInterface[];
+      const chats = useStore.getState().chats;
+      if (!chats || currentChatIndex < 0 || currentChatIndex >= chats.length) return;
+      const updatedChats: ChatInterface[] = structuredClone(chats);
       updatedChats[currentChatIndex].scrollTop = scrollTop;
       setChats(updatedChats);
     };
@@ -96,7 +98,9 @@ const ChatContent = () => {
   const handleReduceMessages = () => {
     const confirmMessage = t('reduceMessagesWarning');
     if (window.confirm(confirmMessage)) {
-      const updatedChats = JSON.parse(JSON.stringify(useStore.getState().chats));
+      const chats = useStore.getState().chats;
+      if (!chats) return;
+      const updatedChats = structuredClone(chats);
       const removedMessagesCount = messages.length - messagesLimited.length;
       updatedChats[currentChatIndex].messages = messagesLimited;
       setChats(updatedChats);

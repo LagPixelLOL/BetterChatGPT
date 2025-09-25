@@ -17,7 +17,7 @@ const NewMessageButton = React.memo(
     const addChat = () => {
       const chats = useStore.getState().chats;
       if (chats) {
-        const updatedChats: ChatInterface[] = JSON.parse(JSON.stringify(chats));
+        const updatedChats: ChatInterface[] = structuredClone(chats);
         let titleIndex = 1;
         let title = `New Chat ${titleIndex}`;
 
@@ -36,9 +36,9 @@ const NewMessageButton = React.memo(
       if (currentChatIndex === -1) {
         addChat();
       } else {
-        const updatedChats: ChatInterface[] = JSON.parse(
-          JSON.stringify(useStore.getState().chats)
-        );
+        const chats = useStore.getState().chats;
+        if (!chats) return;
+        const updatedChats: ChatInterface[] = structuredClone(chats);
         updatedChats[currentChatIndex].messages.splice(messageIndex + 1, 0, {
           id: uuidv4(),
           role: 'user',
