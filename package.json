@@ -50,10 +50,10 @@
     },
     "dmg": {
       "title": "${productName} ${version}",
-      "icon": "dist/icon-rounded-macos.png"
+      "icon": "dist/favicon.avif"
     },
     "mac": {
-      "icon": "dist/icon-rounded-macos.png",
+      "icon": "dist/favicon.avif",
       "target": [
         {
           "target": "dmg",
@@ -69,11 +69,11 @@
         "AppImage"
       ],
       "category": "Chat",
-      "icon": "dist/icon-rounded.png"
+      "icon": "dist/favicon.avif"
     },
     "win": {
       "target": "NSIS",
-      "icon": "dist/icon-rounded.png"
+      "icon": "dist/favicon.avif"
     }
   },
   "dependencies": {

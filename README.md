@@ -1,6 +1,6 @@
 # Better ChatGPT PLUS
 <p>
-    <a href="https://animalnots.github.io/BetterChatGPT-PLUS/" target="_blank"><img src="public/public.jpg" alt="Better ChatGPT" width="150" /></a>
+    <a href="https://chat.boikisser.com" target="_blank"><img src="public/social.avif" alt="Boikisser CatGPT" width="150" /></a>
 </p>
 
 ![License](https://img.shields.io/github/license/animalnots/BetterChatGPT-PLUS?style=flat-square)

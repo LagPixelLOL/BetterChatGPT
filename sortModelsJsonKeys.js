@@ -1,6 +1,6 @@
-import fs from 'fs/promises';
-import https from 'https';
-import path from 'path';
+import fs from 'fs/promises'
+import https from 'https'
+import path from 'path'
 
 // Function to recursively sort object keys
 function sortObjectKeys(obj) {
@@ -25,11 +25,11 @@ function downloadJson(url) {
     return new Promise((resolve, reject) => {
         https.get(url, (res) => {
             let data = '';
-            
+
             res.on('data', (chunk) => {
                 data += chunk;
             });
-            
+
             res.on('end', () => {
                 try {
                     const jsonData = JSON.parse(data);
@@ -50,24 +50,24 @@ async function bumpVersion() {
         const packageJsonPath = 'package.json';
         const packageJsonContent = await fs.readFile(packageJsonPath, 'utf8');
         const packageJson = JSON.parse(packageJsonContent);
-        
+
         // Parse current version
         const currentVersion = packageJson.version;
         const versionParts = currentVersion.split('.');
-        
+
         // Increment minor version (middle number)
         versionParts[1] = (parseInt(versionParts[1], 10) + 1).toString();
         // Reset patch version to 0
         versionParts[2] = '0';
         const newVersion = versionParts.join('.');
-        
+
         // Update version in package.json
         packageJson.version = newVersion;
-        
+
         // Write updated package.json
         await fs.writeFile(packageJsonPath, JSON.stringify(packageJson, null, 2), 'utf8');
         console.log(`Version bumped from ${currentVersion} to ${newVersion}`);
-        
+
         return newVersion;
     } catch (err) {
         console.error('Error bumping version:', err);
@@ -82,28 +82,28 @@ async function downloadAndProcessJson() {
         const inputFilePath = 'models.json';
         const outputFilePath = 'public/models.json';
         const apiUrl = 'https://openrouter.ai/api/v1/models';
-        
+
         console.log('Downloading JSON from OpenRouter API...');
         const jsonData = await downloadJson(apiUrl);
-        
+
         // Write the downloaded JSON to models.json
         const jsonString = JSON.stringify(jsonData, null, 2);
         await fs.writeFile(inputFilePath, jsonString, 'utf8');
         console.log('Downloaded JSON has been saved to models.json');
-        
+
         // Sort the JSON data
         const sortedJsonData = sortObjectKeys(jsonData);
-        
+
         // Convert the sorted JSON data back to a string
         const sortedJsonString = JSON.stringify(sortedJsonData, null, 2);
-        
+
         // Write the sorted JSON data to output file
         await fs.writeFile(outputFilePath, sortedJsonString, 'utf8');
         console.log('Sorted JSON has been saved to public/models.json');
-        
+
         // Bump version in package.json
-        const newVersion = await bumpVersion();
-        console.log(`Package version updated to ${newVersion}`)
+        // const newVersion = await bumpVersion();
+        // console.log(`Package version updated to ${newVersion}`)
     } catch (err) {
         console.error('Error processing the file:', err);
     }
