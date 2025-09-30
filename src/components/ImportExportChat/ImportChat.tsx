@@ -64,6 +64,11 @@ const ImportChat = () => {
     success: boolean;
   } | null>(null);
 
+  const cloneChats = () => {
+    const chats = useStore.getState().chats;
+    return chats ? (structuredClone(chats) as ChatInterface[]) : undefined;
+  };
+
   const handleFileUpload = () => {
     if (!inputRef || !inputRef.current) return;
     const file = inputRef.current.files?.[0];
@@ -73,11 +78,9 @@ const ImportChat = () => {
 
       reader.onload = async (event) => {
         const data = event.target?.result as string;
-        const originalChats = JSON.parse(
-          JSON.stringify(useStore.getState().chats)
-        );
-        const originalFolders = JSON.parse(
-          JSON.stringify(useStore.getState().folders)
+        const originalChats = cloneChats();
+        const originalFolders = structuredClone(
+          useStore.getState().folders
         );
         var originalParsedData: any;
         const importData = async (
@@ -94,10 +97,8 @@ const ImportChat = () => {
                   chatsToImport,
                   shouldAllowPartialImport
                 );
-                const prevChats: ChatInterface[] = JSON.parse(
-                  JSON.stringify(useStore.getState().chats)
-                );
-                setChats(chats.concat(prevChats));
+                const prevChats = cloneChats();
+                setChats(prevChats ? chats.concat(prevChats) : chats);
                 if (removedChatsCount > 0) {
                   toast.info(
                     `${t('reduceMessagesSuccess', {
@@ -172,10 +173,12 @@ const ImportChat = () => {
                   // import chats
                   const prevChats = useStore.getState().chats;
                   if (prevChats) {
-                    const updatedChats: ChatInterface[] = JSON.parse(
-                      JSON.stringify(prevChats)
+                    const updatedChats = cloneChats();
+                    setChats(
+                      updatedChats
+                        ? chatsToImport.concat(updatedChats)
+                        : chatsToImport
                     );
-                    setChats(chatsToImport.concat(updatedChats));
                   } else {
                     setChats(chatsToImport);
                   }
@@ -234,14 +237,12 @@ const ImportChat = () => {
                       // import chats
                       const prevChats = useStore.getState().chats;
                       if (parsedData.chats) {
-                        if (prevChats) {
-                          const updatedChats: ChatInterface[] = JSON.parse(
-                            JSON.stringify(prevChats)
-                          );
-                          setChats(parsedData.chats.concat(updatedChats));
-                        } else {
-                          setChats(parsedData.chats);
-                        }
+                      const updatedChats = cloneChats();
+                      setChats(
+                        updatedChats
+                          ? parsedData.chats.concat(updatedChats)
+                          : parsedData.chats
+                      );
                       }
                       if (
                         removedChatsCount > 0 &&
@@ -296,7 +297,7 @@ const ImportChat = () => {
               }
             } catch (error: unknown) {
               if ((error as DOMException).name === 'QuotaExceededError') {
-                setChats(originalChats);
+                setChats(originalChats ?? []);
                 setFolders(originalFolders);
                 if (type === 'ExportV1') {
                   if (chatsToImport.chats.length > 0) {
@@ -397,13 +398,13 @@ const ImportChat = () => {
             toast.success(result.message);
             setAlert({ message: result.message, success: true });
           } else {
-            setChats(originalChats);
+            setChats(originalChats ?? []);
             setFolders(originalFolders);
             toast.error(result.message, { autoClose: 15000 });
             setAlert({ message: result.message, success: false });
           }
         } catch (error: unknown) {
-          setChats(originalChats);
+          setChats(originalChats ?? []);
           setFolders(originalFolders);
           toast.error((error as Error).message, { autoClose: 15000 });
           setAlert({ message: (error as Error).message, success: false });

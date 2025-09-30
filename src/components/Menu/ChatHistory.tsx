@@ -56,19 +56,22 @@ const ChatHistory = React.memo(
     const [_title, _setTitle] = useState<string>(title);
     const inputRef = useRef<HTMLInputElement>(null);
 
+    const cloneChats = () => {
+      const chats = useStore.getState().chats;
+      return chats ? (structuredClone(chats) as ChatInterface[]) : undefined;
+    };
+
     const editTitle = () => {
-      const updatedChats = JSON.parse(
-        JSON.stringify(useStore.getState().chats)
-      );
+      const updatedChats = cloneChats();
+      if (!updatedChats) return;
       updatedChats[chatIndex].title = _title;
       setChats(updatedChats);
       setIsEdit(false);
     };
 
     const deleteChat = () => {
-      const updatedChats = JSON.parse(
-        JSON.stringify(useStore.getState().chats)
-      );
+      const updatedChats = cloneChats();
+      if (!updatedChats) return;
       const indicesToDelete =
         selectedChats.length > 0 ? selectedChats : [chatIndex];
       indicesToDelete
@@ -141,7 +144,7 @@ const ChatHistory = React.memo(
 
     const handleClone = (e: React.MouseEvent<HTMLButtonElement>) => {
       e.stopPropagation();
-      const chats = useStore.getState().chats;
+      const chats = cloneChats();
       if (chats) {
         const index = chatIndex;
         let title = `Copy of ${chats[index].title}`;

@@ -163,8 +163,8 @@ const ChatHistoryList = () => {
         const folderId = chats[currentChatIndex].folder;
 
         if (folderId) {
-          const updatedFolders: FolderCollection = JSON.parse(
-            JSON.stringify(useStore.getState().folders)
+          const updatedFolders: FolderCollection = structuredClone(
+            useStore.getState().folders
           );
 
           updatedFolders[folderId].expanded = true;
@@ -185,9 +185,9 @@ const ChatHistoryList = () => {
       setIsHover(false);
 
       const chatIndices = JSON.parse(e.dataTransfer.getData('chatIndices'));
-      const updatedChats: ChatInterface[] = JSON.parse(
-        JSON.stringify(useStore.getState().chats)
-      );
+      const chats = useStore.getState().chats;
+      if (!chats) return;
+      const updatedChats: ChatInterface[] = structuredClone(chats);
       chatIndices.forEach((chatIndex: number) => {
         delete updatedChats[chatIndex].folder;
       });

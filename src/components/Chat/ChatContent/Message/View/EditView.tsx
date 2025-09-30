@@ -59,6 +59,14 @@ const EditView = ({
 
   const { t } = useTranslation();
 
+  const cloneChats = () => {
+    const chats = useStore.getState().chats;
+    if (!chats || currentChatIndex < 0 || currentChatIndex >= chats.length) {
+      return undefined;
+    }
+    return structuredClone(chats) as ChatInterface[];
+  };
+
   const resetTextAreaHeight = () => {
     if (textareaRef.current) textareaRef.current.style.height = 'auto';
   };
@@ -104,9 +112,8 @@ const EditView = ({
   };
 
   const handleFileChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
-    const updatedChats: ChatInterface[] = JSON.parse(
-      JSON.stringify(useStore.getState().chats)
-    );
+    const updatedChats = cloneChats();
+    if (!updatedChats) return;
     const chat = updatedChats[currentChatIndex];
     const files = e.target.files!;
     const newImageURLs = Array.from(files).map((file: Blob) =>
@@ -132,7 +139,8 @@ const EditView = ({
   const handleImageUrlChange = () => {
     const imageUrlTrimmed = imageUrl.trim();
     if (!imageUrlTrimmed) return;
-    const updatedChats: ChatInterface[] = structuredClone(useStore.getState().chats) ?? [];
+    const updatedChats = cloneChats();
+    if (!updatedChats) return;
     const chat = updatedChats[currentChatIndex];
     const newImage: ImageContentInterface = {
       type: 'image_url',
@@ -171,12 +179,9 @@ const EditView = ({
     ) {
       return;
     }
-    const originalChats: ChatInterface[] = JSON.parse(
-      JSON.stringify(useStore.getState().chats)
-    );
-    const updatedChats: ChatInterface[] = JSON.parse(
-      JSON.stringify(useStore.getState().chats)
-    );
+    const originalChats = cloneChats();
+    if (!originalChats) return;
+    const updatedChats: ChatInterface[] = structuredClone(originalChats);
     const updatedMessages = updatedChats[currentChatIndex].messages;
 
     if (sticky) {
@@ -236,12 +241,9 @@ const EditView = ({
       return;
     }
 
-    const originalChats: ChatInterface[] = JSON.parse(
-      JSON.stringify(useStore.getState().chats)
-    );
-    const updatedChats: ChatInterface[] = JSON.parse(
-      JSON.stringify(useStore.getState().chats)
-    );
+    const originalChats = cloneChats();
+    if (!originalChats) return;
+    const updatedChats: ChatInterface[] = structuredClone(originalChats);
     const updatedMessages = updatedChats[currentChatIndex].messages;
 
     if (sticky) {
@@ -305,9 +307,8 @@ const EditView = ({
 
   const handlePaste = async (e: React.ClipboardEvent<HTMLTextAreaElement>) => {
     const items = e.clipboardData.items;
-    const updatedChats: ChatInterface[] = JSON.parse(
-      JSON.stringify(useStore.getState().chats)
-    );
+    const updatedChats = cloneChats();
+    if (!updatedChats) return;
     const chat = updatedChats[currentChatIndex];
     for (const item of items) {
       if (item.type.startsWith('image/')) {

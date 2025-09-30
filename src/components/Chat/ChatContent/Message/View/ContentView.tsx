@@ -100,18 +100,24 @@ const ContentView = memo(
       state.chats ? state.chats[state.currentChatIndex].messages.length - 1 : 0
     );
 
+    const getClonedChats = () => {
+      const chats = useStore.getState().chats;
+      if (!chats || currentChatIndex < 0 || currentChatIndex >= chats.length) {
+        return undefined;
+      }
+      return structuredClone(chats) as ChatInterface[];
+    };
+
     const handleDelete = () => {
-      const updatedChats: ChatInterface[] = JSON.parse(
-        JSON.stringify(useStore.getState().chats)
-      );
+      const updatedChats = getClonedChats();
+      if (!updatedChats) return;
       updatedChats[currentChatIndex].messages.splice(messageIndex, 1);
       setChats(updatedChats);
     };
 
     const handleMove = (direction: 'up' | 'down') => {
-      const updatedChats: ChatInterface[] = JSON.parse(
-        JSON.stringify(useStore.getState().chats)
-      );
+      const updatedChats = getClonedChats();
+      if (!updatedChats) return;
       const updatedMessages = updatedChats[currentChatIndex].messages;
       const temp = updatedMessages[messageIndex];
       if (direction === 'up') {
@@ -125,9 +131,8 @@ const ContentView = memo(
     };
 
     const handleRefresh = () => {
-      const updatedChats: ChatInterface[] = JSON.parse(
-        JSON.stringify(useStore.getState().chats)
-      );
+      const updatedChats = getClonedChats();
+      if (!updatedChats) return;
       const updatedMessages = updatedChats[currentChatIndex].messages;
       updatedMessages.splice(updatedMessages.length - 1, 1);
       setChats(updatedChats);

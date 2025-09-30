@@ -55,27 +55,33 @@ const ChatFolder = ({
 
   const [showPalette, setShowPalette, paletteRef] = useHideOnOutsideClick();
 
+  const cloneChats = () => {
+    const chats = useStore.getState().chats;
+    return chats ? (structuredClone(chats) as ChatInterface[]) : undefined;
+  };
+
+  const cloneFolders = () => {
+    const folders = useStore.getState().folders;
+    return structuredClone(folders);
+  };
+
   const editTitle = () => {
-    const updatedFolders: FolderCollection = JSON.parse(
-      JSON.stringify(useStore.getState().folders)
-    );
+    const updatedFolders: FolderCollection = cloneFolders();
     updatedFolders[folderId].name = _folderName;
     setFolders(updatedFolders);
     setIsEdit(false);
   };
 
   const deleteFolder = () => {
-    const updatedChats: ChatInterface[] = JSON.parse(
-      JSON.stringify(useStore.getState().chats)
-    );
-    updatedChats.forEach((chat) => {
-      if (chat.folder === folderId) delete chat.folder;
-    });
-    setChats(updatedChats);
+    const updatedChats = cloneChats();
+    if (updatedChats) {
+      updatedChats.forEach((chat) => {
+        if (chat.folder === folderId) delete chat.folder;
+      });
+      setChats(updatedChats);
+    }
 
-    const updatedFolders: FolderCollection = JSON.parse(
-      JSON.stringify(useStore.getState().folders)
-    );
+    const updatedFolders: FolderCollection = cloneFolders();
     delete updatedFolders[folderId];
     setFolders(updatedFolders);
 
@@ -83,9 +89,7 @@ const ChatFolder = ({
   };
 
   const updateColor = (_color?: string) => {
-    const updatedFolders: FolderCollection = JSON.parse(
-      JSON.stringify(useStore.getState().folders)
-    );
+    const updatedFolders: FolderCollection = cloneFolders();
     if (_color) updatedFolders[folderId].color = _color;
     else delete updatedFolders[folderId].color;
     setFolders(updatedFolders);
@@ -117,17 +121,14 @@ const ChatFolder = ({
       setIsHover(false);
 
       // expand folder on drop
-      const updatedFolders: FolderCollection = JSON.parse(
-        JSON.stringify(useStore.getState().folders)
-      );
+      const updatedFolders: FolderCollection = cloneFolders();
       updatedFolders[folderId].expanded = true;
       setFolders(updatedFolders);
 
       // update chat folderId to new folderId
       const chatIndices = JSON.parse(e.dataTransfer.getData('chatIndices'));
-      const updatedChats: ChatInterface[] = JSON.parse(
-        JSON.stringify(useStore.getState().chats)
-      );
+      const updatedChats = cloneChats();
+      if (!updatedChats) return;
       chatIndices.forEach((chatIndex: number) => {
         updatedChats[chatIndex].folder = folderId;
       });
@@ -147,9 +148,7 @@ const ChatFolder = ({
   };
 
   const toggleExpanded = () => {
-    const updatedFolders: FolderCollection = JSON.parse(
-      JSON.stringify(useStore.getState().folders)
-    );
+    const updatedFolders: FolderCollection = cloneFolders();
     updatedFolders[folderId].expanded = !updatedFolders[folderId].expanded;
     setFolders(updatedFolders);
   };

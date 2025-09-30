@@ -22,9 +22,7 @@ const NewFolder = () => {
       name = `New Folder ${folderIndex}`;
     }
 
-    const updatedFolders: FolderCollection = JSON.parse(
-      JSON.stringify(folders)
-    );
+    const updatedFolders: FolderCollection = structuredClone(folders);
 
     const id = uuidv4();
     const newFolder: Folder = {

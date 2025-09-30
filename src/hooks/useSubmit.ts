@@ -26,6 +26,11 @@ const useSubmit = () => {
   const currentChatIndex = useStore((state) => state.currentChatIndex);
   const setChats = useStore((state) => state.setChats);
 
+  const cloneChats = () => {
+    const chats = useStore.getState().chats;
+    return chats ? (structuredClone(chats) as ChatInterface[]) : undefined;
+  };
+
   const isOfficialOAIEndpoint = apiEndpoint === officialAPIEndpoint;
   const isResponsesApi = checkIsResponsesApi(apiEndpoint);
 
@@ -246,7 +251,8 @@ const useSubmit = () => {
                 return prev;
               }, { reasoningContent: '', messageContent: '' });
 
-              const updatedChats: ChatInterface[] = structuredClone(useStore.getState().chats as ChatInterface[]);
+              const updatedChats = cloneChats();
+              if (!updatedChats) return;
               const updatedMessages = updatedChats[currentChatIndex].messages;
               const updatedMessage = updatedMessages[updatedMessages.length - 1];
               if (updatedMessage.reasoning_content) {
@@ -311,9 +317,8 @@ const useSubmit = () => {
           ],
         };
 
-        const updatedChats: ChatInterface[] = JSON.parse(
-          JSON.stringify(useStore.getState().chats)
-        );
+        const updatedChats = cloneChats();
+        if (!updatedChats) return;
         let title = (
           await generateTitle([message], updatedChats[currentChatIndex].config)
         ).trim();

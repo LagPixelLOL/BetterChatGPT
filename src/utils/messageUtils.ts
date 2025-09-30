@@ -103,8 +103,8 @@ export const updateTotalTokenUsed = (
   completionMessage: MessageInterface
 ) => {
   const setTotalTokenUsed = useStore.getState().setTotalTokenUsed;
-  const updatedTotalTokenUsed: TotalTokenUsed = JSON.parse(
-    JSON.stringify(useStore.getState().totalTokenUsed)
+  const updatedTotalTokenUsed: TotalTokenUsed = structuredClone(
+    useStore.getState().totalTokenUsed
   );
 
   // Filter text and image prompts

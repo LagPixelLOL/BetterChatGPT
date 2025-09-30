@@ -51,8 +51,17 @@ const RoleSelector = React.memo(
                 className='px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white cursor-pointer'
                 onClick={() => {
                   if (!sticky) {
-                    const updatedChats: ChatInterface[] = JSON.parse(
-                      JSON.stringify(useStore.getState().chats)
+                    const chats = useStore.getState().chats;
+                    if (
+                      !chats ||
+                      currentChatIndex < 0 ||
+                      currentChatIndex >= chats.length
+                    ) {
+                      setDropDown(false);
+                      return;
+                    }
+                    const updatedChats: ChatInterface[] = structuredClone(
+                      chats
                     );
                     updatedChats[currentChatIndex].messages[messageIndex].role =
                       r;
