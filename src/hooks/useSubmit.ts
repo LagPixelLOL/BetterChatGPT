@@ -169,7 +169,7 @@ const useSubmit = () => {
           }
 
           const messageObj = choice.message;
-          reasoningContent = messageObj?.reasoning ?? '';
+          reasoningContent = messageObj?.reasoning_content ?? messageObj?.reasoning ?? '';
           messageContent = messageObj.content;
         }
 
@@ -229,7 +229,7 @@ const useSubmit = () => {
                         // cover the case where we get some element which doesnt have text data, e.g. usage stats
                         return prev;
                       }
-                      const reasoningContent = delta.reasoning;
+                      const reasoningContent = delta.reasoning_content ?? delta.reasoning;
                       if (reasoningContent) prev.reasoningContent += reasoningContent;
                       const messageContent = delta.content;
                       if (messageContent) prev.messageContent += messageContent;
