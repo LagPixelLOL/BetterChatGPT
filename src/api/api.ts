@@ -91,7 +91,10 @@ function assemblePayload(
       return message
     });
     var { reasoning_effort: reasoningEffort, presence_penalty: _, frequency_penalty: _, ...modifiedConfig }: any = config;
-    if (reasoningEffort !== 'none') {
+    if (modifiedConfig.model.startsWith('gpt-') && modifiedConfig.model.endsWith('-chat')) {
+      modifiedConfig.model += '-latest';
+    }
+    if (reasoningEffort !== 'null') {
       modifiedConfig.reasoning = { effort: reasoningEffort, summary: 'auto' };
     }
     if (stream) {
@@ -101,7 +104,7 @@ function assemblePayload(
   } else {
     if (isOpenRouterEndpoint) {
       var { reasoning_effort: reasoningEffort, ...modifiedConfig }: any = config;
-      if (reasoningEffort === 'none') {
+      if (reasoningEffort === 'null') {
         modifiedConfig.reasoning = { enabled: false };
       } else {
         modifiedConfig.reasoning = { effort: reasoningEffort };
@@ -110,9 +113,8 @@ function assemblePayload(
       var { reasoning_effort: reasoningEffort, ...modifiedConfig }: any = config;
       let thinkingBudget: { type: string, budget_tokens?: number };
       switch (reasoningEffort) {
+        case 'null':
         case 'none':
-          thinkingBudget = { 'type': 'disabled' };
-          break;
         case 'minimal':
           thinkingBudget = { 'type': 'disabled' };
           break;
@@ -131,7 +133,7 @@ function assemblePayload(
       modifiedConfig.thinking = thinkingBudget;
     } else {
       var { ...modifiedConfig }: any = config;
-      if (modifiedConfig.reasoning_effort === 'none') {
+      if (modifiedConfig.reasoning_effort === 'null') {
         modifiedConfig.reasoning_effort = undefined;
       }
     }

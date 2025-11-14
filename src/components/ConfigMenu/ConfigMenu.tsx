@@ -397,6 +397,7 @@ export const ReasoningEffortSelector = ({
   const { t } = useTranslation('model');
 
   const reasoningEffortOptions = [
+    { value: 'null', label: t('reasoningEffort.null') },
     { value: 'none', label: t('reasoningEffort.none') },
     { value: 'minimal', label: t('reasoningEffort.minimal') },
     { value: 'low', label: t('reasoningEffort.low') },

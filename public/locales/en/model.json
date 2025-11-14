@@ -34,6 +34,7 @@
   },
   "reasoningEffort": {
     "label": "Reasoning Effort",
+    "null": "Null",
     "none": "None",
     "minimal": "Minimal",
     "low": "Low",
