@@ -8,6 +8,7 @@ import {
   openRouterAPIEndpoint,
   anthropicEndpoint,
 } from '@constants/auth';
+import { _defaultChatConfig } from '@constants/chat';
 import { ModelOptions } from '@utils/modelReader';
 import { checkIsResponsesApi } from '@utils/api';
 
@@ -140,6 +141,12 @@ function assemblePayload(
   }
 
   delete modifiedConfig.max_tokens;
+  if (modifiedConfig.presence_penalty == _defaultChatConfig.presence_penalty) {
+    delete modifiedConfig.presence_penalty;
+  }
+  if (modifiedConfig.frequency_penalty == _defaultChatConfig.frequency_penalty) {
+    delete modifiedConfig.frequency_penalty;
+  }
 
   let payload = {
     ...modifiedConfig,

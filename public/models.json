@@ -5,102 +5,6 @@
         "input_modalities": [
           "text"
         ],
-        "instruct_type": "deepseek-r1",
-        "modality": "text->text",
-        "output_modalities": [
-          "text"
-        ],
-        "tokenizer": "Other"
-      },
-      "canonical_slug": "agentica-org/deepcoder-14b-preview",
-      "context_length": 96000,
-      "created": 1744555395,
-      "default_parameters": {},
-      "description": "DeepCoder-14B-Preview is a 14B parameter code generation model fine-tuned from DeepSeek-R1-Distill-Qwen-14B using reinforcement learning with GRPO+ and iterative context lengthening. It is optimized for long-context program synthesis and achieves strong performance across coding benchmarks, including 60.6% on LiveCodeBench v5, competitive with models like o3-Mini",
-      "hugging_face_id": "agentica-org/DeepCoder-14B-Preview",
-      "id": "agentica-org/deepcoder-14b-preview",
-      "name": "Agentica: Deepcoder 14B Preview",
-      "per_request_limits": null,
-      "pricing": {
-        "completion": "0.000000015",
-        "image": "0",
-        "internal_reasoning": "0",
-        "prompt": "0.000000015",
-        "request": "0",
-        "web_search": "0"
-      },
-      "supported_parameters": [
-        "frequency_penalty",
-        "include_reasoning",
-        "max_tokens",
-        "presence_penalty",
-        "reasoning",
-        "repetition_penalty",
-        "seed",
-        "stop",
-        "temperature",
-        "top_k",
-        "top_p"
-      ],
-      "top_provider": {
-        "context_length": 96000,
-        "is_moderated": false,
-        "max_completion_tokens": null
-      }
-    },
-    {
-      "architecture": {
-        "input_modalities": [
-          "text"
-        ],
-        "instruct_type": "deepseek-r1",
-        "modality": "text->text",
-        "output_modalities": [
-          "text"
-        ],
-        "tokenizer": "Other"
-      },
-      "canonical_slug": "agentica-org/deepcoder-14b-preview",
-      "context_length": 96000,
-      "created": 1744555395,
-      "default_parameters": {},
-      "description": "DeepCoder-14B-Preview is a 14B parameter code generation model fine-tuned from DeepSeek-R1-Distill-Qwen-14B using reinforcement learning with GRPO+ and iterative context lengthening. It is optimized for long-context program synthesis and achieves strong performance across coding benchmarks, including 60.6% on LiveCodeBench v5, competitive with models like o3-Mini",
-      "hugging_face_id": "agentica-org/DeepCoder-14B-Preview",
-      "id": "agentica-org/deepcoder-14b-preview:free",
-      "name": "Agentica: Deepcoder 14B Preview (free)",
-      "per_request_limits": null,
-      "pricing": {
-        "completion": "0",
-        "image": "0",
-        "internal_reasoning": "0",
-        "prompt": "0",
-        "request": "0",
-        "web_search": "0"
-      },
-      "supported_parameters": [
-        "frequency_penalty",
-        "include_reasoning",
-        "max_tokens",
-        "presence_penalty",
-        "reasoning",
-        "repetition_penalty",
-        "seed",
-        "stop",
-        "temperature",
-        "top_k",
-        "top_p"
-      ],
-      "top_provider": {
-        "context_length": 96000,
-        "is_moderated": false,
-        "max_completion_tokens": null
-      }
-    },
-    {
-      "architecture": {
-        "input_modalities": [
-          "text"
-        ],
         "instruct_type": null,
         "modality": "text->text",
         "output_modalities": [
@@ -834,54 +738,6 @@
         ],
         "tokenizer": "Claude"
       },
-      "canonical_slug": "anthropic/claude-3.5-sonnet-20240620",
-      "context_length": 200000,
-      "created": 1718841600,
-      "default_parameters": {},
-      "description": "Claude 3.5 Sonnet delivers better-than-Opus capabilities, faster-than-Sonnet speeds, at the same Sonnet prices. Sonnet is particularly good at:\n\n- Coding: Autonomously writes, edits, and runs code with reasoning and troubleshooting\n- Data science: Augments human data science expertise; navigates unstructured data while using multiple tools for insights\n- Visual processing: excelling at interpreting charts, graphs, and images, accurately transcribing text to derive insights beyond just the text alone\n- Agentic tasks: exceptional tool use, making it great at agentic tasks (i.e. complex, multi-step problem solving tasks that require engaging with other systems)\n\nFor the latest version (2024-10-23), check out [Claude 3.5 Sonnet](/anthropic/claude-3.5-sonnet).\n\n#multimodal",
-      "hugging_face_id": null,
-      "id": "anthropic/claude-3.5-sonnet-20240620",
-      "name": "Anthropic: Claude 3.5 Sonnet (2024-06-20)",
-      "per_request_limits": null,
-      "pricing": {
-        "completion": "0.000015",
-        "image": "0.0048",
-        "input_cache_read": "0.0000003",
-        "input_cache_write": "0.00000375",
-        "internal_reasoning": "0",
-        "prompt": "0.000003",
-        "request": "0",
-        "web_search": "0"
-      },
-      "supported_parameters": [
-        "max_tokens",
-        "stop",
-        "temperature",
-        "tool_choice",
-        "tools",
-        "top_k",
-        "top_p"
-      ],
-      "top_provider": {
-        "context_length": 200000,
-        "is_moderated": false,
-        "max_completion_tokens": 8192
-      }
-    },
-    {
-      "architecture": {
-        "input_modalities": [
-          "text",
-          "image",
-          "file"
-        ],
-        "instruct_type": null,
-        "modality": "text+image->text",
-        "output_modalities": [
-          "text"
-        ],
-        "tokenizer": "Claude"
-      },
       "canonical_slug": "anthropic/claude-3-7-sonnet-20250219",
       "context_length": 200000,
       "created": 1740422110,
@@ -1115,7 +971,9 @@
         "include_reasoning",
         "max_tokens",
         "reasoning",
+        "response_format",
         "stop",
+        "structured_outputs",
         "temperature",
         "tool_choice",
         "tools",
@@ -1219,7 +1077,9 @@
         "include_reasoning",
         "max_tokens",
         "reasoning",
+        "response_format",
         "stop",
+        "structured_outputs",
         "temperature",
         "tool_choice",
         "tools",
@@ -3019,10 +2879,10 @@
       "name": "DeepSeek: R1 0528",
       "per_request_limits": null,
       "pricing": {
-        "completion": "0.00000175",
+        "completion": "0.0000045",
         "image": "0",
         "internal_reasoning": "0",
-        "prompt": "0.0000004",
+        "prompt": "0.0000002",
         "request": "0",
         "web_search": "0"
       },
@@ -3237,9 +3097,7 @@
       "supported_parameters": [
         "frequency_penalty",
         "include_reasoning",
-        "logit_bias",
         "max_tokens",
-        "min_p",
         "presence_penalty",
         "reasoning",
         "repetition_penalty",
@@ -3413,7 +3271,8 @@
           "text",
           "image",
           "file",
-          "audio"
+          "audio",
+          "video"
         ],
         "instruct_type": null,
         "modality": "text+image->text",
@@ -3425,7 +3284,11 @@
       "canonical_slug": "google/gemini-2.0-flash-001",
       "context_length": 1048576,
       "created": 1738769413,
-      "default_parameters": {},
+      "default_parameters": {
+        "frequency_penalty": null,
+        "temperature": null,
+        "top_p": null
+      },
       "description": "Gemini Flash 2.0 offers a significantly faster time to first token (TTFT) compared to [Gemini Flash 1.5](/google/gemini-flash-1.5), while maintaining quality on par with larger models like [Gemini Pro 1.5](/google/gemini-pro-1.5). It introduces notable enhancements in multimodal understanding, coding capabilities, complex instruction following, and function calling. These advancements come together to deliver more seamless and robust agentic experiences.",
       "hugging_face_id": "",
       "id": "google/gemini-2.0-flash-001",
@@ -3511,7 +3374,8 @@
           "text",
           "image",
           "file",
-          "audio"
+          "audio",
+          "video"
         ],
         "instruct_type": null,
         "modality": "text+image->text",
@@ -3523,7 +3387,11 @@
       "canonical_slug": "google/gemini-2.0-flash-lite-001",
       "context_length": 1048576,
       "created": 1740506212,
-      "default_parameters": {},
+      "default_parameters": {
+        "frequency_penalty": null,
+        "temperature": null,
+        "top_p": null
+      },
       "description": "Gemini 2.0 Flash Lite offers a significantly faster time to first token (TTFT) compared to [Gemini Flash 1.5](/google/gemini-flash-1.5), while maintaining quality on par with larger models like [Gemini Pro 1.5](/google/gemini-pro-1.5), all at extremely economical token prices.",
       "hugging_face_id": "",
       "id": "google/gemini-2.0-flash-lite-001",
@@ -4311,10 +4179,10 @@
       "name": "Google: Gemma 3 27B",
       "per_request_limits": null,
       "pricing": {
-        "completion": "0.00000016",
-        "image": "0.0000256",
+        "completion": "0.0000005",
+        "image": "0",
         "internal_reasoning": "0",
-        "prompt": "0.00000009",
+        "prompt": "0.00000007",
         "request": "0",
         "web_search": "0"
       },
@@ -4338,7 +4206,7 @@
       "top_provider": {
         "context_length": 131072,
         "is_moderated": false,
-        "max_completion_tokens": 16384
+        "max_completion_tokens": 131072
       }
     },
     {
@@ -4771,106 +4639,6 @@
         "context_length": 128000,
         "is_moderated": false,
         "max_completion_tokens": 16384
-      }
-    },
-    {
-      "architecture": {
-        "input_modalities": [
-          "text"
-        ],
-        "instruct_type": null,
-        "modality": "text->text",
-        "output_modalities": [
-          "text"
-        ],
-        "tokenizer": "Other"
-      },
-      "canonical_slug": "inclusionai/ling-1t",
-      "context_length": 131072,
-      "created": 1760316076,
-      "default_parameters": {
-        "frequency_penalty": null,
-        "temperature": null,
-        "top_p": null
-      },
-      "description": "Ling-1T is a trillion-parameter open-weight large language model developed by inclusionAI and released under the MIT license. It represents the first flagship non-thinking model in the Ling 2.0 series, built around a sparse-activation architecture with roughly 50 billion active parameters per token. The model supports up to 128 K tokens of context and emphasizes efficient reasoning through an “Evolutionary Chain-of-Thought (Evo-CoT)” training strategy.\n\nPre-trained on more than 20 trillion reasoning-dense tokens, Ling-1T achieves strong results across code generation, mathematics, and logical reasoning benchmarks while maintaining high inference efficiency. It employs FP8 mixed-precision training, MoE routing with QK normalization, and MTP layers for compositional reasoning stability. The model also introduces LPO (Linguistics-unit Policy Optimization) for post-training alignment, enhancing sentence-level semantic control.\n\nLing-1T can perform complex text generation, multilingual reasoning, and front-end code synthesis with a focus on both functionality and aesthetics.",
-      "hugging_face_id": "inclusionAI/Ling-1T",
-      "id": "inclusionai/ling-1t",
-      "name": "inclusionAI: Ling-1T",
-      "per_request_limits": null,
-      "pricing": {
-        "completion": "0.00000228",
-        "image": "0",
-        "internal_reasoning": "0",
-        "prompt": "0.00000057",
-        "request": "0",
-        "web_search": "0"
-      },
-      "supported_parameters": [
-        "frequency_penalty",
-        "response_format",
-        "structured_outputs",
-        "temperature",
-        "tool_choice",
-        "tools",
-        "top_k",
-        "top_p"
-      ],
-      "top_provider": {
-        "context_length": 131072,
-        "is_moderated": false,
-        "max_completion_tokens": 131072
-      }
-    },
-    {
-      "architecture": {
-        "input_modalities": [
-          "text"
-        ],
-        "instruct_type": null,
-        "modality": "text->text",
-        "output_modalities": [
-          "text"
-        ],
-        "tokenizer": "Other"
-      },
-      "canonical_slug": "inclusionai/ring-1t",
-      "context_length": 131072,
-      "created": 1760384099,
-      "default_parameters": {
-        "frequency_penalty": null,
-        "temperature": null,
-        "top_p": null
-      },
-      "description": "Ring-1T has undergone continued scaling with large-scale verifiable reward reinforcement learning (RLVR) training, further unlocking the natural language reasoning capabilities of the trillion-parameter foundation model. Through RLHF training, the model's general abilities have also been refined, making this release of Ring-1T more balanced in performance across various tasks.\n\nRing-1T adopts the Ling 2.0 architecture and is trained on the Ling-1T-base foundation model, which contains 1 trillion total parameters with 50 billion activated parameters, supporting a context window of up to 128K tokens.",
-      "hugging_face_id": "inclusionAI/Ring-1T",
-      "id": "inclusionai/ring-1t",
-      "name": "inclusionAI: Ring 1T",
-      "per_request_limits": null,
-      "pricing": {
-        "completion": "0.00000228",
-        "image": "0",
-        "internal_reasoning": "0",
-        "prompt": "0.00000057",
-        "request": "0",
-        "web_search": "0"
-      },
-      "supported_parameters": [
-        "frequency_penalty",
-        "include_reasoning",
-        "reasoning",
-        "response_format",
-        "structured_outputs",
-        "temperature",
-        "tool_choice",
-        "tools",
-        "top_k",
-        "top_p"
-      ],
-      "top_provider": {
-        "context_length": 131072,
-        "is_moderated": false,
-        "max_completion_tokens": 131072
       }
     },
     {
@@ -6003,52 +5771,6 @@
     {
       "architecture": {
         "input_modalities": [
-          "text"
-        ],
-        "instruct_type": null,
-        "modality": "text->text",
-        "output_modalities": [
-          "text"
-        ],
-        "tokenizer": "Llama3"
-      },
-      "canonical_slug": "meta-llama/llama-3.3-8b-instruct",
-      "context_length": 128000,
-      "created": 1747230154,
-      "default_parameters": {},
-      "description": "A lightweight and ultra-fast variant of Llama 3.3 70B, for use when quick response times are needed most.",
-      "hugging_face_id": "",
-      "id": "meta-llama/llama-3.3-8b-instruct:free",
-      "name": "Meta: Llama 3.3 8B Instruct (free)",
-      "per_request_limits": null,
-      "pricing": {
-        "completion": "0",
-        "image": "0",
-        "internal_reasoning": "0",
-        "prompt": "0",
-        "request": "0",
-        "web_search": "0"
-      },
-      "supported_parameters": [
-        "max_tokens",
-        "repetition_penalty",
-        "response_format",
-        "structured_outputs",
-        "temperature",
-        "tool_choice",
-        "tools",
-        "top_k",
-        "top_p"
-      ],
-      "top_provider": {
-        "context_length": 128000,
-        "is_moderated": true,
-        "max_completion_tokens": 4028
-      }
-    },
-    {
-      "architecture": {
-        "input_modalities": [
           "text",
           "image"
         ],
@@ -6112,53 +5834,6 @@
         ],
         "tokenizer": "Llama4"
       },
-      "canonical_slug": "meta-llama/llama-4-maverick-17b-128e-instruct",
-      "context_length": 128000,
-      "created": 1743881822,
-      "default_parameters": {},
-      "description": "Llama 4 Maverick 17B Instruct (128E) is a high-capacity multimodal language model from Meta, built on a mixture-of-experts (MoE) architecture with 128 experts and 17 billion active parameters per forward pass (400B total). It supports multilingual text and image input, and produces multilingual text and code output across 12 supported languages. Optimized for vision-language tasks, Maverick is instruction-tuned for assistant-like behavior, image reasoning, and general-purpose multimodal interaction.\n\nMaverick features early fusion for native multimodality and a 1 million token context window. It was trained on a curated mixture of public, licensed, and Meta-platform data, covering ~22 trillion tokens, with a knowledge cutoff in August 2024. Released on April 5, 2025 under the Llama 4 Community License, Maverick is suited for research and commercial applications requiring advanced multimodal understanding and high model throughput.",
-      "hugging_face_id": "meta-llama/Llama-4-Maverick-17B-128E-Instruct",
-      "id": "meta-llama/llama-4-maverick:free",
-      "name": "Meta: Llama 4 Maverick (free)",
-      "per_request_limits": null,
-      "pricing": {
-        "completion": "0",
-        "image": "0",
-        "internal_reasoning": "0",
-        "prompt": "0",
-        "request": "0",
-        "web_search": "0"
-      },
-      "supported_parameters": [
-        "max_tokens",
-        "repetition_penalty",
-        "response_format",
-        "structured_outputs",
-        "temperature",
-        "tool_choice",
-        "tools",
-        "top_k",
-        "top_p"
-      ],
-      "top_provider": {
-        "context_length": 128000,
-        "is_moderated": true,
-        "max_completion_tokens": 4028
-      }
-    },
-    {
-      "architecture": {
-        "input_modalities": [
-          "text",
-          "image"
-        ],
-        "instruct_type": null,
-        "modality": "text+image->text",
-        "output_modalities": [
-          "text"
-        ],
-        "tokenizer": "Llama4"
-      },
       "canonical_slug": "meta-llama/llama-4-scout-17b-16e-instruct",
       "context_length": 327680,
       "created": 1743881519,
@@ -6197,53 +5872,6 @@
         "context_length": 327680,
         "is_moderated": false,
         "max_completion_tokens": 16384
-      }
-    },
-    {
-      "architecture": {
-        "input_modalities": [
-          "text",
-          "image"
-        ],
-        "instruct_type": null,
-        "modality": "text+image->text",
-        "output_modalities": [
-          "text"
-        ],
-        "tokenizer": "Llama4"
-      },
-      "canonical_slug": "meta-llama/llama-4-scout-17b-16e-instruct",
-      "context_length": 128000,
-      "created": 1743881519,
-      "default_parameters": {},
-      "description": "Llama 4 Scout 17B Instruct (16E) is a mixture-of-experts (MoE) language model developed by Meta, activating 17 billion parameters out of a total of 109B. It supports native multimodal input (text and image) and multilingual output (text and code) across 12 supported languages. Designed for assistant-style interaction and visual reasoning, Scout uses 16 experts per forward pass and features a context length of 10 million tokens, with a training corpus of ~40 trillion tokens.\n\nBuilt for high efficiency and local or commercial deployment, Llama 4 Scout incorporates early fusion for seamless modality integration. It is instruction-tuned for use in multilingual chat, captioning, and image understanding tasks. Released under the Llama 4 Community License, it was last trained on data up to August 2024 and launched publicly on April 5, 2025.",
-      "hugging_face_id": "meta-llama/Llama-4-Scout-17B-16E-Instruct",
-      "id": "meta-llama/llama-4-scout:free",
-      "name": "Meta: Llama 4 Scout (free)",
-      "per_request_limits": null,
-      "pricing": {
-        "completion": "0",
-        "image": "0",
-        "internal_reasoning": "0",
-        "prompt": "0",
-        "request": "0",
-        "web_search": "0"
-      },
-      "supported_parameters": [
-        "max_tokens",
-        "repetition_penalty",
-        "response_format",
-        "structured_outputs",
-        "temperature",
-        "tool_choice",
-        "tools",
-        "top_k",
-        "top_p"
-      ],
-      "top_provider": {
-        "context_length": 128000,
-        "is_moderated": true,
-        "max_completion_tokens": 4028
       }
     },
     {
@@ -8980,10 +8608,10 @@
       "name": "MoonshotAI: Kimi K2 Thinking",
       "per_request_limits": null,
       "pricing": {
-        "completion": "0.00000225",
+        "completion": "0.0000025",
         "image": "0",
         "internal_reasoning": "0",
-        "prompt": "0.00000055",
+        "prompt": "0.0000005",
         "request": "0",
         "web_search": "0"
       },
@@ -9011,7 +8639,7 @@
       "top_provider": {
         "context_length": 262144,
         "is_moderated": false,
-        "max_completion_tokens": 16384
+        "max_completion_tokens": 262144
       }
     },
     {
@@ -9043,7 +8671,7 @@
         "completion": "0.0000006",
         "image": "0",
         "internal_reasoning": "0",
-        "prompt": "0.0000003",
+        "prompt": "0.0000005",
         "request": "0",
         "web_search": "0"
       },
@@ -9630,7 +9258,7 @@
         "tokenizer": "Llama3"
       },
       "canonical_slug": "nousresearch/hermes-2-pro-llama-3-8b",
-      "context_length": 32768,
+      "context_length": 8192,
       "created": 1716768000,
       "default_parameters": {},
       "description": "Hermes 2 Pro is an upgraded, retrained version of Nous Hermes 2, consisting of an updated and cleaned version of the OpenHermes 2.5 Dataset, as well as a newly introduced Function Calling and JSON Mode dataset developed in-house.",
@@ -9660,9 +9288,9 @@
         "top_p"
       ],
       "top_provider": {
-        "context_length": 32768,
+        "context_length": 8192,
         "is_moderated": false,
-        "max_completion_tokens": null
+        "max_completion_tokens": 2048
       }
     },
     {
@@ -9687,10 +9315,10 @@
       "name": "NVIDIA: Llama 3.1 Nemotron 70B Instruct",
       "per_request_limits": null,
       "pricing": {
-        "completion": "0.0000006",
+        "completion": "0.0000012",
         "image": "0",
         "internal_reasoning": "0",
-        "prompt": "0.0000006",
+        "prompt": "0.0000012",
         "request": "0",
         "web_search": "0"
       },
@@ -11745,6 +11373,8 @@
         "seed",
         "stop",
         "structured_outputs",
+        "tool_choice",
+        "tools",
         "top_logprobs"
       ],
       "top_provider": {
@@ -11837,11 +11467,11 @@
       "name": "OpenAI: GPT-5.1-Codex-Mini",
       "per_request_limits": null,
       "pricing": {
-        "completion": "0.000006",
+        "completion": "0.000002",
         "image": "0",
-        "input_cache_read": "0.000000375",
+        "input_cache_read": "0.000000025",
         "internal_reasoning": "0",
-        "prompt": "0.0000015",
+        "prompt": "0.00000025",
         "request": "0",
         "web_search": "0"
       },
@@ -11893,10 +11523,10 @@
       "name": "OpenAI: gpt-oss-120b",
       "per_request_limits": null,
       "pricing": {
-        "completion": "0",
+        "completion": "0.0000004",
         "image": "0",
         "internal_reasoning": "0",
-        "prompt": "0",
+        "prompt": "0.00000004",
         "request": "0",
         "web_search": "0"
       },
@@ -11924,7 +11554,7 @@
       "top_provider": {
         "context_length": 131072,
         "is_moderated": false,
-        "max_completion_tokens": null
+        "max_completion_tokens": 131072
       }
     },
     {
@@ -13905,7 +13535,6 @@
         "frequency_penalty",
         "include_reasoning",
         "logit_bias",
-        "logprobs",
         "max_tokens",
         "min_p",
         "presence_penalty",
@@ -13919,7 +13548,6 @@
         "tool_choice",
         "tools",
         "top_k",
-        "top_logprobs",
         "top_p"
       ],
       "top_provider": {
@@ -14771,7 +14399,7 @@
         "tokenizer": "Qwen3"
       },
       "canonical_slug": "qwen/qwen3-vl-235b-a22b-instruct",
-      "context_length": 262144,
+      "context_length": 131072,
       "created": 1758668687,
       "default_parameters": {
         "frequency_penalty": null,
@@ -14784,10 +14412,10 @@
       "name": "Qwen: Qwen3 VL 235B A22B Instruct",
       "per_request_limits": null,
       "pricing": {
-        "completion": "0.00000088",
+        "completion": "0.0000019",
         "image": "0",
         "internal_reasoning": "0",
-        "prompt": "0.00000022",
+        "prompt": "0.00000021",
         "request": "0",
         "web_search": "0"
       },
@@ -14811,9 +14439,9 @@
         "top_p"
       ],
       "top_provider": {
-        "context_length": 262144,
+        "context_length": 131072,
         "is_moderated": false,
-        "max_completion_tokens": null
+        "max_completion_tokens": 32768
       }
     },
     {
@@ -15687,6 +15315,102 @@
         "context_length": 131072,
         "is_moderated": false,
         "max_completion_tokens": 16384
+      }
+    },
+    {
+      "architecture": {
+        "input_modalities": [
+          "text",
+          "image"
+        ],
+        "instruct_type": null,
+        "modality": "text+image->text",
+        "output_modalities": [
+          "text"
+        ],
+        "tokenizer": "Other"
+      },
+      "canonical_slug": "openrouter/sherlock-dash-alpha",
+      "context_length": 1840000,
+      "created": 1763228989,
+      "default_parameters": {
+        "frequency_penalty": null,
+        "temperature": 0.7,
+        "top_p": 0.95
+      },
+      "description": "This is a cloaked model provided to the community to gather feedback. A frontier non-reasoning model that excels at tool calling, with a 1.8M context window and multimodal support.\n\n**Note:** All prompts and completions for this model are logged by the provider and may be used to improve the model.",
+      "hugging_face_id": "",
+      "id": "openrouter/sherlock-dash-alpha",
+      "name": "Sherlock Dash Alpha",
+      "per_request_limits": null,
+      "pricing": {
+        "completion": "0",
+        "image": "0",
+        "internal_reasoning": "0",
+        "prompt": "0",
+        "request": "0",
+        "web_search": "0"
+      },
+      "supported_parameters": [
+        "max_tokens",
+        "response_format",
+        "structured_outputs",
+        "tool_choice",
+        "tools"
+      ],
+      "top_provider": {
+        "context_length": 1840000,
+        "is_moderated": false,
+        "max_completion_tokens": 64000
+      }
+    },
+    {
+      "architecture": {
+        "input_modalities": [
+          "text",
+          "image"
+        ],
+        "instruct_type": null,
+        "modality": "text+image->text",
+        "output_modalities": [
+          "text"
+        ],
+        "tokenizer": "Other"
+      },
+      "canonical_slug": "openrouter/sherlock-think-alpha",
+      "context_length": 1840000,
+      "created": 1763228986,
+      "default_parameters": {
+        "frequency_penalty": null,
+        "temperature": 0.7,
+        "top_p": 0.95
+      },
+      "description": "This is a cloaked model provided to the community to gather feedback. A frontier reasoning model that excels at tool calling, with a 1.8M context window and multimodal support.\n\n**Note:** All prompts and completions for this model are logged by the provider and may be used to improve the model.",
+      "hugging_face_id": "",
+      "id": "openrouter/sherlock-think-alpha",
+      "name": "Sherlock Think Alpha",
+      "per_request_limits": null,
+      "pricing": {
+        "completion": "0",
+        "image": "0",
+        "internal_reasoning": "0",
+        "prompt": "0",
+        "request": "0",
+        "web_search": "0"
+      },
+      "supported_parameters": [
+        "include_reasoning",
+        "max_tokens",
+        "reasoning",
+        "response_format",
+        "structured_outputs",
+        "tool_choice",
+        "tools"
+      ],
+      "top_provider": {
+        "context_length": 1840000,
+        "is_moderated": false,
+        "max_completion_tokens": 64000
       }
     },
     {
@@ -17291,7 +17015,7 @@
         "tokenizer": "Other"
       },
       "canonical_slug": "z-ai/glm-4.6",
-      "context_length": 204800,
+      "context_length": 202752,
       "created": 1759235576,
       "default_parameters": {
         "frequency_penalty": null,
@@ -17304,10 +17028,10 @@
       "name": "Z.AI: GLM 4.6 (exacto)",
       "per_request_limits": null,
       "pricing": {
-        "completion": "0.0000022",
+        "completion": "0.0000019",
         "image": "0",
         "internal_reasoning": "0",
-        "prompt": "0.0000006",
+        "prompt": "0.00000045",
         "request": "0",
         "web_search": "0"
       },
@@ -17315,6 +17039,7 @@
         "frequency_penalty",
         "include_reasoning",
         "max_tokens",
+        "min_p",
         "presence_penalty",
         "reasoning",
         "repetition_penalty",
@@ -17329,9 +17054,9 @@
         "top_p"
       ],
       "top_provider": {
-        "context_length": 204800,
+        "context_length": 202752,
         "is_moderated": false,
-        "max_completion_tokens": 131072
+        "max_completion_tokens": null
       }
     }
   ]
