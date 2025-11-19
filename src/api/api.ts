@@ -70,7 +70,7 @@ function assemblePayload(
   stream: boolean=false,
 ): string {
   const maxTokens = isOfficialOAIEndpoint || isOpenRouterEndpoint || isAnthropicEndpoint || config.model.startsWith('gemini-') ? undefined : 32768;
-  const isGemini25ProPaidAndOpenRouterEndpoint = config.model.startsWith('google/gemini-2.5-pro');
+  const isGeminiAndOpenRouterEndpoint = config.model.startsWith('google/gemini-');
   let modifiedMessages: any[] = messages.map(({ id, reasoning_content, ...rest }) => rest);
 
   if (isResponsesApi) {
@@ -150,7 +150,7 @@ function assemblePayload(
 
   let payload = {
     ...modifiedConfig,
-    provider: isGemini25ProPaidAndOpenRouterEndpoint ? { ignore: ['google-ai-studio'] } : undefined,
+    provider: isGeminiAndOpenRouterEndpoint ? { ignore: ['google-ai-studio'] } : undefined,
     stream,
   };
 

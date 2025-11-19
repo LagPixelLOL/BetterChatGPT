@@ -2550,49 +2550,6 @@
         ],
         "tokenizer": "DeepSeek"
       },
-      "canonical_slug": "deepseek/deepseek-chat-v3.1",
-      "context_length": 163800,
-      "created": 1755779628,
-      "default_parameters": {},
-      "description": "DeepSeek-V3.1 is a large hybrid reasoning model (671B parameters, 37B active) that supports both thinking and non-thinking modes via prompt templates. It extends the DeepSeek-V3 base with a two-phase long-context training process, reaching up to 128K tokens, and uses FP8 microscaling for efficient inference. Users can control the reasoning behaviour with the `reasoning` `enabled` boolean. [Learn more in our docs](https://openrouter.ai/docs/use-cases/reasoning-tokens#enable-reasoning-with-default-config)\n\nThe model improves tool use, code generation, and reasoning efficiency, achieving performance comparable to DeepSeek-R1 on difficult benchmarks while responding more quickly. It supports structured tool calling, code agents, and search agents, making it suitable for research, coding, and agentic workflows. \n\nIt succeeds the [DeepSeek V3-0324](/deepseek/deepseek-chat-v3-0324) model and performs well on a variety of tasks.",
-      "hugging_face_id": "deepseek-ai/DeepSeek-V3.1",
-      "id": "deepseek/deepseek-chat-v3.1:free",
-      "name": "DeepSeek: DeepSeek V3.1 (free)",
-      "per_request_limits": null,
-      "pricing": {
-        "completion": "0",
-        "image": "0",
-        "internal_reasoning": "0",
-        "prompt": "0",
-        "request": "0",
-        "web_search": "0"
-      },
-      "supported_parameters": [
-        "include_reasoning",
-        "max_tokens",
-        "reasoning",
-        "seed",
-        "stop",
-        "temperature"
-      ],
-      "top_provider": {
-        "context_length": 163800,
-        "is_moderated": true,
-        "max_completion_tokens": null
-      }
-    },
-    {
-      "architecture": {
-        "input_modalities": [
-          "text"
-        ],
-        "instruct_type": "deepseek-v3.1",
-        "modality": "text->text",
-        "output_modalities": [
-          "text"
-        ],
-        "tokenizer": "DeepSeek"
-      },
       "canonical_slug": "deepseek/deepseek-v3.1-terminus",
       "context_length": 163840,
       "created": 1758548275,
@@ -3639,60 +3596,6 @@
     {
       "architecture": {
         "input_modalities": [
-          "file",
-          "image",
-          "text",
-          "audio"
-        ],
-        "instruct_type": null,
-        "modality": "text+image->text",
-        "output_modalities": [
-          "text"
-        ],
-        "tokenizer": "Gemini"
-      },
-      "canonical_slug": "google/gemini-2.5-flash-lite-preview-06-17",
-      "context_length": 1048576,
-      "created": 1750173831,
-      "default_parameters": {},
-      "description": "Gemini 2.5 Flash-Lite is a lightweight reasoning model in the Gemini 2.5 family, optimized for ultra-low latency and cost efficiency. It offers improved throughput, faster token generation, and better performance across common benchmarks compared to earlier Flash models. By default, \"thinking\" (i.e. multi-pass reasoning) is disabled to prioritize speed, but developers can enable it via the [Reasoning API parameter](https://openrouter.ai/docs/use-cases/reasoning-tokens) to selectively trade off cost for intelligence. ",
-      "hugging_face_id": "",
-      "id": "google/gemini-2.5-flash-lite-preview-06-17",
-      "name": "Google: Gemini 2.5 Flash Lite Preview 06-17",
-      "per_request_limits": null,
-      "pricing": {
-        "audio": "0.0000003",
-        "completion": "0.0000004",
-        "image": "0",
-        "input_cache_read": "0.000000025",
-        "input_cache_write": "0.0000001833",
-        "internal_reasoning": "0",
-        "prompt": "0.0000001",
-        "request": "0",
-        "web_search": "0"
-      },
-      "supported_parameters": [
-        "include_reasoning",
-        "max_tokens",
-        "reasoning",
-        "response_format",
-        "seed",
-        "stop",
-        "structured_outputs",
-        "temperature",
-        "tool_choice",
-        "tools",
-        "top_p"
-      ],
-      "top_provider": {
-        "context_length": 1048576,
-        "is_moderated": false,
-        "max_completion_tokens": 65535
-      }
-    },
-    {
-      "architecture": {
-        "input_modalities": [
           "text",
           "image",
           "file",
@@ -3952,6 +3855,64 @@
         "input_cache_write": "0.000001625",
         "internal_reasoning": "0",
         "prompt": "0.00000125",
+        "request": "0",
+        "web_search": "0"
+      },
+      "supported_parameters": [
+        "include_reasoning",
+        "max_tokens",
+        "reasoning",
+        "response_format",
+        "seed",
+        "stop",
+        "structured_outputs",
+        "temperature",
+        "tool_choice",
+        "tools",
+        "top_p"
+      ],
+      "top_provider": {
+        "context_length": 1048576,
+        "is_moderated": false,
+        "max_completion_tokens": 65536
+      }
+    },
+    {
+      "architecture": {
+        "input_modalities": [
+          "text",
+          "image",
+          "file",
+          "audio",
+          "video"
+        ],
+        "instruct_type": null,
+        "modality": "text+image->text",
+        "output_modalities": [
+          "text"
+        ],
+        "tokenizer": "Gemini"
+      },
+      "canonical_slug": "google/gemini-3-pro-preview-20251117",
+      "context_length": 1048576,
+      "created": 1763474668,
+      "default_parameters": {
+        "frequency_penalty": null,
+        "temperature": null,
+        "top_p": null
+      },
+      "description": "Gemini 3 Pro is Google’s flagship frontier model for high-precision multimodal reasoning, combining strong performance across text, image, video, audio, and code with a 1M-token context window. Reasoning Details must be preserved when using multi-turn tool calling, see our docs here: https://openrouter.ai/docs/use-cases/reasoning-tokens#preserving-reasoning-blocks. It delivers state-of-the-art benchmark results in general reasoning, STEM problem solving, factual QA, and multimodal understanding, including leading scores on LMArena, GPQA Diamond, MathArena Apex, MMMU-Pro, and Video-MMMU. Interactions emphasize depth and interpretability: the model is designed to infer intent with minimal prompting and produce direct, insight-focused responses.\n\nBuilt for advanced development and agentic workflows, Gemini 3 Pro provides robust tool-calling, long-horizon planning stability, and strong zero-shot generation for complex UI, visualization, and coding tasks. It excels at agentic coding (SWE-Bench Verified, Terminal-Bench 2.0), multimodal analysis, and structured long-form tasks such as research synthesis, planning, and interactive learning experiences. Suitable applications include autonomous agents, coding assistants, multimodal analytics, scientific reasoning, and high-context information processing.",
+      "hugging_face_id": "",
+      "id": "google/gemini-3-pro-preview",
+      "name": "Google: Gemini 3 Pro Preview",
+      "per_request_limits": null,
+      "pricing": {
+        "completion": "0.000012",
+        "image": "0.008256",
+        "input_cache_read": "0.0000002",
+        "input_cache_write": "0.000002375",
+        "internal_reasoning": "0",
+        "prompt": "0.000002",
         "request": "0",
         "web_search": "0"
       },
@@ -7394,16 +7355,11 @@
       },
       "supported_parameters": [
         "frequency_penalty",
-        "logit_bias",
         "max_tokens",
-        "min_p",
         "presence_penalty",
         "repetition_penalty",
         "seed",
-        "stop",
         "temperature",
-        "tool_choice",
-        "tools",
         "top_k",
         "top_p"
       ],
@@ -13721,7 +13677,7 @@
         "tokenizer": "Qwen3"
       },
       "canonical_slug": "qwen/qwen3-30b-a3b-thinking-2507",
-      "context_length": 262144,
+      "context_length": 32768,
       "created": 1756399192,
       "default_parameters": {},
       "description": "Qwen3-30B-A3B-Thinking-2507 is a 30B parameter Mixture-of-Experts reasoning model optimized for complex tasks requiring extended multi-step thinking. The model is designed specifically for “thinking mode,” where internal reasoning traces are separated from final answers.\n\nCompared to earlier Qwen3-30B releases, this version improves performance across logical reasoning, mathematics, science, coding, and multilingual benchmarks. It also demonstrates stronger instruction following, tool use, and alignment with human preferences. With higher reasoning efficiency and extended output budgets, it is best suited for advanced research, competitive problem solving, and agentic applications requiring structured long-context reasoning.",
@@ -13730,10 +13686,10 @@
       "name": "Qwen: Qwen3 30B A3B Thinking 2507",
       "per_request_limits": null,
       "pricing": {
-        "completion": "0.0000003",
+        "completion": "0.00000034",
         "image": "0",
         "internal_reasoning": "0",
-        "prompt": "0.00000009",
+        "prompt": "0.000000051",
         "request": "0",
         "web_search": "0"
       },
@@ -13754,9 +13710,9 @@
         "top_p"
       ],
       "top_provider": {
-        "context_length": 262144,
+        "context_length": 32768,
         "is_moderated": false,
-        "max_completion_tokens": 131072
+        "max_completion_tokens": null
       }
     },
     {
