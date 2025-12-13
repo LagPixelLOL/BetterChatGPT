@@ -403,6 +403,7 @@ export const ReasoningEffortSelector = ({
     { value: 'low', label: t('reasoningEffort.low') },
     { value: 'medium', label: t('reasoningEffort.medium') },
     { value: 'high', label: t('reasoningEffort.high') },
+    { value: 'xhigh', label: t('reasoningEffort.xhigh') },
   ];
 
   return (

@@ -39,7 +39,8 @@
     "minimal": "Minimal",
     "low": "Low",
     "medium": "Medium",
-    "high": "High"
+    "high": "High",
+    "xhigh": "Extra High"
   },
   "customModels": {
     "title": "Custom Models",

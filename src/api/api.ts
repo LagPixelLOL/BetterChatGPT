@@ -8,7 +8,6 @@ import {
   openRouterAPIEndpoint,
   anthropicEndpoint,
 } from '@constants/auth';
-import { _defaultChatConfig } from '@constants/chat';
 import { ModelOptions } from '@utils/modelReader';
 import { checkIsResponsesApi } from '@utils/api';
 
@@ -69,7 +68,7 @@ function assemblePayload(
   isAnthropicEndpoint: boolean,
   stream: boolean=false,
 ): string {
-  const maxTokens = isOfficialOAIEndpoint || isOpenRouterEndpoint || isAnthropicEndpoint || config.model.startsWith('gemini-') ? undefined : 32768;
+  const maxTokens = isOfficialOAIEndpoint || isOpenRouterEndpoint || isAnthropicEndpoint || config.model.startsWith('gemini-') ? undefined : 65536;
   const isGeminiAndOpenRouterEndpoint = config.model.startsWith('google/gemini-');
   let modifiedMessages: any[] = messages.map(({ id, reasoning_content, ...rest }) => rest);
 
@@ -128,6 +127,9 @@ function assemblePayload(
         case 'high':
           thinkingBudget = { 'type': 'enabled', 'budget_tokens': 32768 };
           break;
+        case 'xhigh':
+          thinkingBudget = { 'type': 'enabled', 'budget_tokens': 65536 };
+          break;
         default:
           throw Error(`Invalid reasoning effort: ${reasoningEffort}`);
       }
@@ -141,10 +143,16 @@ function assemblePayload(
   }
 
   delete modifiedConfig.max_tokens;
-  if (modifiedConfig.presence_penalty == _defaultChatConfig.presence_penalty) {
+  if (modifiedConfig.temperature == 1) {
+    delete modifiedConfig.temperature;
+  }
+  if (modifiedConfig.top_p == 1) {
+    delete modifiedConfig.top_p;
+  }
+  if (modifiedConfig.presence_penalty == 0) {
     delete modifiedConfig.presence_penalty;
   }
-  if (modifiedConfig.frequency_penalty == _defaultChatConfig.frequency_penalty) {
+  if (modifiedConfig.frequency_penalty == 0) {
     delete modifiedConfig.frequency_penalty;
   }
 
