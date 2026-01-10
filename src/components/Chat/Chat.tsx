@@ -25,7 +25,7 @@ const Chat = () => {
      }}
     >
       <MobileBar />
-      <main className='relative h-full w-full transition-width flex flex-col overflow-hidden items-stretch flex-1'>
+      <main className='relative h-full w-full overflow-hidden transition-width flex flex-col items-stretch flex-1'>
         <ChatContent key={currentChatId} />
         <StopGeneratingButton />
       </main>

@@ -3,6 +3,7 @@ import ScrollToBottom, { useScrollTo, useScrollToBottom, useObserveScrollPositio
 import useStore from '@store/store';
 import { useTranslation } from 'react-i18next';
 
+import ScrollToTopButton from './ScrollToTopButton';
 import ScrollToBottomButton from './ScrollToBottomButton';
 import ChatTitle from './ChatTitle';
 import Message from './Message';
@@ -156,8 +157,9 @@ const ChatContent = () => {
         followButtonClassName='hidden'
         scroller={customScroller}
         initialScrollBehavior='auto'
-        checkInterval={100}
+        checkInterval={50}
       >
+        <ScrollToTopButton />
         <ScrollToBottomButton />
         <div className='flex flex-col items-center text-sm dark:bg-gray-800'>
           <div
@@ -208,7 +210,7 @@ const ChatContent = () => {
             </div>
           )}
           <div
-            className={`mt-4 w-full m-auto  ${
+            className={`mt-4 w-full m-auto ${
               hideSideMenu
                 ? 'md:max-w-5xl lg:max-w-5xl xl:max-w-6xl'
                 : 'md:max-w-3xl lg:max-w-3xl xl:max-w-4xl'

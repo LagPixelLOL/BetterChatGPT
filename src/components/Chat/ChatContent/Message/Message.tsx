@@ -41,13 +41,15 @@ const Message = React.memo(
           }`}
         >
           <Avatar role={message.role} />
-          <div className='w-[calc(100%-50px)] '>
-            {advancedMode &&
+          <div className='w-[calc(100%-50px)]'>
+            {
+              advancedMode &&
               <RoleSelector
                 role={message.role}
                 messageIndex={messageIndex}
                 sticky={sticky}
-              />}
+              />
+            }
             <MessageContent
               message={message}
               messageIndex={messageIndex}

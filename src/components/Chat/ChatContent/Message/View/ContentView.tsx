@@ -173,14 +173,14 @@ const ContentView = memo(
               <span>{showReasoning ? <UpChevronArrow /> : <DownChevronArrow />}</span>
             </button>
             {showReasoning && (
-              <div className='p-3 bg-white dark:bg-gray-900 border-t border-gray-300 dark:border-gray-600 whitespace-pre-wrap'>
+              <div className='markdown prose dark:prose-invert w-full max-w-full break-words overflow-x-auto overflow-y-hidden p-3 bg-white dark:bg-gray-900 border-t border-gray-300 dark:border-gray-600 no-scrollbar'>
                 <MarkdownRenderer text={currentReasoningContent} />
               </div>
             )}
           </div>
         )}
 
-        <div className='markdown prose w-full md:max-w-full break-words dark:prose-invert dark share-gpt-message'>
+        <div className='markdown prose dark:prose-invert w-full max-w-full break-words overflow-x-auto overflow-y-hidden no-scrollbar'>
           <MarkdownRenderer text={currentTextContent} />
         </div>
 

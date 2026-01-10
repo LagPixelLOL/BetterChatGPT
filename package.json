@@ -86,7 +86,7 @@
     "i18next": "^22.4.11",
     "i18next-browser-languagedetector": "^7.0.1",
     "i18next-http-backend": "^2.1.1",
-    "jspdf": "^3.0.3",
+    "jspdf": "^4.0.0",
     "katex": "^0.16.4",
     "lodash": "^4.17.21",
     "match-sorter": "^6.3.1",

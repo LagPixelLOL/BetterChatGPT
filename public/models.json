@@ -262,6 +262,60 @@
     {
       "architecture": {
         "input_modalities": [
+          "text",
+          "image",
+          "video"
+        ],
+        "instruct_type": null,
+        "modality": "text+image->text",
+        "output_modalities": [
+          "text"
+        ],
+        "tokenizer": "Other"
+      },
+      "canonical_slug": "allenai/molmo-2-8b-20260109",
+      "context_length": 36864,
+      "created": 1767996672,
+      "default_parameters": {
+        "frequency_penalty": null,
+        "temperature": null,
+        "top_p": null
+      },
+      "description": "Molmo2-8B is an open vision-language model developed by the Allen Institute for AI (Ai2) as part of the Molmo2 family, supporting image, video, and multi-image understanding and grounding. It is based on Qwen3-8B and uses SigLIP 2 as its vision backbone, outperforming other open-weight, open-data models on short videos, counting, and captioning, while remaining competitive on long-video tasks.",
+      "hugging_face_id": "allenai/Molmo2-8B",
+      "id": "allenai/molmo-2-8b:free",
+      "name": "AllenAI: Molmo2 8B (free)",
+      "per_request_limits": null,
+      "pricing": {
+        "completion": "0",
+        "image": "0",
+        "internal_reasoning": "0",
+        "prompt": "0",
+        "request": "0",
+        "web_search": "0"
+      },
+      "supported_parameters": [
+        "frequency_penalty",
+        "logit_bias",
+        "max_tokens",
+        "min_p",
+        "presence_penalty",
+        "repetition_penalty",
+        "seed",
+        "stop",
+        "temperature",
+        "top_k",
+        "top_p"
+      ],
+      "top_provider": {
+        "context_length": 36864,
+        "is_moderated": false,
+        "max_completion_tokens": 36864
+      }
+    },
+    {
+      "architecture": {
+        "input_modalities": [
           "text"
         ],
         "instruct_type": null,
@@ -317,14 +371,14 @@
       },
       "description": "Olmo 3 32B Think is a large-scale, 32-billion-parameter model purpose-built for deep reasoning, complex logic chains and advanced instruction-following scenarios. Its capacity enables strong performance on demanding evaluation tasks and highly nuanced conversational reasoning. Developed by Ai2 under the Apache 2.0 license, Olmo 3 32B Think embodies the Olmo initiative’s commitment to openness, offering full transparency across weights, code and training methodology.",
       "hugging_face_id": "allenai/Olmo-3-32B-Think",
-      "id": "allenai/olmo-3-32b-think:free",
-      "name": "AllenAI: Olmo 3 32B Think (free)",
+      "id": "allenai/olmo-3-32b-think",
+      "name": "AllenAI: Olmo 3 32B Think",
       "per_request_limits": null,
       "pricing": {
-        "completion": "0",
+        "completion": "0.0000005",
         "image": "0",
         "internal_reasoning": "0",
-        "prompt": "0",
+        "prompt": "0.00000015",
         "request": "0",
         "web_search": "0"
       },
@@ -475,6 +529,61 @@
         ],
         "tokenizer": "Other"
       },
+      "canonical_slug": "allenai/olmo-3.1-32b-instruct-20251215",
+      "context_length": 65536,
+      "created": 1767728554,
+      "default_parameters": {
+        "frequency_penalty": null,
+        "temperature": 0.6,
+        "top_p": 0.95
+      },
+      "description": "Olmo 3.1 32B Instruct is a large-scale, 32-billion-parameter instruction-tuned language model engineered for high-performance conversational AI, multi-turn dialogue, and practical instruction following. As part of the Olmo 3.1 family, this variant emphasizes responsiveness to complex user directions and robust chat interactions while retaining strong capabilities on reasoning and coding benchmarks. Developed by Ai2 under the Apache 2.0 license, Olmo 3.1 32B Instruct reflects the Olmo initiative’s commitment to openness and transparency.",
+      "hugging_face_id": "allenai/Olmo-3.1-32B-Instruct",
+      "id": "allenai/olmo-3.1-32b-instruct",
+      "name": "AllenAI: Olmo 3.1 32B Instruct",
+      "per_request_limits": null,
+      "pricing": {
+        "completion": "0.0000006",
+        "image": "0",
+        "internal_reasoning": "0",
+        "prompt": "0.0000002",
+        "request": "0",
+        "web_search": "0"
+      },
+      "supported_parameters": [
+        "frequency_penalty",
+        "max_tokens",
+        "min_p",
+        "presence_penalty",
+        "repetition_penalty",
+        "response_format",
+        "seed",
+        "stop",
+        "structured_outputs",
+        "temperature",
+        "tool_choice",
+        "tools",
+        "top_k",
+        "top_p"
+      ],
+      "top_provider": {
+        "context_length": 65536,
+        "is_moderated": false,
+        "max_completion_tokens": null
+      }
+    },
+    {
+      "architecture": {
+        "input_modalities": [
+          "text"
+        ],
+        "instruct_type": null,
+        "modality": "text->text",
+        "output_modalities": [
+          "text"
+        ],
+        "tokenizer": "Other"
+      },
       "canonical_slug": "allenai/olmo-3.1-32b-think-20251215",
       "context_length": 65536,
       "created": 1765907719,
@@ -485,14 +594,14 @@
       },
       "description": "Olmo 3.1 32B Think is a large-scale, 32-billion-parameter model designed for deep reasoning, complex multi-step logic, and advanced instruction following. Building on the Olmo 3 series, version 3.1 delivers refined reasoning behavior and stronger performance across demanding evaluations and nuanced conversational tasks. Developed by Ai2 under the Apache 2.0 license, Olmo 3.1 32B Think continues the Olmo initiative’s commitment to openness, providing full transparency across model weights, code, and training methodology.",
       "hugging_face_id": "allenai/Olmo-3.1-32B-Think",
-      "id": "allenai/olmo-3.1-32b-think:free",
-      "name": "AllenAI: Olmo 3.1 32B Think (free)",
+      "id": "allenai/olmo-3.1-32b-think",
+      "name": "AllenAI: Olmo 3.1 32B Think",
       "per_request_limits": null,
       "pricing": {
-        "completion": "0",
+        "completion": "0.0000005",
         "image": "0",
         "internal_reasoning": "0",
-        "prompt": "0",
+        "prompt": "0.00000015",
         "request": "0",
         "web_search": "0"
       },
@@ -781,53 +890,6 @@
         "input_cache_write": "0.0000003",
         "internal_reasoning": "0",
         "prompt": "0.00000025",
-        "request": "0",
-        "web_search": "0"
-      },
-      "supported_parameters": [
-        "max_tokens",
-        "stop",
-        "temperature",
-        "tool_choice",
-        "tools",
-        "top_k",
-        "top_p"
-      ],
-      "top_provider": {
-        "context_length": 200000,
-        "is_moderated": true,
-        "max_completion_tokens": 4096
-      }
-    },
-    {
-      "architecture": {
-        "input_modalities": [
-          "text",
-          "image"
-        ],
-        "instruct_type": null,
-        "modality": "text+image->text",
-        "output_modalities": [
-          "text"
-        ],
-        "tokenizer": "Claude"
-      },
-      "canonical_slug": "anthropic/claude-3-opus",
-      "context_length": 200000,
-      "created": 1709596800,
-      "default_parameters": {},
-      "description": "Claude 3 Opus is Anthropic's most powerful model for highly complex tasks. It boasts top-level performance, intelligence, fluency, and understanding.\n\nSee the launch announcement and benchmark results [here](https://www.anthropic.com/news/claude-3-family)\n\n#multimodal",
-      "hugging_face_id": null,
-      "id": "anthropic/claude-3-opus",
-      "name": "Anthropic: Claude 3 Opus",
-      "per_request_limits": null,
-      "pricing": {
-        "completion": "0.000075",
-        "image": "0.024",
-        "input_cache_read": "0.0000015",
-        "input_cache_write": "0.00001875",
-        "internal_reasoning": "0",
-        "prompt": "0.000015",
         "request": "0",
         "web_search": "0"
       },
@@ -1732,56 +1794,6 @@
         "input_modalities": [
           "text"
         ],
-        "instruct_type": "deepseek-r1",
-        "modality": "text->text",
-        "output_modalities": [
-          "text"
-        ],
-        "tokenizer": "Other"
-      },
-      "canonical_slug": "arliai/qwq-32b-arliai-rpr-v1",
-      "context_length": 32768,
-      "created": 1744555982,
-      "default_parameters": {},
-      "description": "QwQ-32B-ArliAI-RpR-v1 is a 32B parameter model fine-tuned from Qwen/QwQ-32B using a curated creative writing and roleplay dataset originally developed for the RPMax series. It is designed to maintain coherence and reasoning across long multi-turn conversations by introducing explicit reasoning steps per dialogue turn, generated and refined using the base model itself.\n\nThe model was trained using RS-QLORA+ on 8K sequence lengths and supports up to 128K context windows (with practical performance around 32K). It is optimized for creative roleplay and dialogue generation, with an emphasis on minimizing cross-context repetition while preserving stylistic diversity.",
-      "hugging_face_id": "ArliAI/QwQ-32B-ArliAI-RpR-v1",
-      "id": "arliai/qwq-32b-arliai-rpr-v1",
-      "name": "ArliAI: QwQ 32B RpR v1",
-      "per_request_limits": null,
-      "pricing": {
-        "completion": "0.00000011",
-        "image": "0",
-        "internal_reasoning": "0",
-        "prompt": "0.00000003",
-        "request": "0",
-        "web_search": "0"
-      },
-      "supported_parameters": [
-        "frequency_penalty",
-        "include_reasoning",
-        "max_tokens",
-        "presence_penalty",
-        "reasoning",
-        "repetition_penalty",
-        "response_format",
-        "seed",
-        "stop",
-        "structured_outputs",
-        "temperature",
-        "top_k",
-        "top_p"
-      ],
-      "top_provider": {
-        "context_length": 32768,
-        "is_moderated": false,
-        "max_completion_tokens": 32768
-      }
-    },
-    {
-      "architecture": {
-        "input_modalities": [
-          "text"
-        ],
         "instruct_type": null,
         "modality": "text->text",
         "output_modalities": [
@@ -1792,8 +1804,12 @@
       "canonical_slug": "openrouter/auto",
       "context_length": 2000000,
       "created": 1699401600,
-      "default_parameters": {},
-      "description": "Your prompt will be processed by a meta-model and routed to one of dozens of models (see below), optimizing for the best possible output.\n\nTo see which model was used, visit [Activity](/activity), or read the `model` attribute of the response. Your response will be priced at the same rate as the routed model.\n\nThe meta-model is powered by [Not Diamond](https://docs.notdiamond.ai/docs/how-not-diamond-works). Learn more in our [docs](/docs/model-routing).\n\nRequests will be routed to the following models:\n- [openai/gpt-5](/openai/gpt-5)\n- [openai/gpt-5-mini](/openai/gpt-5-mini)\n- [openai/gpt-5-nano](/openai/gpt-5-nano)\n- [openai/gpt-4.1-nano](/openai/gpt-4.1-nano)\n- [openai/gpt-4.1](/openai/gpt-4.1)\n- [openai/gpt-4.1-mini](/openai/gpt-4.1-mini)\n- [openai/gpt-4.1](/openai/gpt-4.1)\n- [openai/gpt-4o-mini](/openai/gpt-4o-mini)\n- [openai/chatgpt-4o-latest](/openai/chatgpt-4o-latest)\n- [anthropic/claude-3.5-haiku](/anthropic/claude-3.5-haiku)\n- [anthropic/claude-opus-4-1](/anthropic/claude-opus-4-1)\n- [anthropic/claude-sonnet-4-0](/anthropic/claude-sonnet-4-0)\n- [anthropic/claude-3-7-sonnet-latest](/anthropic/claude-3-7-sonnet-latest)\n- [google/gemini-2.5-pro](/google/gemini-2.5-pro)\n- [google/gemini-2.5-flash](/google/gemini-2.5-flash)\n- [mistral/mistral-large-latest](/mistral/mistral-large-latest)\n- [mistral/mistral-medium-latest](/mistral/mistral-medium-latest)\n- [mistral/mistral-small-latest](/mistral/mistral-small-latest)\n- [mistralai/mistral-nemo](/mistralai/mistral-nemo)\n- [x-ai/grok-3](/x-ai/grok-3)\n- [x-ai/grok-3-mini](/x-ai/grok-3-mini)\n- [x-ai/grok-4](/x-ai/grok-4)\n- [deepseek/deepseek-r1](/deepseek/deepseek-r1)\n- [meta-llama/llama-3.1-70b-instruct](/meta-llama/llama-3.1-70b-instruct)\n- [meta-llama/llama-3.1-405b-instruct](/meta-llama/llama-3.1-405b-instruct)\n- [mistralai/mixtral-8x22b-instruct](/mistralai/mixtral-8x22b-instruct)\n- [perplexity/sonar](/perplexity/sonar)\n- [cohere/command-r-plus](/cohere/command-r-plus)\n- [cohere/command-r](/cohere/command-r)",
+      "default_parameters": {
+        "frequency_penalty": null,
+        "temperature": null,
+        "top_p": null
+      },
+      "description": "Your prompt will be processed by a meta-model and routed to one of dozens of models (see below), optimizing for the best possible output.\n\nTo see which model was used, visit [Activity](/activity), or read the `model` attribute of the response. Your response will be priced at the same rate as the routed model.\n\nLearn more, including how to customize the models for routing, in our [docs](/docs/guides/routing/routers/auto-router).\n\nRequests will be routed to the following models:\n- [openai/gpt-5.1](/openai/gpt-5.1)\n- [openai/gpt-5](/openai/gpt-5)\n- [openai/gpt-5-mini](/openai/gpt-5-mini)\n- [openai/gpt-5-nano](/openai/gpt-5-nano)\n- [openai/gpt-4.1](/openai/gpt-4.1)\n- [openai/gpt-4.1-mini](/openai/gpt-4.1-mini)\n- [openai/gpt-4.1-nano](/openai/gpt-4.1-nano)\n- [openai/gpt-4o](/openai/gpt-4o)\n- [openai/gpt-4o-2024-05-13](/openai/gpt-4o-2024-05-13)\n- [openai/gpt-4o-2024-08-06](/openai/gpt-4o-2024-08-06)\n- [openai/gpt-4o-2024-11-20](/openai/gpt-4o-2024-11-20)\n- [openai/gpt-4o-mini](/openai/gpt-4o-mini)\n- [openai/gpt-4o-mini-2024-07-18](/openai/gpt-4o-mini-2024-07-18)\n- [openai/gpt-4-turbo](/openai/gpt-4-turbo)\n- [openai/gpt-4-turbo-preview](/openai/gpt-4-turbo-preview)\n- [openai/gpt-4-1106-preview](/openai/gpt-4-1106-preview)\n- [openai/gpt-4](/openai/gpt-4)\n- [openai/gpt-3.5-turbo](/openai/gpt-3.5-turbo)\n- [openai/gpt-oss-120b](/openai/gpt-oss-120b)\n- [anthropic/claude-opus-4.5](/anthropic/claude-opus-4.5)\n- [anthropic/claude-opus-4.1](/anthropic/claude-opus-4.1)\n- [anthropic/claude-opus-4](/anthropic/claude-opus-4)\n- [anthropic/claude-sonnet-4.5](/anthropic/claude-sonnet-4.5)\n- [anthropic/claude-sonnet-4](/anthropic/claude-sonnet-4)\n- [anthropic/claude-3.7-sonnet](/anthropic/claude-3.7-sonnet)\n- [anthropic/claude-haiku-4.5](/anthropic/claude-haiku-4.5)\n- [anthropic/claude-3.5-haiku](/anthropic/claude-3.5-haiku)\n- [anthropic/claude-3-haiku](/anthropic/claude-3-haiku)\n- [google/gemini-3-pro-preview](/google/gemini-3-pro-preview)\n- [google/gemini-2.5-pro](/google/gemini-2.5-pro)\n- [google/gemini-2.0-flash-001](/google/gemini-2.0-flash-001)\n- [google/gemini-2.5-flash](/google/gemini-2.5-flash)\n- [mistralai/mistral-large](/mistralai/mistral-large)\n- [mistralai/mistral-large-2407](/mistralai/mistral-large-2407)\n- [mistralai/mistral-large-2411](/mistralai/mistral-large-2411)\n- [mistralai/mistral-medium-3.1](/mistralai/mistral-medium-3.1)\n- [mistralai/mistral-nemo](/mistralai/mistral-nemo)\n- [mistralai/mistral-7b-instruct](/mistralai/mistral-7b-instruct)\n- [mistralai/mixtral-8x7b-instruct](/mistralai/mixtral-8x7b-instruct)\n- [mistralai/mixtral-8x22b-instruct](/mistralai/mixtral-8x22b-instruct)\n- [mistralai/codestral-2508](/mistralai/codestral-2508)\n- [x-ai/grok-4](/x-ai/grok-4)\n- [x-ai/grok-3](/x-ai/grok-3)\n- [x-ai/grok-3-mini](/x-ai/grok-3-mini)\n- [deepseek/deepseek-r1](/deepseek/deepseek-r1)\n- [meta-llama/llama-3.3-70b-instruct](/meta-llama/llama-3.3-70b-instruct)\n- [meta-llama/llama-3.1-405b-instruct](/meta-llama/llama-3.1-405b-instruct)\n- [meta-llama/llama-3.1-70b-instruct](/meta-llama/llama-3.1-70b-instruct)\n- [meta-llama/llama-3.1-8b-instruct](/meta-llama/llama-3.1-8b-instruct)\n- [meta-llama/llama-3-70b-instruct](/meta-llama/llama-3-70b-instruct)\n- [meta-llama/llama-3-8b-instruct](/meta-llama/llama-3-8b-instruct)\n- [qwen/qwen3-235b-a22b](/qwen/qwen3-235b-a22b)\n- [qwen/qwen3-32b](/qwen/qwen3-32b)\n- [qwen/qwen3-14b](/qwen/qwen3-14b)\n- [cohere/command-r-plus-08-2024](/cohere/command-r-plus-08-2024)\n- [cohere/command-r-08-2024](/cohere/command-r-08-2024)\n- [moonshotai/kimi-k2-thinking](/moonshotai/kimi-k2-thinking)\n- [perplexity/sonar](/perplexity/sonar)",
       "hugging_face_id": null,
       "id": "openrouter/auto",
       "name": "Auto Router",
@@ -1835,10 +1851,10 @@
       "name": "Baidu: ERNIE 4.5 21B A3B",
       "per_request_limits": null,
       "pricing": {
-        "completion": "0.000000224",
+        "completion": "0.00000028",
         "image": "0",
         "internal_reasoning": "0",
-        "prompt": "0.000000056",
+        "prompt": "0.00000007",
         "request": "0",
         "web_search": "0"
       },
@@ -1887,10 +1903,10 @@
       "name": "Baidu: ERNIE 4.5 21B A3B Thinking",
       "per_request_limits": null,
       "pricing": {
-        "completion": "0.000000224",
+        "completion": "0.00000028",
         "image": "0",
         "internal_reasoning": "0",
-        "prompt": "0.000000056",
+        "prompt": "0.00000007",
         "request": "0",
         "web_search": "0"
       },
@@ -1935,10 +1951,10 @@
       "name": "Baidu: ERNIE 4.5 300B A47B ",
       "per_request_limits": null,
       "pricing": {
-        "completion": "0.00000088",
+        "completion": "0.0000011",
         "image": "0",
         "internal_reasoning": "0",
-        "prompt": "0.000000224",
+        "prompt": "0.00000028",
         "request": "0",
         "web_search": "0"
       },
@@ -1984,10 +2000,10 @@
       "name": "Baidu: ERNIE 4.5 VL 28B A3B",
       "per_request_limits": null,
       "pricing": {
-        "completion": "0.000000448",
+        "completion": "0.00000056",
         "image": "0",
         "internal_reasoning": "0",
-        "prompt": "0.000000112",
+        "prompt": "0.00000014",
         "request": "0",
         "web_search": "0"
       },
@@ -2035,10 +2051,10 @@
       "name": "Baidu: ERNIE 4.5 VL 424B A47B ",
       "per_request_limits": null,
       "pricing": {
-        "completion": "0.000001",
+        "completion": "0.00000125",
         "image": "0",
         "internal_reasoning": "0",
-        "prompt": "0.000000336",
+        "prompt": "0.00000042",
         "request": "0",
         "web_search": "0"
       },
@@ -2726,7 +2742,7 @@
         "tokenizer": "Qwen"
       },
       "canonical_slug": "deepseek/deepseek-r1-0528-qwen3-8b",
-      "context_length": 32768,
+      "context_length": 128000,
       "created": 1748538543,
       "default_parameters": {
         "frequency_penalty": null,
@@ -2739,10 +2755,10 @@
       "name": "DeepSeek: DeepSeek R1 0528 Qwen3 8B",
       "per_request_limits": null,
       "pricing": {
-        "completion": "0.0000001",
+        "completion": "0.00000009",
         "image": "0",
         "internal_reasoning": "0",
-        "prompt": "0.00000002",
+        "prompt": "0.00000006",
         "request": "0",
         "web_search": "0"
       },
@@ -2753,18 +2769,16 @@
         "presence_penalty",
         "reasoning",
         "repetition_penalty",
-        "response_format",
         "seed",
         "stop",
-        "structured_outputs",
         "temperature",
         "top_k",
         "top_p"
       ],
       "top_provider": {
-        "context_length": 32768,
+        "context_length": 128000,
         "is_moderated": false,
-        "max_completion_tokens": 32768
+        "max_completion_tokens": 32000
       }
     },
     {
@@ -2840,11 +2854,10 @@
       "name": "DeepSeek: DeepSeek V3 0324",
       "per_request_limits": null,
       "pricing": {
-        "completion": "0.00000088",
+        "completion": "0.00000087",
         "image": "0",
-        "input_cache_read": "0.000000106",
         "internal_reasoning": "0",
-        "prompt": "0.0000002",
+        "prompt": "0.00000019",
         "request": "0",
         "web_search": "0"
       },
@@ -2871,7 +2884,7 @@
       "top_provider": {
         "context_length": 163840,
         "is_moderated": false,
-        "max_completion_tokens": null
+        "max_completion_tokens": 65536
       }
     },
     {
@@ -3072,10 +3085,10 @@
       "name": "DeepSeek: DeepSeek V3.2",
       "per_request_limits": null,
       "pricing": {
-        "completion": "0.00000032",
+        "completion": "0.00000038",
         "image": "0",
         "internal_reasoning": "0",
-        "prompt": "0.000000224",
+        "prompt": "0.00000025",
         "request": "0",
         "web_search": "0"
       },
@@ -3103,7 +3116,7 @@
       "top_provider": {
         "context_length": 163840,
         "is_moderated": false,
-        "max_completion_tokens": null
+        "max_completion_tokens": 65536
       }
     },
     {
@@ -3241,10 +3254,10 @@
       "name": "DeepSeek: R1",
       "per_request_limits": null,
       "pricing": {
-        "completion": "0.0000012",
+        "completion": "0.0000024",
         "image": "0",
         "internal_reasoning": "0",
-        "prompt": "0.0000003",
+        "prompt": "0.0000007",
         "request": "0",
         "web_search": "0"
       },
@@ -3259,7 +3272,6 @@
         "response_format",
         "seed",
         "stop",
-        "structured_outputs",
         "temperature",
         "tool_choice",
         "tools",
@@ -3269,7 +3281,7 @@
       "top_provider": {
         "context_length": 163840,
         "is_moderated": false,
-        "max_completion_tokens": null
+        "max_completion_tokens": 163840
       }
     },
     {
@@ -3287,7 +3299,11 @@
       "canonical_slug": "deepseek/deepseek-r1-0528",
       "context_length": 163840,
       "created": 1748455170,
-      "default_parameters": {},
+      "default_parameters": {
+        "frequency_penalty": null,
+        "temperature": null,
+        "top_p": null
+      },
       "description": "May 28th update to the [original DeepSeek R1](/deepseek/deepseek-r1) Performance on par with [OpenAI o1](/openai/o1), but open-sourced and with fully open reasoning tokens. It's 671B parameters in size, with 37B active in an inference pass.\n\nFully open-source model.",
       "hugging_face_id": "deepseek-ai/DeepSeek-R1-0528",
       "id": "deepseek/deepseek-r1-0528",
@@ -3325,7 +3341,7 @@
       "top_provider": {
         "context_length": 163840,
         "is_moderated": false,
-        "max_completion_tokens": 163840
+        "max_completion_tokens": 65536
       }
     },
     {
@@ -3343,7 +3359,11 @@
       "canonical_slug": "deepseek/deepseek-r1-0528",
       "context_length": 163840,
       "created": 1748455170,
-      "default_parameters": {},
+      "default_parameters": {
+        "frequency_penalty": null,
+        "temperature": null,
+        "top_p": null
+      },
       "description": "May 28th update to the [original DeepSeek R1](/deepseek/deepseek-r1) Performance on par with [OpenAI o1](/openai/o1), but open-sourced and with fully open reasoning tokens. It's 671B parameters in size, with 37B active in an inference pass.\n\nFully open-source model.",
       "hugging_face_id": "deepseek-ai/DeepSeek-R1-0528",
       "id": "deepseek/deepseek-r1-0528:free",
@@ -3448,10 +3468,10 @@
       "name": "DeepSeek: R1 Distill Qwen 14B",
       "per_request_limits": null,
       "pricing": {
-        "completion": "0.00000012",
+        "completion": "0.00000015",
         "image": "0",
         "internal_reasoning": "0",
-        "prompt": "0.00000012",
+        "prompt": "0.00000015",
         "request": "0",
         "web_search": "0"
       },
@@ -3489,7 +3509,7 @@
         "tokenizer": "Qwen"
       },
       "canonical_slug": "deepseek/deepseek-r1-distill-qwen-32b",
-      "context_length": 64000,
+      "context_length": 131072,
       "created": 1738194830,
       "default_parameters": {},
       "description": "DeepSeek R1 Distill Qwen 32B is a distilled large language model based on [Qwen 2.5 32B](https://huggingface.co/Qwen/Qwen2.5-32B), using outputs from [DeepSeek R1](/deepseek/deepseek-r1). It outperforms OpenAI's o1-mini across various benchmarks, achieving new state-of-the-art results for dense models.\\n\\nOther benchmark results include:\\n\\n- AIME 2024 pass@1: 72.6\\n- MATH-500 pass@1: 94.3\\n- CodeForces Rating: 1691\\n\\nThe model leverages fine-tuning from DeepSeek R1's outputs, enabling competitive performance comparable to larger frontier models.",
@@ -3498,10 +3518,10 @@
       "name": "DeepSeek: R1 Distill Qwen 32B",
       "per_request_limits": null,
       "pricing": {
-        "completion": "0.00000024",
+        "completion": "0.00000027",
         "image": "0",
         "internal_reasoning": "0",
-        "prompt": "0.00000024",
+        "prompt": "0.00000027",
         "request": "0",
         "web_search": "0"
       },
@@ -3522,9 +3542,9 @@
         "top_p"
       ],
       "top_provider": {
-        "context_length": 64000,
+        "context_length": 131072,
         "is_moderated": false,
-        "max_completion_tokens": 32000
+        "max_completion_tokens": null
       }
     },
     {
@@ -4624,6 +4644,7 @@
       "supported_parameters": [
         "max_tokens",
         "seed",
+        "stop",
         "temperature",
         "top_p"
       ],
@@ -4649,9 +4670,13 @@
       "canonical_slug": "google/gemma-3-27b-it",
       "context_length": 96000,
       "created": 1741756359,
-      "default_parameters": {},
+      "default_parameters": {
+        "frequency_penalty": null,
+        "temperature": null,
+        "top_p": null
+      },
       "description": "Gemma 3 introduces multimodality, supporting vision-language input and text outputs. It handles context windows up to 128k tokens, understands over 140 languages, and offers improved math, reasoning, and chat capabilities, including structured outputs and function calling. Gemma 3 27B is Google's latest open source model, successor to [Gemma 2](google/gemma-2-27b-it)",
-      "hugging_face_id": "",
+      "hugging_face_id": "google/gemma-3-27b-it",
       "id": "google/gemma-3-27b-it",
       "name": "Google: Gemma 3 27B",
       "per_request_limits": null,
@@ -4702,9 +4727,13 @@
       "canonical_slug": "google/gemma-3-27b-it",
       "context_length": 131072,
       "created": 1741756359,
-      "default_parameters": {},
+      "default_parameters": {
+        "frequency_penalty": null,
+        "temperature": null,
+        "top_p": null
+      },
       "description": "Gemma 3 introduces multimodality, supporting vision-language input and text outputs. It handles context windows up to 128k tokens, understands over 140 languages, and offers improved math, reasoning, and chat capabilities, including structured outputs and function calling. Gemma 3 27B is Google's latest open source model, successor to [Gemma 2](google/gemma-2-27b-it)",
-      "hugging_face_id": "",
+      "hugging_face_id": "google/gemma-3-27b-it",
       "id": "google/gemma-3-27b-it:free",
       "name": "Google: Gemma 3 27B (free)",
       "per_request_limits": null,
@@ -4724,7 +4753,6 @@
         "response_format",
         "seed",
         "stop",
-        "structured_outputs",
         "temperature",
         "tool_choice",
         "tools",
@@ -4819,7 +4847,7 @@
         "max_tokens",
         "response_format",
         "seed",
-        "structured_outputs",
+        "stop",
         "temperature",
         "top_p"
       ],
@@ -5007,6 +5035,7 @@
         "reasoning",
         "response_format",
         "seed",
+        "stop",
         "structured_outputs",
         "temperature",
         "top_p"
@@ -5274,6 +5303,61 @@
       },
       "description": "KAT-Coder-Pro V1 is KwaiKAT's most advanced agentic coding model in the KAT-Coder series. Designed specifically for agentic coding tasks, it excels in real-world software engineering scenarios, achieving 73.4% solve rate on the SWE-Bench Verified benchmark. \n\nThe model has been optimized for tool-use capability, multi-turn interaction, instruction following, generalization, and comprehensive capabilities through a multi-stage training process, including mid-training, supervised fine-tuning (SFT), reinforcement fine-tuning (RFT), and scalable agentic RL.",
       "hugging_face_id": "",
+      "id": "kwaipilot/kat-coder-pro",
+      "name": "Kwaipilot: KAT-Coder-Pro V1",
+      "per_request_limits": null,
+      "pricing": {
+        "completion": "0.000000828",
+        "image": "0",
+        "input_cache_read": "0.0000000414",
+        "internal_reasoning": "0",
+        "prompt": "0.000000207",
+        "request": "0",
+        "web_search": "0"
+      },
+      "supported_parameters": [
+        "frequency_penalty",
+        "max_tokens",
+        "presence_penalty",
+        "repetition_penalty",
+        "response_format",
+        "seed",
+        "stop",
+        "structured_outputs",
+        "temperature",
+        "tool_choice",
+        "tools",
+        "top_k",
+        "top_p"
+      ],
+      "top_provider": {
+        "context_length": 256000,
+        "is_moderated": false,
+        "max_completion_tokens": 128000
+      }
+    },
+    {
+      "architecture": {
+        "input_modalities": [
+          "text"
+        ],
+        "instruct_type": null,
+        "modality": "text->text",
+        "output_modalities": [
+          "text"
+        ],
+        "tokenizer": "Other"
+      },
+      "canonical_slug": "kwaipilot/kat-coder-pro-v1",
+      "context_length": 256000,
+      "created": 1762745912,
+      "default_parameters": {
+        "frequency_penalty": null,
+        "temperature": null,
+        "top_p": null
+      },
+      "description": "KAT-Coder-Pro V1 is KwaiKAT's most advanced agentic coding model in the KAT-Coder series. Designed specifically for agentic coding tasks, it excels in real-world software engineering scenarios, achieving 73.4% solve rate on the SWE-Bench Verified benchmark. \n\nThe model has been optimized for tool-use capability, multi-turn interaction, instruction following, generalization, and comprehensive capabilities through a multi-stage training process, including mid-training, supervised fine-tuning (SFT), reinforcement fine-tuning (RFT), and scalable agentic RL.",
+      "hugging_face_id": "",
       "id": "kwaipilot/kat-coder-pro:free",
       "name": "Kwaipilot: KAT-Coder-Pro V1 (free)",
       "per_request_limits": null,
@@ -5303,7 +5387,7 @@
       "top_provider": {
         "context_length": 256000,
         "is_moderated": false,
-        "max_completion_tokens": 32768
+        "max_completion_tokens": 128000
       }
     },
     {
@@ -5332,10 +5416,10 @@
       "name": "LiquidAI/LFM2-2.6B",
       "per_request_limits": null,
       "pricing": {
-        "completion": "0.0000001",
+        "completion": "0.00000002",
         "image": "0",
         "internal_reasoning": "0",
-        "prompt": "0.00000005",
+        "prompt": "0.00000001",
         "request": "0",
         "web_search": "0"
       },
@@ -5379,10 +5463,10 @@
       "name": "LiquidAI/LFM2-8B-A1B",
       "per_request_limits": null,
       "pricing": {
-        "completion": "0.0000001",
+        "completion": "0.00000002",
         "image": "0",
         "internal_reasoning": "0",
-        "prompt": "0.00000005",
+        "prompt": "0.00000001",
         "request": "0",
         "web_search": "0"
       },
@@ -5435,7 +5519,6 @@
       },
       "supported_parameters": [
         "frequency_penalty",
-        "logit_bias",
         "max_tokens",
         "min_p",
         "presence_penalty",
@@ -5906,7 +5989,7 @@
         "tokenizer": "Llama3"
       },
       "canonical_slug": "meta-llama/llama-3.1-8b-instruct",
-      "context_length": 131072,
+      "context_length": 16384,
       "created": 1721692800,
       "default_parameters": {},
       "description": "Meta's latest class of model (Llama 3.1) launched with a variety of sizes & flavors. This 8B instruct-tuned version is fast and efficient.\n\nIt has demonstrated strong performance compared to leading closed-source models in human evaluations.\n\nTo read more about the model release, [click here](https://ai.meta.com/blog/meta-llama-3-1/). Usage of this model is subject to [Meta's Acceptable Use Policy](https://llama.meta.com/llama3/use-policy/).",
@@ -5915,7 +5998,7 @@
       "name": "Meta: Llama 3.1 8B Instruct",
       "per_request_limits": null,
       "pricing": {
-        "completion": "0.00000003",
+        "completion": "0.00000005",
         "image": "0",
         "internal_reasoning": "0",
         "prompt": "0.00000002",
@@ -5942,7 +6025,7 @@
         "top_p"
       ],
       "top_provider": {
-        "context_length": 131072,
+        "context_length": 16384,
         "is_moderated": false,
         "max_completion_tokens": 16384
       }
@@ -6644,132 +6727,6 @@
         "input_modalities": [
           "text"
         ],
-        "instruct_type": "phi3",
-        "modality": "text->text",
-        "output_modalities": [
-          "text"
-        ],
-        "tokenizer": "Other"
-      },
-      "canonical_slug": "microsoft/phi-3-medium-128k-instruct",
-      "context_length": 128000,
-      "created": 1716508800,
-      "default_parameters": {},
-      "description": "Phi-3 128K Medium is a powerful 14-billion parameter model designed for advanced language understanding, reasoning, and instruction following. Optimized through supervised fine-tuning and preference adjustments, it excels in tasks involving common sense, mathematics, logical reasoning, and code processing.\n\nAt time of release, Phi-3 Medium demonstrated state-of-the-art performance among lightweight models. In the MMLU-Pro eval, the model even comes close to a Llama3 70B level of performance.\n\nFor 4k context length, try [Phi-3 Medium 4K](/models/microsoft/phi-3-medium-4k-instruct).",
-      "hugging_face_id": "microsoft/Phi-3-medium-128k-instruct",
-      "id": "microsoft/phi-3-medium-128k-instruct",
-      "name": "Microsoft: Phi-3 Medium 128K Instruct",
-      "per_request_limits": null,
-      "pricing": {
-        "completion": "0.000001",
-        "image": "0",
-        "internal_reasoning": "0",
-        "prompt": "0.000001",
-        "request": "0",
-        "web_search": "0"
-      },
-      "supported_parameters": [
-        "max_tokens",
-        "temperature",
-        "tool_choice",
-        "tools",
-        "top_p"
-      ],
-      "top_provider": {
-        "context_length": 128000,
-        "is_moderated": false,
-        "max_completion_tokens": null
-      }
-    },
-    {
-      "architecture": {
-        "input_modalities": [
-          "text"
-        ],
-        "instruct_type": "phi3",
-        "modality": "text->text",
-        "output_modalities": [
-          "text"
-        ],
-        "tokenizer": "Other"
-      },
-      "canonical_slug": "microsoft/phi-3-mini-128k-instruct",
-      "context_length": 128000,
-      "created": 1716681600,
-      "default_parameters": {},
-      "description": "Phi-3 Mini is a powerful 3.8B parameter model designed for advanced language understanding, reasoning, and instruction following. Optimized through supervised fine-tuning and preference adjustments, it excels in tasks involving common sense, mathematics, logical reasoning, and code processing.\n\nAt time of release, Phi-3 Medium demonstrated state-of-the-art performance among lightweight models. This model is static, trained on an offline dataset with an October 2023 cutoff date.",
-      "hugging_face_id": "microsoft/Phi-3-mini-128k-instruct",
-      "id": "microsoft/phi-3-mini-128k-instruct",
-      "name": "Microsoft: Phi-3 Mini 128K Instruct",
-      "per_request_limits": null,
-      "pricing": {
-        "completion": "0.0000001",
-        "image": "0",
-        "internal_reasoning": "0",
-        "prompt": "0.0000001",
-        "request": "0",
-        "web_search": "0"
-      },
-      "supported_parameters": [
-        "max_tokens",
-        "temperature",
-        "tool_choice",
-        "tools",
-        "top_p"
-      ],
-      "top_provider": {
-        "context_length": 128000,
-        "is_moderated": false,
-        "max_completion_tokens": null
-      }
-    },
-    {
-      "architecture": {
-        "input_modalities": [
-          "text"
-        ],
-        "instruct_type": "phi3",
-        "modality": "text->text",
-        "output_modalities": [
-          "text"
-        ],
-        "tokenizer": "Other"
-      },
-      "canonical_slug": "microsoft/phi-3.5-mini-128k-instruct",
-      "context_length": 128000,
-      "created": 1724198400,
-      "default_parameters": {},
-      "description": "Phi-3.5 models are lightweight, state-of-the-art open models. These models were trained with Phi-3 datasets that include both synthetic data and the filtered, publicly available websites data, with a focus on high quality and reasoning-dense properties. Phi-3.5 Mini uses 3.8B parameters, and is a dense decoder-only transformer model using the same tokenizer as [Phi-3 Mini](/models/microsoft/phi-3-mini-128k-instruct).\n\nThe models underwent a rigorous enhancement process, incorporating both supervised fine-tuning, proximal policy optimization, and direct preference optimization to ensure precise instruction adherence and robust safety measures. When assessed against benchmarks that test common sense, language understanding, math, code, long context and logical reasoning, Phi-3.5 models showcased robust and state-of-the-art performance among models with less than 13 billion parameters.",
-      "hugging_face_id": "microsoft/Phi-3.5-mini-instruct",
-      "id": "microsoft/phi-3.5-mini-128k-instruct",
-      "name": "Microsoft: Phi-3.5 Mini 128K Instruct",
-      "per_request_limits": null,
-      "pricing": {
-        "completion": "0.0000001",
-        "image": "0",
-        "internal_reasoning": "0",
-        "prompt": "0.0000001",
-        "request": "0",
-        "web_search": "0"
-      },
-      "supported_parameters": [
-        "max_tokens",
-        "temperature",
-        "tool_choice",
-        "tools",
-        "top_p"
-      ],
-      "top_provider": {
-        "context_length": 128000,
-        "is_moderated": false,
-        "max_completion_tokens": null
-      }
-    },
-    {
-      "architecture": {
-        "input_modalities": [
-          "text"
-        ],
         "instruct_type": null,
         "modality": "text->text",
         "output_modalities": [
@@ -6870,7 +6827,7 @@
       "top_provider": {
         "context_length": 196608,
         "is_moderated": false,
-        "max_completion_tokens": 131072
+        "max_completion_tokens": 65536
       }
     },
     {
@@ -6886,7 +6843,7 @@
         "tokenizer": "Other"
       },
       "canonical_slug": "minimax/minimax-m2.1",
-      "context_length": 204800,
+      "context_length": 196608,
       "created": 1766454997,
       "default_parameters": {
         "frequency_penalty": null,
@@ -6901,25 +6858,37 @@
       "pricing": {
         "completion": "0.0000012",
         "image": "0",
+        "input_cache_read": "0.00000014",
         "internal_reasoning": "0",
-        "prompt": "0.0000003",
+        "prompt": "0.00000028",
         "request": "0",
         "web_search": "0"
       },
       "supported_parameters": [
+        "frequency_penalty",
         "include_reasoning",
+        "logit_bias",
+        "logprobs",
         "max_tokens",
+        "min_p",
+        "presence_penalty",
         "reasoning",
+        "repetition_penalty",
         "response_format",
+        "seed",
+        "stop",
+        "structured_outputs",
         "temperature",
         "tool_choice",
         "tools",
+        "top_k",
+        "top_logprobs",
         "top_p"
       ],
       "top_provider": {
-        "context_length": 204800,
+        "context_length": 196608,
         "is_moderated": false,
-        "max_completion_tokens": 131072
+        "max_completion_tokens": null
       }
     },
     {
@@ -8831,10 +8800,10 @@
       "name": "MoonshotAI: Kimi K2 0711",
       "per_request_limits": null,
       "pricing": {
-        "completion": "0.00000184",
+        "completion": "0.0000024",
         "image": "0",
         "internal_reasoning": "0",
-        "prompt": "0.000000456",
+        "prompt": "0.0000005",
         "request": "0",
         "web_search": "0"
       },
@@ -8859,7 +8828,7 @@
       "top_provider": {
         "context_length": 131072,
         "is_moderated": false,
-        "max_completion_tokens": 131072
+        "max_completion_tokens": null
       }
     },
     {
@@ -9273,16 +9242,16 @@
       },
       "description": "DeepSeek V3.1 Nex-N1 is the flagship release of the Nex-N1 series — a post-trained model designed to highlight agent autonomy, tool use, and real-world productivity. \n\nNex-N1 demonstrates competitive performance across all evaluation scenarios, showing particularly strong results in practical coding and HTML generation tasks.",
       "hugging_face_id": "nex-agi/DeepSeek-V3.1-Nex-N1",
-      "id": "nex-agi/deepseek-v3.1-nex-n1:free",
-      "name": "Nex AGI: DeepSeek V3.1 Nex N1 (free)",
+      "id": "nex-agi/deepseek-v3.1-nex-n1",
+      "name": "Nex AGI: DeepSeek V3.1 Nex N1",
       "per_request_limits": null,
       "pricing": {
-        "completion": "0",
+        "completion": "0.000001",
         "image": "0",
         "input_cache_read": "0",
         "input_cache_write": "0",
         "internal_reasoning": "0",
-        "prompt": "0",
+        "prompt": "0.00000027",
         "request": "0",
         "web_search": "0"
       },
@@ -9570,10 +9539,10 @@
       "name": "Nous: Hermes 4 405B",
       "per_request_limits": null,
       "pricing": {
-        "completion": "0.0000012",
+        "completion": "0.000003",
         "image": "0",
         "internal_reasoning": "0",
-        "prompt": "0.0000003",
+        "prompt": "0.000001",
         "request": "0",
         "web_search": "0"
       },
@@ -9585,19 +9554,14 @@
         "reasoning",
         "repetition_penalty",
         "response_format",
-        "seed",
-        "stop",
-        "structured_outputs",
         "temperature",
-        "tool_choice",
-        "tools",
         "top_k",
         "top_p"
       ],
       "top_provider": {
         "context_length": 131072,
         "is_moderated": false,
-        "max_completion_tokens": 131072
+        "max_completion_tokens": null
       }
     },
     {
@@ -10755,8 +10719,10 @@
         "response_format",
         "seed",
         "structured_outputs",
+        "temperature",
         "tool_choice",
-        "tools"
+        "tools",
+        "top_p"
       ],
       "top_provider": {
         "context_length": 1047576,
@@ -10801,8 +10767,10 @@
         "response_format",
         "seed",
         "structured_outputs",
+        "temperature",
         "tool_choice",
-        "tools"
+        "tools",
+        "top_p"
       ],
       "top_provider": {
         "context_length": 1047576,
@@ -10847,8 +10815,10 @@
         "response_format",
         "seed",
         "structured_outputs",
+        "temperature",
         "tool_choice",
-        "tools"
+        "tools",
+        "top_p"
       ],
       "top_provider": {
         "context_length": 1047576,
@@ -12391,10 +12361,10 @@
       "name": "OpenAI: gpt-oss-20b",
       "per_request_limits": null,
       "pricing": {
-        "completion": "0.00000014",
+        "completion": "0.0000001",
         "image": "0",
         "internal_reasoning": "0",
-        "prompt": "0.00000003",
+        "prompt": "0.00000002",
         "request": "0",
         "web_search": "0"
       },
@@ -12421,7 +12391,7 @@
       "top_provider": {
         "context_length": 131072,
         "is_moderated": false,
-        "max_completion_tokens": null
+        "max_completion_tokens": 131072
       }
     },
     {
@@ -12458,26 +12428,19 @@
         "web_search": "0"
       },
       "supported_parameters": [
-        "frequency_penalty",
         "include_reasoning",
         "max_tokens",
-        "presence_penalty",
         "reasoning",
-        "repetition_penalty",
-        "response_format",
         "seed",
         "stop",
-        "structured_outputs",
         "temperature",
         "tool_choice",
-        "tools",
-        "top_k",
-        "top_p"
+        "tools"
       ],
       "top_provider": {
         "context_length": 131072,
-        "is_moderated": false,
-        "max_completion_tokens": 128000
+        "is_moderated": true,
+        "max_completion_tokens": null
       }
     },
     {
@@ -12792,7 +12755,11 @@
       "canonical_slug": "openai/o3-mini-high-2025-01-31",
       "context_length": 200000,
       "created": 1739372611,
-      "default_parameters": {},
+      "default_parameters": {
+        "frequency_penalty": null,
+        "temperature": null,
+        "top_p": null
+      },
       "description": "OpenAI o3-mini-high is the same model as [o3-mini](/openai/o3-mini) with reasoning_effort set to high. \n\no3-mini is a cost-efficient language model optimized for STEM reasoning tasks, particularly excelling in science, mathematics, and coding. The model features three adjustable reasoning effort levels and supports key developer capabilities including function calling, structured outputs, and streaming, though it does not include vision processing capabilities.\n\nThe model demonstrates significant improvements over its predecessor, with expert testers preferring its responses 56% of the time and noting a 39% reduction in major errors on complex questions. With medium reasoning effort settings, o3-mini matches the performance of the larger o1 model on challenging reasoning evaluations like AIME and GPQA, while maintaining lower latency and cost.",
       "hugging_face_id": "",
       "id": "openai/o3-mini-high",
@@ -12988,12 +12955,16 @@
         "output_modalities": [
           "text"
         ],
-        "tokenizer": "Other"
+        "tokenizer": "GPT"
       },
       "canonical_slug": "openai/o4-mini-high-2025-04-16",
       "context_length": 200000,
       "created": 1744824212,
-      "default_parameters": {},
+      "default_parameters": {
+        "frequency_penalty": null,
+        "temperature": null,
+        "top_p": null
+      },
       "description": "OpenAI o4-mini-high is the same model as [o4-mini](/openai/o4-mini) with reasoning_effort set to high. \n\nOpenAI o4-mini is a compact reasoning model in the o-series, optimized for fast, cost-efficient performance while retaining strong multimodal and agentic capabilities. It supports tool use and demonstrates competitive reasoning and coding performance across benchmarks like AIME (99.5% with Python) and SWE-bench, outperforming its predecessor o3-mini and even approaching o3 in some domains.\n\nDespite its smaller size, o4-mini exhibits high accuracy in STEM tasks, visual problem solving (e.g., MathVista, MMMU), and code editing. It is especially well-suited for high-throughput scenarios where latency or cost is critical. Thanks to its efficient architecture and refined reinforcement learning training, o4-mini can chain tools, generate structured outputs, and solve multi-step tasks with minimal delay—often in under a minute.",
       "hugging_face_id": "",
       "id": "openai/o4-mini-high",
@@ -13259,52 +13230,6 @@
         "context_length": 200000,
         "is_moderated": false,
         "max_completion_tokens": 8000
-      }
-    },
-    {
-      "architecture": {
-        "input_modalities": [
-          "text"
-        ],
-        "instruct_type": "deepseek-r1",
-        "modality": "text->text",
-        "output_modalities": [
-          "text"
-        ],
-        "tokenizer": "Other"
-      },
-      "canonical_slug": "perplexity/sonar-reasoning",
-      "context_length": 127000,
-      "created": 1738131107,
-      "default_parameters": {},
-      "description": "Sonar Reasoning is a reasoning model provided by Perplexity based on [DeepSeek R1](/deepseek/deepseek-r1).\n\nIt allows developers to utilize long chain of thought with built-in web search. Sonar Reasoning is uncensored and hosted in US datacenters. ",
-      "hugging_face_id": "",
-      "id": "perplexity/sonar-reasoning",
-      "name": "Perplexity: Sonar Reasoning",
-      "per_request_limits": null,
-      "pricing": {
-        "completion": "0.000005",
-        "image": "0",
-        "internal_reasoning": "0",
-        "prompt": "0.000001",
-        "request": "0.005",
-        "web_search": "0"
-      },
-      "supported_parameters": [
-        "frequency_penalty",
-        "include_reasoning",
-        "max_tokens",
-        "presence_penalty",
-        "reasoning",
-        "temperature",
-        "top_k",
-        "top_p",
-        "web_search_options"
-      ],
-      "top_provider": {
-        "context_length": 127000,
-        "is_moderated": false,
-        "max_completion_tokens": null
       }
     },
     {
@@ -13789,6 +13714,8 @@
         "seed",
         "stop",
         "temperature",
+        "tool_choice",
+        "tools",
         "top_k",
         "top_p"
       ],
@@ -13920,10 +13847,10 @@
       "name": "Qwen: Qwen2.5 VL 72B Instruct",
       "per_request_limits": null,
       "pricing": {
-        "completion": "0.00000026",
+        "completion": "0.0000006",
         "image": "0",
         "internal_reasoning": "0",
-        "prompt": "0.00000007",
+        "prompt": "0.00000015",
         "request": "0",
         "web_search": "0"
       },
@@ -14221,7 +14148,11 @@
       "canonical_slug": "qwen/qwen3-235b-a22b-thinking-2507",
       "context_length": 262144,
       "created": 1753449557,
-      "default_parameters": {},
+      "default_parameters": {
+        "frequency_penalty": null,
+        "temperature": null,
+        "top_p": null
+      },
       "description": "Qwen3-235B-A22B-Thinking-2507 is a high-performance, open-weight Mixture-of-Experts (MoE) language model optimized for complex reasoning tasks. It activates 22B of its 235B parameters per forward pass and natively supports up to 262,144 tokens of context. This \"thinking-only\" variant enhances structured logical reasoning, mathematics, science, and long-form generation, showing strong benchmark performance across AIME, SuperGPQA, LiveCodeBench, and MMLU-Redux. It enforces a special reasoning mode (</think>) and is designed for high-token outputs (up to 81,920 tokens) in challenging domains.\n\nThe model is instruction-tuned and excels at step-by-step reasoning, tool use, agentic workflows, and multilingual tasks. This release represents the most capable open-source variant in the Qwen3-235B series, surpassing many closed models in structured reasoning use cases.",
       "hugging_face_id": "Qwen/Qwen3-235B-A22B-Thinking-2507",
       "id": "qwen/qwen3-235b-a22b-thinking-2507",
@@ -14275,7 +14206,11 @@
       "canonical_slug": "qwen/qwen3-30b-a3b-04-28",
       "context_length": 40960,
       "created": 1745878604,
-      "default_parameters": {},
+      "default_parameters": {
+        "frequency_penalty": null,
+        "temperature": null,
+        "top_p": null
+      },
       "description": "Qwen3, the latest generation in the Qwen large language model series, features both dense and mixture-of-experts (MoE) architectures to excel in reasoning, multilingual support, and advanced agent tasks. Its unique ability to switch seamlessly between a thinking mode for complex reasoning and a non-thinking mode for efficient dialogue ensures versatile, high-quality performance.\n\nSignificantly outperforming prior models like QwQ and Qwen2.5, Qwen3 delivers superior mathematics, coding, commonsense reasoning, creative writing, and interactive dialogue capabilities. The Qwen3-30B-A3B variant includes 30.5 billion parameters (3.3 billion activated), 48 layers, 128 experts (8 activated per task), and supports up to 131K token contexts with YaRN, setting a new standard among open-source models.",
       "hugging_face_id": "Qwen/Qwen3-30B-A3B",
       "id": "qwen/qwen3-30b-a3b",
@@ -14534,17 +14469,21 @@
       "canonical_slug": "qwen/qwen3-8b-04-28",
       "context_length": 128000,
       "created": 1745876632,
-      "default_parameters": {},
+      "default_parameters": {
+        "frequency_penalty": null,
+        "temperature": null,
+        "top_p": null
+      },
       "description": "Qwen3-8B is a dense 8.2B parameter causal language model from the Qwen3 series, designed for both reasoning-heavy tasks and efficient dialogue. It supports seamless switching between \"thinking\" mode for math, coding, and logical inference, and \"non-thinking\" mode for general conversation. The model is fine-tuned for instruction-following, agent integration, creative writing, and multilingual use across 100+ languages and dialects. It natively supports a 32K token context window and can extend to 131K tokens with YaRN scaling.",
       "hugging_face_id": "Qwen/Qwen3-8B",
       "id": "qwen/qwen3-8b",
       "name": "Qwen: Qwen3 8B",
       "per_request_limits": null,
       "pricing": {
-        "completion": "0.0000001104",
+        "completion": "0.000000138",
         "image": "0",
         "internal_reasoning": "0",
-        "prompt": "0.000000028",
+        "prompt": "0.000000035",
         "request": "0",
         "web_search": "0"
       },
@@ -14763,7 +14702,6 @@
         "frequency_penalty",
         "max_tokens",
         "presence_penalty",
-        "repetition_penalty",
         "seed",
         "stop",
         "temperature",
@@ -14994,7 +14932,7 @@
         "tokenizer": "Qwen3"
       },
       "canonical_slug": "qwen/qwen3-next-80b-a3b-thinking-2509",
-      "context_length": 131072,
+      "context_length": 262144,
       "created": 1757612284,
       "default_parameters": {
         "frequency_penalty": null,
@@ -15010,7 +14948,7 @@
         "completion": "0.0000012",
         "image": "0",
         "internal_reasoning": "0",
-        "prompt": "0.00000012",
+        "prompt": "0.00000015",
         "request": "0",
         "web_search": "0"
       },
@@ -15018,7 +14956,6 @@
         "frequency_penalty",
         "include_reasoning",
         "logit_bias",
-        "logprobs",
         "max_tokens",
         "min_p",
         "presence_penalty",
@@ -15032,13 +14969,12 @@
         "tool_choice",
         "tools",
         "top_k",
-        "top_logprobs",
         "top_p"
       ],
       "top_provider": {
-        "context_length": 131072,
+        "context_length": 262144,
         "is_moderated": false,
-        "max_completion_tokens": 32768
+        "max_completion_tokens": 262144
       }
     },
     {
@@ -15127,10 +15063,10 @@
       "name": "Qwen: Qwen3 VL 235B A22B Thinking",
       "per_request_limits": null,
       "pricing": {
-        "completion": "0.0000012",
+        "completion": "0.0000035",
         "image": "0",
         "internal_reasoning": "0",
-        "prompt": "0.0000003",
+        "prompt": "0.00000045",
         "request": "0",
         "web_search": "0"
       },
@@ -15242,11 +15178,11 @@
       "name": "Qwen: Qwen3 VL 30B A3B Thinking",
       "per_request_limits": null,
       "pricing": {
-        "completion": "0.0000008",
+        "completion": "0.000001",
         "image": "0",
         "input_cache_read": "0",
         "internal_reasoning": "0",
-        "prompt": "0.00000016",
+        "prompt": "0.0000002",
         "request": "0",
         "web_search": "0"
       },
@@ -15354,11 +15290,11 @@
       "name": "Qwen: Qwen3 VL 8B Instruct",
       "per_request_limits": null,
       "pricing": {
-        "completion": "0.0000004",
+        "completion": "0.0000005",
         "image": "0",
         "input_cache_read": "0",
         "internal_reasoning": "0",
-        "prompt": "0.000000064",
+        "prompt": "0.00000008",
         "request": "0",
         "web_search": "0"
       },
@@ -16394,10 +16330,10 @@
       "name": "THUDM: GLM 4.1V 9B Thinking",
       "per_request_limits": null,
       "pricing": {
-        "completion": "0.0000001104",
+        "completion": "0.000000138",
         "image": "0",
         "internal_reasoning": "0",
-        "prompt": "0.000000028",
+        "prompt": "0.000000035",
         "request": "0",
         "web_search": "0"
       },
@@ -16540,10 +16476,10 @@
       "name": "TNG: DeepSeek R1T2 Chimera",
       "per_request_limits": null,
       "pricing": {
-        "completion": "0.0000012",
+        "completion": "0.00000085",
         "image": "0",
         "internal_reasoning": "0",
-        "prompt": "0.0000003",
+        "prompt": "0.00000025",
         "request": "0",
         "web_search": "0"
       },
@@ -16644,10 +16580,10 @@
       "name": "TNG: R1T Chimera",
       "per_request_limits": null,
       "pricing": {
-        "completion": "0.0000012",
+        "completion": "0.00000085",
         "image": "0",
         "internal_reasoning": "0",
-        "prompt": "0.0000003",
+        "prompt": "0.00000025",
         "request": "0",
         "web_search": "0"
       },
@@ -16727,7 +16663,7 @@
       "top_provider": {
         "context_length": 163840,
         "is_moderated": false,
-        "max_completion_tokens": 163840
+        "max_completion_tokens": 65536
       }
     },
     {
@@ -16768,62 +16704,6 @@
         "include_reasoning",
         "max_tokens",
         "min_p",
-        "presence_penalty",
-        "reasoning",
-        "repetition_penalty",
-        "response_format",
-        "seed",
-        "stop",
-        "structured_outputs",
-        "temperature",
-        "tool_choice",
-        "tools",
-        "top_k",
-        "top_p"
-      ],
-      "top_provider": {
-        "context_length": 131072,
-        "is_moderated": false,
-        "max_completion_tokens": 131072
-      }
-    },
-    {
-      "architecture": {
-        "input_modalities": [
-          "text"
-        ],
-        "instruct_type": null,
-        "modality": "text->text",
-        "output_modalities": [
-          "text"
-        ],
-        "tokenizer": "Other"
-      },
-      "canonical_slug": "alibaba/tongyi-deepresearch-30b-a3b",
-      "context_length": 131072,
-      "created": 1758210804,
-      "default_parameters": {
-        "frequency_penalty": null,
-        "temperature": null,
-        "top_p": null
-      },
-      "description": "Tongyi DeepResearch is an agentic large language model developed by Tongyi Lab, with 30 billion total parameters activating only 3 billion per token. It's optimized for long-horizon, deep information-seeking tasks and delivers state-of-the-art performance on benchmarks like Humanity's Last Exam, BrowserComp, BrowserComp-ZH, WebWalkerQA, GAIA, xbench-DeepSearch, and FRAMES. This makes it superior for complex agentic search, reasoning, and multi-step problem-solving compared to prior models.\n\nThe model includes a fully automated synthetic data pipeline for scalable pre-training, fine-tuning, and reinforcement learning. It uses large-scale continual pre-training on diverse agentic data to boost reasoning and stay fresh. It also features end-to-end on-policy RL with a customized Group Relative Policy Optimization, including token-level gradients and negative sample filtering for stable training. The model supports ReAct for core ability checks and an IterResearch-based 'Heavy' mode for max performance through test-time scaling. It's ideal for advanced research agents, tool use, and heavy inference workflows.",
-      "hugging_face_id": "Alibaba-NLP/Tongyi-DeepResearch-30B-A3B",
-      "id": "alibaba/tongyi-deepresearch-30b-a3b:free",
-      "name": "Tongyi DeepResearch 30B A3B (free)",
-      "per_request_limits": null,
-      "pricing": {
-        "completion": "0",
-        "image": "0",
-        "internal_reasoning": "0",
-        "prompt": "0",
-        "request": "0",
-        "web_search": "0"
-      },
-      "supported_parameters": [
-        "frequency_penalty",
-        "include_reasoning",
-        "max_tokens",
         "presence_penalty",
         "reasoning",
         "repetition_penalty",
@@ -17053,7 +16933,11 @@
       "canonical_slug": "x-ai/grok-3-mini",
       "context_length": 131072,
       "created": 1749583245,
-      "default_parameters": {},
+      "default_parameters": {
+        "frequency_penalty": null,
+        "temperature": null,
+        "top_p": null
+      },
       "description": "A lightweight model that thinks before responding. Fast, smart, and great for logic-based tasks that do not require deep domain knowledge. The raw thinking traces are accessible.",
       "hugging_face_id": "",
       "id": "x-ai/grok-3-mini",
@@ -17104,7 +16988,11 @@
       "canonical_slug": "x-ai/grok-3-mini-beta",
       "context_length": 131072,
       "created": 1744240195,
-      "default_parameters": {},
+      "default_parameters": {
+        "frequency_penalty": null,
+        "temperature": null,
+        "top_p": null
+      },
       "description": "Grok 3 Mini is a lightweight, smaller thinking model. Unlike traditional models that generate answers immediately, Grok 3 Mini thinks before responding. It’s ideal for reasoning-heavy tasks that don’t demand extensive domain knowledge, and shines in math-specific and quantitative use cases, such as solving challenging puzzles or math problems.\n\nTransparent \"thinking\" traces accessible. Defaults to low reasoning, can boost with setting `reasoning: { effort: \"high\" }`\n\nNote: That there are two xAI endpoints for this model. By default when using this model we will always route you to the base endpoint. If you want the fast endpoint you can add `provider: { sort: throughput}`, to sort by throughput instead. \n",
       "hugging_face_id": "",
       "id": "x-ai/grok-3-mini-beta",
@@ -17532,11 +17420,10 @@
       "name": "Z.AI: GLM 4.5 Air",
       "per_request_limits": null,
       "pricing": {
-        "completion": "0.00000068",
+        "completion": "0.00000022",
         "image": "0",
-        "input_cache_read": "0",
         "internal_reasoning": "0",
-        "prompt": "0.000000104",
+        "prompt": "0.00000005",
         "request": "0",
         "web_search": "0"
       },
@@ -17560,7 +17447,7 @@
       "top_provider": {
         "context_length": 131072,
         "is_moderated": false,
-        "max_completion_tokens": 98304
+        "max_completion_tokens": 131072
       }
     },
     {
@@ -17597,26 +17484,18 @@
         "web_search": "0"
       },
       "supported_parameters": [
-        "frequency_penalty",
         "include_reasoning",
         "max_tokens",
-        "presence_penalty",
         "reasoning",
-        "repetition_penalty",
-        "response_format",
-        "seed",
-        "stop",
-        "structured_outputs",
         "temperature",
         "tool_choice",
         "tools",
-        "top_k",
         "top_p"
       ],
       "top_provider": {
         "context_length": 131072,
         "is_moderated": false,
-        "max_completion_tokens": 131072
+        "max_completion_tokens": 96000
       }
     },
     {
@@ -17646,12 +17525,12 @@
       "name": "Z.AI: GLM 4.5V",
       "per_request_limits": null,
       "pricing": {
-        "completion": "0.00000144",
+        "completion": "0.0000018",
         "image": "0",
-        "input_cache_read": "0.000000088",
+        "input_cache_read": "0.00000011",
         "input_cache_write": "0",
         "internal_reasoning": "0",
-        "prompt": "0.00000048",
+        "prompt": "0.0000006",
         "request": "0",
         "web_search": "0"
       },
@@ -17691,7 +17570,7 @@
         "tokenizer": "Other"
       },
       "canonical_slug": "z-ai/glm-4.6",
-      "context_length": 204800,
+      "context_length": 202752,
       "created": 1759235576,
       "default_parameters": {
         "frequency_penalty": null,
@@ -17704,10 +17583,10 @@
       "name": "Z.AI: GLM 4.6",
       "per_request_limits": null,
       "pricing": {
-        "completion": "0.0000019",
+        "completion": "0.0000015",
         "image": "0",
         "internal_reasoning": "0",
-        "prompt": "0.00000039",
+        "prompt": "0.00000035",
         "request": "0",
         "web_search": "0"
       },
@@ -17734,9 +17613,9 @@
         "top_p"
       ],
       "top_provider": {
-        "context_length": 204800,
+        "context_length": 202752,
         "is_moderated": false,
-        "max_completion_tokens": 204800
+        "max_completion_tokens": 65536
       }
     },
     {
@@ -17825,7 +17704,7 @@
       "pricing": {
         "completion": "0.0000009",
         "image": "0",
-        "input_cache_read": "0.00000005",
+        "input_cache_read": "0",
         "internal_reasoning": "0",
         "prompt": "0.0000003",
         "request": "0",
@@ -17853,7 +17732,7 @@
       "top_provider": {
         "context_length": 131072,
         "is_moderated": false,
-        "max_completion_tokens": 24000
+        "max_completion_tokens": 131072
       }
     },
     {
@@ -17893,6 +17772,7 @@
         "frequency_penalty",
         "include_reasoning",
         "logit_bias",
+        "logprobs",
         "max_tokens",
         "min_p",
         "presence_penalty",
@@ -17905,7 +17785,9 @@
         "temperature",
         "tool_choice",
         "tools",
+        "top_a",
         "top_k",
+        "top_logprobs",
         "top_p"
       ],
       "top_provider": {

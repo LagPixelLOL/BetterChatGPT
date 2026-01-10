@@ -24,7 +24,7 @@ export const defaultApiVersion = '2024-04-01-preview';
 export const defaultModel = 'google/gemini-3-pro-preview';
 
 export const defaultUserMaxToken = 1048576;
-export const reduceMessagesToTotalToken = 256000; // Sufficient for almost all models, Gemini has 1m though.
+export const reduceMessagesToTotalToken = defaultUserMaxToken;
 
 export const _defaultChatConfig: ConfigInterface = {
   model: defaultModel,

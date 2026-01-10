@@ -234,6 +234,15 @@
     margin-left: -1rem;
     position: absolute;
   }
+
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+
+  .no-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
 }
 
 :not(pre) > code.hljs,
