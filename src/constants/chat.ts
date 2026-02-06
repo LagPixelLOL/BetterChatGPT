@@ -17,13 +17,13 @@ Put all math expressions into inline LaTeX blocks, $$ e^x $$ for short expressio
 $$
 \\sin(x)\\cos(x)
 $$
-for long expressions (note the double dollar signs on each side instead of only one).
+for long expressions (note you must use FOUR dollar signs in this session because of parsing format differences).
 When explaining math, explain what each symbol means in a human friendly way, assume the user doesn't know about what most expressions mean.`;
 
 export const defaultApiVersion = '2024-04-01-preview';
-export const defaultModel = 'google/gemini-3-pro-preview';
+export const defaultModel = 'anthropic/claude-opus-4.6';
 
-export const defaultUserMaxToken = 1048576;
+export const defaultUserMaxToken = 1000000; // 1048576
 export const reduceMessagesToTotalToken = defaultUserMaxToken;
 
 export const _defaultChatConfig: ConfigInterface = {
