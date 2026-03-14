@@ -2,23 +2,18 @@ import fs from 'fs/promises'
 import https from 'https'
 import path from 'path'
 
-// Function to recursively sort object keys
-function sortObjectKeys(obj) {
-    if (Array.isArray(obj)) {
-        // Check if the array contains objects with a 'name' field
-        if (obj.length > 0 && typeof obj[0] === 'object' && 'name' in obj[0]) {
-            // Sort the array by the 'name' field
-            obj.sort((a, b) => a.name.localeCompare(b.name));
-        }
-        return obj.map(sortObjectKeys);
-    } else if (obj !== null && typeof obj === 'object') {
-        return Object.keys(obj).sort().reduce((sortedObj, key) => {
-            sortedObj[key] = sortObjectKeys(obj[key]);
-            return sortedObj;
-        }, {});
-    }
-    return obj;
-}
+const sortObjectKeys = (obj) =>
+  Array.isArray(obj)
+    ? obj
+        .toSorted((a, b) =>
+          a?.created !== undefined ? b.created - a.created : 0
+        )
+        .map(sortObjectKeys)
+    : obj !== null && typeof obj === "object"
+      ? Object.keys(obj)
+          .sort()
+          .reduce((sorted, key) => ({ ...sorted, [key]: sortObjectKeys(obj[key]) }), {})
+      : obj;
 
 // Function to download JSON from URL
 function downloadJson(url) {
@@ -87,9 +82,9 @@ async function downloadAndProcessJson() {
         const jsonData = await downloadJson(apiUrl);
 
         // Write the downloaded JSON to models.json
-        const jsonString = JSON.stringify(jsonData, null, 2);
-        await fs.writeFile(inputFilePath, jsonString, 'utf8');
-        console.log('Downloaded JSON has been saved to models.json');
+        // const jsonString = JSON.stringify(jsonData, null, 2);
+        // await fs.writeFile(inputFilePath, jsonString, 'utf8');
+        // console.log('Downloaded JSON has been saved to models.json');
 
         // Sort the JSON data
         const sortedJsonData = sortObjectKeys(jsonData);
