@@ -39,8 +39,8 @@ export function isImageContent(ob: ContentInterface | undefined): ob is ImageCon
 }
 
 export interface ContentInterface {
-  [x: string]: any;
   type: Content;
+  [x: string]: any;
 }
 
 export interface MessageInterface {

@@ -2,6 +2,7 @@ import { ShareGPTSubmitBodyInterface } from '@type/api';
 import {
   ConfigInterface,
   MessageInterface,
+  isTextContent,
 } from '@type/chat';
 import {
   officialAPIEndpoint,
@@ -102,6 +103,13 @@ function assemblePayload(
     }
     modifiedConfig.store = false;
   } else {
+    modifiedMessages = modifiedMessages.map(({ ...message }) => {
+      let content = message.content;
+      if (content.length === 1 && isTextContent(content[0])) {
+        message.content = content[0].text;
+      }
+      return message
+    });
     if (isOpenRouterEndpoint) {
       var { reasoning_effort: reasoningEffort, ...modifiedConfig }: any = config;
       if (reasoningEffort === 'null') {
@@ -167,11 +175,7 @@ function assemblePayload(
     payload.max_output_tokens = maxTokens;
   } else {
     payload.messages = modifiedMessages;
-    if (isOfficialOAIEndpoint) {
-      payload.max_completion_tokens = maxTokens;
-    } else {
-      payload.max_tokens = maxTokens;
-    }
+    payload.max_completion_tokens = maxTokens;
   }
 
   return JSON.stringify(payload)
