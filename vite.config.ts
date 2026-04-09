@@ -1,7 +1,6 @@
 import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react-swc';
 import wasm from 'vite-plugin-wasm';
-import topLevelAwait from 'vite-plugin-top-level-await';
 import { consoleForwardPlugin } from "vite-console-forward-plugin"
 
 // https://vitejs.dev/config/
@@ -12,7 +11,6 @@ export default defineConfig(({ command, mode }) => {
     plugins: [
       react(),
       wasm(),
-      topLevelAwait(),
       isDev && consoleForwardPlugin(),
     ].filter(Boolean),
     resolve: {
