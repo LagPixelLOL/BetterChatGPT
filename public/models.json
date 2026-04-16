@@ -13,6 +13,116 @@
         ],
         "tokenizer": "Claude"
       },
+      "canonical_slug": "anthropic/claude-4.7-opus-20260416",
+      "context_length": 1000000,
+      "created": 1776351100,
+      "default_parameters": {
+        "frequency_penalty": null,
+        "presence_penalty": null,
+        "repetition_penalty": null,
+        "temperature": null,
+        "top_k": null,
+        "top_p": null
+      },
+      "description": "Opus 4.7 is the next generation of Anthropic's Opus family, built for long-running, asynchronous agents. Building on the coding and agentic strengths of Opus 4.6, it delivers stronger performance on...",
+      "expiration_date": null,
+      "hugging_face_id": null,
+      "id": "anthropic/claude-opus-4.7",
+      "knowledge_cutoff": null,
+      "links": {
+        "details": "/api/v1/models/anthropic/claude-4.7-opus-20260416/endpoints"
+      },
+      "name": "Anthropic: Claude Opus 4.7",
+      "per_request_limits": null,
+      "pricing": {
+        "completion": "0.000025",
+        "input_cache_read": "0.0000005",
+        "input_cache_write": "0.00000625",
+        "prompt": "0.000005",
+        "web_search": "0.01"
+      },
+      "supported_parameters": [
+        "include_reasoning",
+        "max_tokens",
+        "reasoning",
+        "response_format",
+        "stop",
+        "structured_outputs",
+        "tool_choice",
+        "tools",
+        "verbosity"
+      ],
+      "top_provider": {
+        "context_length": 1000000,
+        "is_moderated": true,
+        "max_completion_tokens": 128000
+      }
+    },
+    {
+      "architecture": {
+        "input_modalities": [
+          "text"
+        ],
+        "instruct_type": null,
+        "modality": "text->text",
+        "output_modalities": [
+          "text"
+        ],
+        "tokenizer": "Other"
+      },
+      "canonical_slug": "openrouter/elephant-alpha",
+      "context_length": 262144,
+      "created": 1776052598,
+      "default_parameters": {
+        "frequency_penalty": null,
+        "presence_penalty": null,
+        "repetition_penalty": null,
+        "temperature": null,
+        "top_k": null,
+        "top_p": null
+      },
+      "description": "Elephant Alpha is a 100B-parameter text model focused on intelligence efficiency, delivering strong performance while minimizing token usage. It supports a 256K context window with up to 32K output tokens,...",
+      "expiration_date": null,
+      "hugging_face_id": null,
+      "id": "openrouter/elephant-alpha",
+      "knowledge_cutoff": null,
+      "links": {
+        "details": "/api/v1/models/openrouter/elephant-alpha/endpoints"
+      },
+      "name": "Elephant",
+      "per_request_limits": null,
+      "pricing": {
+        "completion": "0",
+        "prompt": "0"
+      },
+      "supported_parameters": [
+        "max_tokens",
+        "response_format",
+        "structured_outputs",
+        "temperature",
+        "tool_choice",
+        "tools",
+        "top_p"
+      ],
+      "top_provider": {
+        "context_length": 262144,
+        "is_moderated": false,
+        "max_completion_tokens": 32768
+      }
+    },
+    {
+      "architecture": {
+        "input_modalities": [
+          "text",
+          "image"
+        ],
+        "instruct_type": null,
+        "modality": "text+image->text",
+        "output_modalities": [
+          "text"
+        ],
+        "tokenizer": "Claude"
+      },
       "canonical_slug": "anthropic/claude-4.6-opus-fast-20260407",
       "context_length": 1000000,
       "created": 1775592472,
@@ -94,9 +204,9 @@
       "name": "Z.ai: GLM 5.1",
       "per_request_limits": null,
       "pricing": {
-        "completion": "0.0000044",
-        "input_cache_read": "0.00000026",
-        "prompt": "0.000001395"
+        "completion": "0.00000315",
+        "input_cache_read": "0.000000475",
+        "prompt": "0.00000095"
       },
       "supported_parameters": [
         "frequency_penalty",
@@ -105,8 +215,10 @@
         "logprobs",
         "max_tokens",
         "min_p",
+        "parallel_tool_calls",
         "presence_penalty",
         "reasoning",
+        "reasoning_effort",
         "repetition_penalty",
         "response_format",
         "seed",
@@ -122,7 +234,7 @@
       "top_provider": {
         "context_length": 202752,
         "is_moderated": false,
-        "max_completion_tokens": 131072
+        "max_completion_tokens": 65535
       }
     },
     {
@@ -212,7 +324,8 @@
       "per_request_limits": null,
       "pricing": {
         "completion": "0.0000004",
-        "prompt": "0.00000013"
+        "input_cache_read": "0.00000004",
+        "prompt": "0.00000007"
       },
       "supported_parameters": [
         "frequency_penalty",
@@ -220,6 +333,7 @@
         "logit_bias",
         "logprobs",
         "max_tokens",
+        "min_p",
         "presence_penalty",
         "reasoning",
         "repetition_penalty",
@@ -332,15 +446,16 @@
       "name": "Google: Gemma 4 31B",
       "per_request_limits": null,
       "pricing": {
-        "completion": "0.0000004",
-        "prompt": "0.00000014"
+        "completion": "0.00000038",
+        "input_cache_read": "0.0000000199999995",
+        "prompt": "0.00000013"
       },
       "supported_parameters": [
         "frequency_penalty",
         "include_reasoning",
         "logit_bias",
-        "logprobs",
         "max_tokens",
+        "min_p",
         "presence_penalty",
         "reasoning",
         "repetition_penalty",
@@ -352,13 +467,12 @@
         "tool_choice",
         "tools",
         "top_k",
-        "top_logprobs",
         "top_p"
       ],
       "top_provider": {
         "context_length": 262144,
         "is_moderated": false,
-        "max_completion_tokens": 131072
+        "max_completion_tokens": null
       }
     },
     {
@@ -510,6 +624,7 @@
       "per_request_limits": null,
       "pricing": {
         "completion": "0.00000085",
+        "input_cache_read": "0.00000006",
         "prompt": "0.00000022"
       },
       "supported_parameters": [
@@ -1009,7 +1124,7 @@
         "tokenizer": "Other"
       },
       "canonical_slug": "minimax/minimax-m2.7-20260318",
-      "context_length": 204800,
+      "context_length": 196608,
       "created": 1773836697,
       "default_parameters": {
         "frequency_penalty": null,
@@ -1031,23 +1146,33 @@
       "per_request_limits": null,
       "pricing": {
         "completion": "0.0000012",
-        "input_cache_read": "0.00000006",
+        "input_cache_read": "0.000000059",
         "prompt": "0.0000003"
       },
       "supported_parameters": [
+        "frequency_penalty",
         "include_reasoning",
+        "logit_bias",
+        "logprobs",
         "max_tokens",
+        "min_p",
+        "presence_penalty",
         "reasoning",
+        "repetition_penalty",
         "response_format",
+        "stop",
+        "structured_outputs",
         "temperature",
         "tool_choice",
         "tools",
+        "top_k",
+        "top_logprobs",
         "top_p"
       ],
       "top_provider": {
-        "context_length": 204800,
+        "context_length": 196608,
         "is_moderated": false,
-        "max_completion_tokens": 131072
+        "max_completion_tokens": null
       }
     },
     {
@@ -1104,7 +1229,7 @@
       ],
       "top_provider": {
         "context_length": 400000,
-        "is_moderated": true,
+        "is_moderated": false,
         "max_completion_tokens": 128000
       }
     },
@@ -1162,7 +1287,7 @@
       ],
       "top_provider": {
         "context_length": 400000,
-        "is_moderated": true,
+        "is_moderated": false,
         "max_completion_tokens": 128000
       }
     },
@@ -1581,7 +1706,7 @@
       ],
       "top_provider": {
         "context_length": 1050000,
-        "is_moderated": true,
+        "is_moderated": false,
         "max_completion_tokens": 128000
       }
     },
@@ -1639,7 +1764,7 @@
       ],
       "top_provider": {
         "context_length": 1050000,
-        "is_moderated": true,
+        "is_moderated": false,
         "max_completion_tokens": 128000
       }
     },
@@ -2699,7 +2824,7 @@
       "top_provider": {
         "context_length": 196608,
         "is_moderated": true,
-        "max_completion_tokens": 196608
+        "max_completion_tokens": 8192
       }
     },
     {
@@ -2976,9 +3101,9 @@
       "name": "Qwen: Qwen3 Coder Next",
       "per_request_limits": null,
       "pricing": {
-        "completion": "0.00000075",
-        "input_cache_read": "0.00000006",
-        "prompt": "0.00000012"
+        "completion": "0.0000008",
+        "input_cache_read": "0.00000012",
+        "prompt": "0.00000015"
       },
       "supported_parameters": [
         "frequency_penalty",
@@ -3000,7 +3125,7 @@
       "top_provider": {
         "context_length": 262144,
         "is_moderated": false,
-        "max_completion_tokens": 65536
+        "max_completion_tokens": 262144
       }
     },
     {
@@ -3103,6 +3228,7 @@
         "min_p",
         "presence_penalty",
         "reasoning",
+        "reasoning_effort",
         "repetition_penalty",
         "response_format",
         "seed",
@@ -3699,8 +3825,7 @@
       "pricing": {
         "completion": "0.000014",
         "input_cache_read": "0.000000175",
-        "prompt": "0.00000175",
-        "web_search": "0.01"
+        "prompt": "0.00000175"
       },
       "supported_parameters": [
         "include_reasoning",
@@ -3715,7 +3840,7 @@
       ],
       "top_provider": {
         "context_length": 400000,
-        "is_moderated": true,
+        "is_moderated": false,
         "max_completion_tokens": 128000
       }
     },
@@ -3924,7 +4049,6 @@
         "frequency_penalty",
         "include_reasoning",
         "logit_bias",
-        "logprobs",
         "max_tokens",
         "min_p",
         "presence_penalty",
@@ -3938,7 +4062,6 @@
         "tool_choice",
         "tools",
         "top_k",
-        "top_logprobs",
         "top_p"
       ],
       "top_provider": {
@@ -4318,8 +4441,7 @@
       "pricing": {
         "completion": "0.000014",
         "input_cache_read": "0.000000175",
-        "prompt": "0.00000175",
-        "web_search": "0.01"
+        "prompt": "0.00000175"
       },
       "supported_parameters": [
         "max_completion_tokens",
@@ -4332,8 +4454,8 @@
       ],
       "top_provider": {
         "context_length": 128000,
-        "is_moderated": true,
-        "max_completion_tokens": 16384
+        "is_moderated": false,
+        "max_completion_tokens": 32000
       }
     },
     {
@@ -4427,8 +4549,7 @@
       "pricing": {
         "completion": "0.000014",
         "input_cache_read": "0.000000175",
-        "prompt": "0.00000175",
-        "web_search": "0.01"
+        "prompt": "0.00000175"
       },
       "supported_parameters": [
         "include_reasoning",
@@ -4443,7 +4564,7 @@
       ],
       "top_provider": {
         "context_length": 400000,
-        "is_moderated": true,
+        "is_moderated": false,
         "max_completion_tokens": 128000
       }
     },
@@ -5118,58 +5239,6 @@
         "top_p": 0.75
       },
       "description": "Trinity Mini is a 26B-parameter (3B active) sparse mixture-of-experts language model featuring 128 experts with 8 active per token. Engineered for efficient reasoning over long contexts (131k) with robust function...",
-      "expiration_date": "2026-04-10",
-      "hugging_face_id": "arcee-ai/Trinity-Mini",
-      "id": "arcee-ai/trinity-mini:free",
-      "knowledge_cutoff": null,
-      "links": {
-        "details": "/api/v1/models/arcee-ai/trinity-mini-20251201/endpoints"
-      },
-      "name": "Arcee AI: Trinity Mini (free)",
-      "per_request_limits": null,
-      "pricing": {
-        "completion": "0",
-        "prompt": "0"
-      },
-      "supported_parameters": [
-        "include_reasoning",
-        "max_tokens",
-        "reasoning",
-        "response_format",
-        "structured_outputs",
-        "temperature",
-        "tool_choice",
-        "tools",
-        "top_k",
-        "top_p"
-      ],
-      "top_provider": {
-        "context_length": 131072,
-        "is_moderated": false,
-        "max_completion_tokens": null
-      }
-    },
-    {
-      "architecture": {
-        "input_modalities": [
-          "text"
-        ],
-        "instruct_type": null,
-        "modality": "text->text",
-        "output_modalities": [
-          "text"
-        ],
-        "tokenizer": "Other"
-      },
-      "canonical_slug": "arcee-ai/trinity-mini-20251201",
-      "context_length": 131072,
-      "created": 1764601720,
-      "default_parameters": {
-        "frequency_penalty": null,
-        "temperature": 0.15,
-        "top_p": 0.75
-      },
-      "description": "Trinity Mini is a 26B-parameter (3B active) sparse mixture-of-experts language model featuring 128 experts with 8 active per token. Engineered for efficient reasoning over long contexts (131k) with robust function...",
       "expiration_date": null,
       "hugging_face_id": "arcee-ai/Trinity-Mini",
       "id": "arcee-ai/trinity-mini",
@@ -5398,7 +5467,10 @@
       "created": 1764010580,
       "default_parameters": {
         "frequency_penalty": null,
+        "presence_penalty": null,
+        "repetition_penalty": null,
         "temperature": null,
+        "top_k": null,
         "top_p": null
       },
       "description": "Claude Opus 4.5 is Anthropic’s frontier reasoning model optimized for complex software engineering, agentic workflows, and long-horizon computer use. It offers strong multimodal capabilities, competitive performance across real-world coding and...",
@@ -5705,9 +5777,8 @@
       "per_request_limits": null,
       "pricing": {
         "completion": "0.00001",
-        "input_cache_read": "0.000000125",
-        "prompt": "0.00000125",
-        "web_search": "0.01"
+        "input_cache_read": "0.00000013",
+        "prompt": "0.00000125"
       },
       "supported_parameters": [
         "include_reasoning",
@@ -5722,7 +5793,7 @@
       ],
       "top_provider": {
         "context_length": 400000,
-        "is_moderated": true,
+        "is_moderated": false,
         "max_completion_tokens": 128000
       }
     },
@@ -5871,7 +5942,7 @@
       "per_request_limits": null,
       "pricing": {
         "completion": "0.000002",
-        "input_cache_read": "0.000000025",
+        "input_cache_read": "0.00000003",
         "prompt": "0.00000025"
       },
       "supported_parameters": [
@@ -5887,8 +5958,8 @@
       ],
       "top_provider": {
         "context_length": 400000,
-        "is_moderated": true,
-        "max_completion_tokens": 100000
+        "is_moderated": false,
+        "max_completion_tokens": 128000
       }
     },
     {
@@ -5923,6 +5994,7 @@
       "per_request_limits": null,
       "pricing": {
         "completion": "0.0000025",
+        "input_cache_read": "0.00000015",
         "prompt": "0.0000006"
       },
       "supported_parameters": [
@@ -5947,7 +6019,7 @@
       "top_provider": {
         "context_length": 262144,
         "is_moderated": false,
-        "max_completion_tokens": null
+        "max_completion_tokens": 262144
       }
     },
     {
@@ -7405,6 +7477,7 @@
       "per_request_limits": null,
       "pricing": {
         "completion": "0.0000005",
+        "input_cache_read": "0.00000015",
         "prompt": "0.0000003"
       },
       "supported_parameters": [
@@ -8210,60 +8283,6 @@
         "output_modalities": [
           "text"
         ],
-        "tokenizer": "Other"
-      },
-      "canonical_slug": "meituan/longcat-flash-chat",
-      "context_length": 131072,
-      "created": 1757427658,
-      "default_parameters": {},
-      "description": "LongCat-Flash-Chat is a large-scale Mixture-of-Experts (MoE) model with 560B total parameters, of which 18.6B–31.3B (≈27B on average) are dynamically activated per input. It introduces a shortcut-connected MoE design to reduce...",
-      "expiration_date": null,
-      "hugging_face_id": "meituan-longcat/LongCat-Flash-Chat",
-      "id": "meituan/longcat-flash-chat",
-      "knowledge_cutoff": "2025-03-31",
-      "links": {
-        "details": "/api/v1/models/meituan/longcat-flash-chat/endpoints"
-      },
-      "name": "Meituan: LongCat Flash Chat",
-      "per_request_limits": null,
-      "pricing": {
-        "completion": "0.0000008",
-        "input_cache_read": "0.0000002",
-        "prompt": "0.0000002"
-      },
-      "supported_parameters": [
-        "frequency_penalty",
-        "logit_bias",
-        "max_tokens",
-        "min_p",
-        "presence_penalty",
-        "repetition_penalty",
-        "response_format",
-        "seed",
-        "stop",
-        "structured_outputs",
-        "temperature",
-        "tool_choice",
-        "tools",
-        "top_k",
-        "top_p"
-      ],
-      "top_provider": {
-        "context_length": 131072,
-        "is_moderated": false,
-        "max_completion_tokens": 131072
-      }
-    },
-    {
-      "architecture": {
-        "input_modalities": [
-          "text"
-        ],
-        "instruct_type": null,
-        "modality": "text->text",
-        "output_modalities": [
-          "text"
-        ],
         "tokenizer": "Qwen3"
       },
       "canonical_slug": "qwen/qwen-plus-2025-07-28",
@@ -8499,10 +8518,7 @@
       },
       "supported_parameters": [
         "frequency_penalty",
-        "logit_bias",
-        "logprobs",
         "max_tokens",
-        "min_p",
         "presence_penalty",
         "repetition_penalty",
         "response_format",
@@ -8513,7 +8529,6 @@
         "tool_choice",
         "tools",
         "top_k",
-        "top_logprobs",
         "top_p"
       ],
       "top_provider": {
@@ -9187,8 +9202,7 @@
       "pricing": {
         "completion": "0.00001",
         "input_cache_read": "0.000000125",
-        "prompt": "0.00000125",
-        "web_search": "0.01"
+        "prompt": "0.00000125"
       },
       "supported_parameters": [
         "include_reasoning",
@@ -9203,7 +9217,7 @@
       ],
       "top_provider": {
         "context_length": 400000,
-        "is_moderated": true,
+        "is_moderated": false,
         "max_completion_tokens": 128000
       }
     },
@@ -9302,9 +9316,8 @@
       "per_request_limits": null,
       "pricing": {
         "completion": "0.0000004",
-        "input_cache_read": "0.000000005",
-        "prompt": "0.00000005",
-        "web_search": "0.01"
+        "input_cache_read": "0.00000001",
+        "prompt": "0.00000005"
       },
       "supported_parameters": [
         "include_reasoning",
@@ -9319,8 +9332,8 @@
       ],
       "top_provider": {
         "context_length": 400000,
-        "is_moderated": true,
-        "max_completion_tokens": 128000
+        "is_moderated": false,
+        "max_completion_tokens": null
       }
     },
     {
@@ -9482,7 +9495,7 @@
       "top_provider": {
         "context_length": 131072,
         "is_moderated": true,
-        "max_completion_tokens": 131072
+        "max_completion_tokens": 8192
       }
     },
     {
@@ -9516,8 +9529,7 @@
       "name": "OpenAI: gpt-oss-20b",
       "per_request_limits": null,
       "pricing": {
-        "completion": "0.00000011",
-        "input_cache_read": "0.000000015",
+        "completion": "0.00000014",
         "prompt": "0.00000003"
       },
       "supported_parameters": [
@@ -9545,7 +9557,7 @@
       "top_provider": {
         "context_length": 131072,
         "is_moderated": false,
-        "max_completion_tokens": 131072
+        "max_completion_tokens": null
       }
     },
     {
@@ -9567,7 +9579,10 @@
       "created": 1754411591,
       "default_parameters": {
         "frequency_penalty": null,
+        "presence_penalty": null,
+        "repetition_penalty": null,
         "temperature": null,
+        "top_k": null,
         "top_p": null
       },
       "description": "Claude Opus 4.1 is an updated version of Anthropic’s flagship model, offering improved performance in coding, reasoning, and agentic tasks. It achieves 74.5% on SWE-bench Verified and shows notable gains...",
@@ -9602,7 +9617,7 @@
       ],
       "top_provider": {
         "context_length": 200000,
-        "is_moderated": true,
+        "is_moderated": false,
         "max_completion_tokens": 32000
       }
     },
@@ -9807,7 +9822,6 @@
         "response_format",
         "seed",
         "stop",
-        "structured_outputs",
         "temperature",
         "tool_choice",
         "tools",
@@ -9911,10 +9925,8 @@
         "presence_penalty",
         "reasoning",
         "repetition_penalty",
-        "response_format",
         "seed",
         "stop",
-        "structured_outputs",
         "temperature",
         "tool_choice",
         "tools",
@@ -10163,6 +10175,7 @@
       "per_request_limits": null,
       "pricing": {
         "completion": "0.0000002",
+        "input_cache_read": "0.0000001",
         "prompt": "0.0000001"
       },
       "supported_parameters": [
@@ -10395,7 +10408,7 @@
       "top_provider": {
         "context_length": 131072,
         "is_moderated": false,
-        "max_completion_tokens": 131072
+        "max_completion_tokens": 32768
       }
     },
     {
@@ -10945,56 +10958,6 @@
     {
       "architecture": {
         "input_modalities": [
-          "text"
-        ],
-        "instruct_type": null,
-        "modality": "text->text",
-        "output_modalities": [
-          "text"
-        ],
-        "tokenizer": "Other"
-      },
-      "canonical_slug": "inception/mercury",
-      "context_length": 128000,
-      "created": 1750973026,
-      "default_parameters": {
-        "frequency_penalty": null,
-        "temperature": 0,
-        "top_p": null
-      },
-      "description": "Mercury is the first diffusion large language model (dLLM). Applying a breakthrough discrete diffusion approach, the model runs 5-10x faster than even speed optimized models like GPT-4.1 Nano and Claude...",
-      "expiration_date": "2026-04-15",
-      "hugging_face_id": "",
-      "id": "inception/mercury",
-      "knowledge_cutoff": "2025-01-31",
-      "links": {
-        "details": "/api/v1/models/inception/mercury/endpoints"
-      },
-      "name": "Inception: Mercury",
-      "per_request_limits": null,
-      "pricing": {
-        "completion": "0.00000075",
-        "input_cache_read": "0.000000025",
-        "prompt": "0.00000025"
-      },
-      "supported_parameters": [
-        "max_tokens",
-        "response_format",
-        "stop",
-        "structured_outputs",
-        "temperature",
-        "tool_choice",
-        "tools"
-      ],
-      "top_provider": {
-        "context_length": 128000,
-        "is_moderated": false,
-        "max_completion_tokens": 32000
-      }
-    },
-    {
-      "architecture": {
-        "input_modalities": [
           "image",
           "text"
         ],
@@ -11479,8 +11442,8 @@
       "per_request_limits": null,
       "pricing": {
         "completion": "0.00000215",
-        "input_cache_read": "0.000000225",
-        "prompt": "0.00000045"
+        "input_cache_read": "0.00000035",
+        "prompt": "0.0000005"
       },
       "supported_parameters": [
         "frequency_penalty",
@@ -11504,7 +11467,7 @@
       "top_provider": {
         "context_length": 163840,
         "is_moderated": false,
-        "max_completion_tokens": 65536
+        "max_completion_tokens": null
       }
     },
     {
@@ -11526,7 +11489,10 @@
       "created": 1747931245,
       "default_parameters": {
         "frequency_penalty": null,
+        "presence_penalty": null,
+        "repetition_penalty": null,
         "temperature": null,
+        "top_k": null,
         "top_p": null
       },
       "description": "Claude Opus 4 is benchmarked as the world’s best coding model, at time of release, bringing sustained performance on complex, long-running tasks and agent workflows. It sets new benchmarks in...",
@@ -11559,7 +11525,7 @@
       ],
       "top_provider": {
         "context_length": 200000,
-        "is_moderated": true,
+        "is_moderated": false,
         "max_completion_tokens": 32000
       }
     },
@@ -11578,11 +11544,14 @@
         "tokenizer": "Claude"
       },
       "canonical_slug": "anthropic/claude-4-sonnet-20250522",
-      "context_length": 200000,
+      "context_length": 1000000,
       "created": 1747930371,
       "default_parameters": {
         "frequency_penalty": null,
+        "presence_penalty": null,
+        "repetition_penalty": null,
         "temperature": null,
+        "top_k": null,
         "top_p": null
       },
       "description": "Claude Sonnet 4 significantly enhances the capabilities of its predecessor, Sonnet 3.7, excelling in both coding and reasoning tasks with improved precision and controllability. Achieving state-of-the-art performance on SWE-bench (72.7%),...",
@@ -11614,8 +11583,8 @@
         "top_p"
       ],
       "top_provider": {
-        "context_length": 200000,
-        "is_moderated": true,
+        "context_length": 1000000,
+        "is_moderated": false,
         "max_completion_tokens": 64000
       }
     },
@@ -11689,8 +11658,8 @@
       "name": "Google: Gemma 3n 4B",
       "per_request_limits": null,
       "pricing": {
-        "completion": "0.00000004",
-        "prompt": "0.00000002"
+        "completion": "0.00000012",
+        "prompt": "0.00000006"
       },
       "supported_parameters": [
         "frequency_penalty",
@@ -12023,51 +11992,44 @@
     {
       "architecture": {
         "input_modalities": [
+          "image",
           "text"
         ],
         "instruct_type": null,
-        "modality": "text->text",
+        "modality": "text+image->text",
         "output_modalities": [
           "text"
         ],
         "tokenizer": "Other"
       },
-      "canonical_slug": "inception/mercury-coder-small-beta",
-      "context_length": 128000,
-      "created": 1746033880,
-      "default_parameters": {
-        "frequency_penalty": null,
-        "temperature": 0,
-        "top_p": null
-      },
-      "description": "Mercury Coder is the first diffusion large language model (dLLM). Applying a breakthrough discrete diffusion approach, the model runs 5-10x faster than even speed optimized models like Claude 3.5 Haiku...",
-      "expiration_date": "2026-04-15",
-      "hugging_face_id": "",
-      "id": "inception/mercury-coder",
-      "knowledge_cutoff": "2025-01-31",
+      "canonical_slug": "meta-llama/llama-guard-4-12b",
+      "context_length": 163840,
+      "created": 1745975193,
+      "default_parameters": {},
+      "description": "Llama Guard 4 is a Llama 4 Scout-derived multimodal pretrained model, fine-tuned for content safety classification. Similar to previous versions, it can be used to classify content in both LLM...",
+      "expiration_date": null,
+      "hugging_face_id": "meta-llama/Llama-Guard-4-12B",
+      "id": "meta-llama/llama-guard-4-12b:free",
+      "knowledge_cutoff": "2024-08-31",
       "links": {
-        "details": "/api/v1/models/inception/mercury-coder-small-beta/endpoints"
+        "details": "/api/v1/models/meta-llama/llama-guard-4-12b/endpoints"
       },
-      "name": "Inception: Mercury Coder",
+      "name": "Meta: Llama Guard 4 12B (free)",
       "per_request_limits": null,
       "pricing": {
-        "completion": "0.00000075",
-        "input_cache_read": "0.000000025",
-        "prompt": "0.00000025"
+        "completion": "0",
+        "prompt": "0"
       },
       "supported_parameters": [
         "max_tokens",
-        "response_format",
-        "stop",
-        "structured_outputs",
+        "seed",
         "temperature",
-        "tool_choice",
-        "tools"
+        "top_p"
       ],
       "top_provider": {
-        "context_length": 128000,
+        "context_length": 163840,
         "is_moderated": false,
-        "max_completion_tokens": 32000
+        "max_completion_tokens": 65000
       }
     },
     {
@@ -12561,53 +12523,6 @@
     {
       "architecture": {
         "input_modalities": [
-          "text"
-        ],
-        "instruct_type": null,
-        "modality": "text->text",
-        "output_modalities": [
-          "text"
-        ],
-        "tokenizer": "Qwen"
-      },
-      "canonical_slug": "qwen/qwen2.5-coder-7b-instruct",
-      "context_length": 32768,
-      "created": 1744734887,
-      "default_parameters": {},
-      "description": "Qwen2.5-Coder-7B-Instruct is a 7B parameter instruction-tuned language model optimized for code-related tasks such as code generation, reasoning, and bug fixing. Based on the Qwen2.5 architecture, it incorporates enhancements like RoPE,...",
-      "expiration_date": null,
-      "hugging_face_id": "Qwen/Qwen2.5-Coder-7B-Instruct",
-      "id": "qwen/qwen2.5-coder-7b-instruct",
-      "knowledge_cutoff": "2024-06-30",
-      "links": {
-        "details": "/api/v1/models/qwen/qwen2.5-coder-7b-instruct/endpoints"
-      },
-      "name": "Qwen: Qwen2.5 Coder 7B Instruct",
-      "per_request_limits": null,
-      "pricing": {
-        "completion": "0.00000009",
-        "prompt": "0.00000003"
-      },
-      "supported_parameters": [
-        "frequency_penalty",
-        "max_tokens",
-        "presence_penalty",
-        "repetition_penalty",
-        "response_format",
-        "structured_outputs",
-        "temperature",
-        "top_k",
-        "top_p"
-      ],
-      "top_provider": {
-        "context_length": 32768,
-        "is_moderated": false,
-        "max_completion_tokens": null
-      }
-    },
-    {
-      "architecture": {
-        "input_modalities": [
           "image",
           "text",
           "file"
@@ -12636,8 +12551,7 @@
       "pricing": {
         "completion": "0.000008",
         "input_cache_read": "0.0000005",
-        "prompt": "0.000002",
-        "web_search": "0.01"
+        "prompt": "0.000002"
       },
       "supported_parameters": [
         "max_completion_tokens",
@@ -12652,8 +12566,8 @@
       ],
       "top_provider": {
         "context_length": 1047576,
-        "is_moderated": true,
-        "max_completion_tokens": 32768
+        "is_moderated": false,
+        "max_completion_tokens": null
       }
     },
     {
@@ -12756,54 +12670,6 @@
         "context_length": 1047576,
         "is_moderated": true,
         "max_completion_tokens": 32768
-      }
-    },
-    {
-      "architecture": {
-        "input_modalities": [
-          "text"
-        ],
-        "instruct_type": "code-llama",
-        "modality": "text->text",
-        "output_modalities": [
-          "text"
-        ],
-        "tokenizer": "Other"
-      },
-      "canonical_slug": "eleutherai/llemma_7b",
-      "context_length": 4096,
-      "created": 1744643225,
-      "default_parameters": {},
-      "description": "Llemma 7B is a language model for mathematics. It was initialized with Code Llama 7B weights, and trained on the Proof-Pile-2 for 200B tokens. Llemma models are particularly strong at...",
-      "expiration_date": null,
-      "hugging_face_id": "EleutherAI/llemma_7b",
-      "id": "eleutherai/llemma_7b",
-      "knowledge_cutoff": "2023-04-30",
-      "links": {
-        "details": "/api/v1/models/eleutherai/llemma_7b/endpoints"
-      },
-      "name": "EleutherAI: Llemma 7b",
-      "per_request_limits": null,
-      "pricing": {
-        "completion": "0.0000012",
-        "prompt": "0.0000008"
-      },
-      "supported_parameters": [
-        "frequency_penalty",
-        "max_tokens",
-        "min_p",
-        "presence_penalty",
-        "repetition_penalty",
-        "seed",
-        "stop",
-        "temperature",
-        "top_k",
-        "top_p"
-      ],
-      "top_provider": {
-        "context_length": 4096,
-        "is_moderated": false,
-        "max_completion_tokens": 4096
       }
     },
     {
@@ -12954,62 +12820,6 @@
         "tool_choice",
         "tools",
         "top_logprobs",
-        "top_p"
-      ],
-      "top_provider": {
-        "context_length": 131072,
-        "is_moderated": false,
-        "max_completion_tokens": null
-      }
-    },
-    {
-      "architecture": {
-        "input_modalities": [
-          "text"
-        ],
-        "instruct_type": null,
-        "modality": "text->text",
-        "output_modalities": [
-          "text"
-        ],
-        "tokenizer": "Llama3"
-      },
-      "canonical_slug": "nvidia/llama-3.1-nemotron-ultra-253b-v1",
-      "context_length": 131072,
-      "created": 1744115059,
-      "default_parameters": {
-        "frequency_penalty": null,
-        "presence_penalty": null,
-        "repetition_penalty": null,
-        "temperature": null,
-        "top_k": null,
-        "top_p": null
-      },
-      "description": "Llama-3.1-Nemotron-Ultra-253B-v1 is a large language model (LLM) optimized for advanced reasoning, human-interactive chat, retrieval-augmented generation (RAG), and tool-calling tasks. Derived from Meta’s Llama-3.1-405B-Instruct, it has been significantly customized using Neural...",
-      "expiration_date": null,
-      "hugging_face_id": "nvidia/Llama-3_1-Nemotron-Ultra-253B-v1",
-      "id": "nvidia/llama-3.1-nemotron-ultra-253b-v1",
-      "knowledge_cutoff": "2024-03-31",
-      "links": {
-        "details": "/api/v1/models/nvidia/llama-3.1-nemotron-ultra-253b-v1/endpoints"
-      },
-      "name": "NVIDIA: Llama 3.1 Nemotron Ultra 253B v1",
-      "per_request_limits": null,
-      "pricing": {
-        "completion": "0.0000018",
-        "prompt": "0.0000006"
-      },
-      "supported_parameters": [
-        "frequency_penalty",
-        "include_reasoning",
-        "max_tokens",
-        "presence_penalty",
-        "reasoning",
-        "repetition_penalty",
-        "response_format",
-        "structured_outputs",
-        "temperature",
-        "top_k",
         "top_p"
       ],
       "top_provider": {
@@ -13292,7 +13102,7 @@
         "tokenizer": "Mistral"
       },
       "canonical_slug": "mistralai/mistral-small-3.1-24b-instruct-2503",
-      "context_length": 131072,
+      "context_length": 128000,
       "created": 1742238937,
       "default_parameters": {
         "temperature": 0.3
@@ -13308,27 +13118,23 @@
       "name": "Mistral: Mistral Small 3.1 24B",
       "per_request_limits": null,
       "pricing": {
-        "completion": "0.00000011",
-        "input_cache_read": "0.000000015",
-        "prompt": "0.00000003"
+        "completion": "0.00000056",
+        "prompt": "0.00000035"
       },
       "supported_parameters": [
         "frequency_penalty",
         "max_tokens",
         "presence_penalty",
         "repetition_penalty",
-        "response_format",
         "seed",
-        "stop",
-        "structured_outputs",
         "temperature",
         "top_k",
         "top_p"
       ],
       "top_provider": {
-        "context_length": 131072,
+        "context_length": 128000,
         "is_moderated": false,
-        "max_completion_tokens": 131072
+        "max_completion_tokens": null
       }
     },
     {
@@ -13881,6 +13687,7 @@
       "per_request_limits": null,
       "pricing": {
         "completion": "0.0000008",
+        "input_cache_read": "0.00000025",
         "prompt": "0.00000055"
       },
       "supported_parameters": [
@@ -14169,7 +13976,10 @@
       "created": 1740422110,
       "default_parameters": {
         "frequency_penalty": null,
+        "presence_penalty": null,
+        "repetition_penalty": null,
         "temperature": null,
+        "top_k": null,
         "top_p": null
       },
       "description": "Claude 3.7 Sonnet is an advanced large language model with improved reasoning, coding, and problem-solving capabilities. It introduces a hybrid reasoning approach, allowing users to choose between rapid responses and...",
@@ -14202,8 +14012,8 @@
       ],
       "top_provider": {
         "context_length": 200000,
-        "is_moderated": false,
-        "max_completion_tokens": 64000
+        "is_moderated": true,
+        "max_completion_tokens": 128000
       }
     },
     {
@@ -14225,7 +14035,10 @@
       "created": 1740422110,
       "default_parameters": {
         "frequency_penalty": null,
+        "presence_penalty": null,
+        "repetition_penalty": null,
         "temperature": null,
+        "top_k": null,
         "top_p": null
       },
       "description": "Claude 3.7 Sonnet is an advanced large language model with improved reasoning, coding, and problem-solving capabilities. It introduces a hybrid reasoning approach, allowing users to choose between rapid responses and...",
@@ -14340,8 +14153,8 @@
       "name": "Llama Guard 3 8B",
       "per_request_limits": null,
       "pricing": {
-        "completion": "0.00000006",
-        "prompt": "0.00000002"
+        "completion": "0.00000003",
+        "prompt": "0.00000048"
       },
       "supported_parameters": [
         "frequency_penalty",
@@ -16467,6 +16280,102 @@
         ],
         "tokenizer": "Llama3"
       },
+      "canonical_slug": "meta-llama/llama-3.2-1b-instruct",
+      "context_length": 60000,
+      "created": 1727222400,
+      "default_parameters": {},
+      "description": "Llama 3.2 1B is a 1-billion-parameter language model focused on efficiently performing natural language tasks, such as summarization, dialogue, and multilingual text analysis. Its smaller size allows it to operate...",
+      "expiration_date": null,
+      "hugging_face_id": "meta-llama/Llama-3.2-1B-Instruct",
+      "id": "meta-llama/llama-3.2-1b-instruct",
+      "knowledge_cutoff": "2023-12-31",
+      "links": {
+        "details": "/api/v1/models/meta-llama/llama-3.2-1b-instruct/endpoints"
+      },
+      "name": "Meta: Llama 3.2 1B Instruct",
+      "per_request_limits": null,
+      "pricing": {
+        "completion": "0.0000002",
+        "prompt": "0.000000027"
+      },
+      "supported_parameters": [
+        "frequency_penalty",
+        "max_tokens",
+        "presence_penalty",
+        "repetition_penalty",
+        "seed",
+        "temperature",
+        "top_k",
+        "top_p"
+      ],
+      "top_provider": {
+        "context_length": 60000,
+        "is_moderated": false,
+        "max_completion_tokens": null
+      }
+    },
+    {
+      "architecture": {
+        "input_modalities": [
+          "text",
+          "image"
+        ],
+        "instruct_type": "llama3",
+        "modality": "text+image->text",
+        "output_modalities": [
+          "text"
+        ],
+        "tokenizer": "Llama3"
+      },
+      "canonical_slug": "meta-llama/llama-3.2-11b-vision-instruct",
+      "context_length": 131072,
+      "created": 1727222400,
+      "default_parameters": {},
+      "description": "Llama 3.2 11B Vision is a multimodal model with 11 billion parameters, designed to handle tasks combining visual and textual data. It excels in tasks such as image captioning and...",
+      "expiration_date": null,
+      "hugging_face_id": "meta-llama/Llama-3.2-11B-Vision-Instruct",
+      "id": "meta-llama/llama-3.2-11b-vision-instruct",
+      "knowledge_cutoff": "2023-12-31",
+      "links": {
+        "details": "/api/v1/models/meta-llama/llama-3.2-11b-vision-instruct/endpoints"
+      },
+      "name": "Meta: Llama 3.2 11B Vision Instruct",
+      "per_request_limits": null,
+      "pricing": {
+        "completion": "0.000000245",
+        "prompt": "0.000000245"
+      },
+      "supported_parameters": [
+        "frequency_penalty",
+        "max_tokens",
+        "min_p",
+        "presence_penalty",
+        "repetition_penalty",
+        "response_format",
+        "seed",
+        "stop",
+        "temperature",
+        "top_k",
+        "top_p"
+      ],
+      "top_provider": {
+        "context_length": 131072,
+        "is_moderated": false,
+        "max_completion_tokens": 16384
+      }
+    },
+    {
+      "architecture": {
+        "input_modalities": [
+          "text"
+        ],
+        "instruct_type": "llama3",
+        "modality": "text->text",
+        "output_modalities": [
+          "text"
+        ],
+        "tokenizer": "Llama3"
+      },
       "canonical_slug": "meta-llama/llama-3.2-3b-instruct",
       "context_length": 131072,
       "created": 1727222400,
@@ -16551,102 +16460,6 @@
         "input_modalities": [
           "text"
         ],
-        "instruct_type": "llama3",
-        "modality": "text->text",
-        "output_modalities": [
-          "text"
-        ],
-        "tokenizer": "Llama3"
-      },
-      "canonical_slug": "meta-llama/llama-3.2-1b-instruct",
-      "context_length": 60000,
-      "created": 1727222400,
-      "default_parameters": {},
-      "description": "Llama 3.2 1B is a 1-billion-parameter language model focused on efficiently performing natural language tasks, such as summarization, dialogue, and multilingual text analysis. Its smaller size allows it to operate...",
-      "expiration_date": null,
-      "hugging_face_id": "meta-llama/Llama-3.2-1B-Instruct",
-      "id": "meta-llama/llama-3.2-1b-instruct",
-      "knowledge_cutoff": "2023-12-31",
-      "links": {
-        "details": "/api/v1/models/meta-llama/llama-3.2-1b-instruct/endpoints"
-      },
-      "name": "Meta: Llama 3.2 1B Instruct",
-      "per_request_limits": null,
-      "pricing": {
-        "completion": "0.0000002",
-        "prompt": "0.000000027"
-      },
-      "supported_parameters": [
-        "frequency_penalty",
-        "max_tokens",
-        "presence_penalty",
-        "repetition_penalty",
-        "seed",
-        "temperature",
-        "top_k",
-        "top_p"
-      ],
-      "top_provider": {
-        "context_length": 60000,
-        "is_moderated": false,
-        "max_completion_tokens": null
-      }
-    },
-    {
-      "architecture": {
-        "input_modalities": [
-          "text",
-          "image"
-        ],
-        "instruct_type": "llama3",
-        "modality": "text+image->text",
-        "output_modalities": [
-          "text"
-        ],
-        "tokenizer": "Llama3"
-      },
-      "canonical_slug": "meta-llama/llama-3.2-11b-vision-instruct",
-      "context_length": 131072,
-      "created": 1727222400,
-      "default_parameters": {},
-      "description": "Llama 3.2 11B Vision is a multimodal model with 11 billion parameters, designed to handle tasks combining visual and textual data. It excels in tasks such as image captioning and...",
-      "expiration_date": null,
-      "hugging_face_id": "meta-llama/Llama-3.2-11B-Vision-Instruct",
-      "id": "meta-llama/llama-3.2-11b-vision-instruct",
-      "knowledge_cutoff": "2023-12-31",
-      "links": {
-        "details": "/api/v1/models/meta-llama/llama-3.2-11b-vision-instruct/endpoints"
-      },
-      "name": "Meta: Llama 3.2 11B Vision Instruct",
-      "per_request_limits": null,
-      "pricing": {
-        "completion": "0.000000049",
-        "prompt": "0.000000049"
-      },
-      "supported_parameters": [
-        "frequency_penalty",
-        "max_tokens",
-        "min_p",
-        "presence_penalty",
-        "repetition_penalty",
-        "response_format",
-        "seed",
-        "stop",
-        "temperature",
-        "top_k",
-        "top_p"
-      ],
-      "top_provider": {
-        "context_length": 131072,
-        "is_moderated": false,
-        "max_completion_tokens": 16384
-      }
-    },
-    {
-      "architecture": {
-        "input_modalities": [
-          "text"
-        ],
         "instruct_type": "chatml",
         "modality": "text->text",
         "output_modalities": [
@@ -16705,23 +16518,23 @@
         ],
         "tokenizer": "Cohere"
       },
-      "canonical_slug": "cohere/command-r-08-2024",
+      "canonical_slug": "cohere/command-r-plus-08-2024",
       "context_length": 128000,
       "created": 1724976000,
       "default_parameters": {},
-      "description": "command-r-08-2024 is an update of the [Command R](/models/cohere/command-r) with improved performance for multilingual retrieval-augmented generation (RAG) and tool use. More broadly, it is better at math, code and reasoning and...",
+      "description": "command-r-plus-08-2024 is an update of the [Command R+](/models/cohere/command-r-plus) with roughly 50% higher throughput and 25% lower latencies as compared to the previous Command R+ version, while keeping the hardware footprint...",
       "expiration_date": null,
       "hugging_face_id": null,
-      "id": "cohere/command-r-08-2024",
+      "id": "cohere/command-r-plus-08-2024",
       "knowledge_cutoff": "2024-03-31",
       "links": {
-        "details": "/api/v1/models/cohere/command-r-08-2024/endpoints"
+        "details": "/api/v1/models/cohere/command-r-plus-08-2024/endpoints"
       },
-      "name": "Cohere: Command R (08-2024)",
+      "name": "Cohere: Command R+ (08-2024)",
       "per_request_limits": null,
       "pricing": {
-        "completion": "0.0000006",
-        "prompt": "0.00000015"
+        "completion": "0.00001",
+        "prompt": "0.0000025"
       },
       "supported_parameters": [
         "frequency_penalty",
@@ -16755,23 +16568,23 @@
         ],
         "tokenizer": "Cohere"
       },
-      "canonical_slug": "cohere/command-r-plus-08-2024",
+      "canonical_slug": "cohere/command-r-08-2024",
       "context_length": 128000,
       "created": 1724976000,
       "default_parameters": {},
-      "description": "command-r-plus-08-2024 is an update of the [Command R+](/models/cohere/command-r-plus) with roughly 50% higher throughput and 25% lower latencies as compared to the previous Command R+ version, while keeping the hardware footprint...",
+      "description": "command-r-08-2024 is an update of the [Command R](/models/cohere/command-r) with improved performance for multilingual retrieval-augmented generation (RAG) and tool use. More broadly, it is better at math, code and reasoning and...",
       "expiration_date": null,
       "hugging_face_id": null,
-      "id": "cohere/command-r-plus-08-2024",
+      "id": "cohere/command-r-08-2024",
       "knowledge_cutoff": "2024-03-31",
       "links": {
-        "details": "/api/v1/models/cohere/command-r-plus-08-2024/endpoints"
+        "details": "/api/v1/models/cohere/command-r-08-2024/endpoints"
       },
-      "name": "Cohere: Command R+ (08-2024)",
+      "name": "Cohere: Command R (08-2024)",
       "per_request_limits": null,
       "pricing": {
-        "completion": "0.00001",
-        "prompt": "0.0000025"
+        "completion": "0.0000006",
+        "prompt": "0.00000015"
       },
       "supported_parameters": [
         "frequency_penalty",
@@ -17267,62 +17080,6 @@
         ],
         "tokenizer": "GPT"
       },
-      "canonical_slug": "openai/gpt-4o-mini-2024-07-18",
-      "context_length": 128000,
-      "created": 1721260800,
-      "default_parameters": {},
-      "description": "GPT-4o mini is OpenAI's newest model after [GPT-4 Omni](/models/openai/gpt-4o), supporting both text and image inputs with text outputs. As their most advanced small model, it is many multiples more affordable...",
-      "expiration_date": null,
-      "hugging_face_id": null,
-      "id": "openai/gpt-4o-mini-2024-07-18",
-      "knowledge_cutoff": "2023-10-31",
-      "links": {
-        "details": "/api/v1/models/openai/gpt-4o-mini-2024-07-18/endpoints"
-      },
-      "name": "OpenAI: GPT-4o-mini (2024-07-18)",
-      "per_request_limits": null,
-      "pricing": {
-        "completion": "0.0000006",
-        "input_cache_read": "0.000000075",
-        "prompt": "0.00000015"
-      },
-      "supported_parameters": [
-        "frequency_penalty",
-        "logit_bias",
-        "logprobs",
-        "max_tokens",
-        "presence_penalty",
-        "response_format",
-        "seed",
-        "stop",
-        "structured_outputs",
-        "temperature",
-        "tool_choice",
-        "tools",
-        "top_logprobs",
-        "top_p",
-        "web_search_options"
-      ],
-      "top_provider": {
-        "context_length": 128000,
-        "is_moderated": true,
-        "max_completion_tokens": 16384
-      }
-    },
-    {
-      "architecture": {
-        "input_modalities": [
-          "text",
-          "image",
-          "file"
-        ],
-        "instruct_type": null,
-        "modality": "text+image+file->text",
-        "output_modalities": [
-          "text"
-        ],
-        "tokenizer": "GPT"
-      },
       "canonical_slug": "openai/gpt-4o-mini",
       "context_length": 128000,
       "created": 1721260800,
@@ -17347,6 +17104,62 @@
         "logit_bias",
         "logprobs",
         "max_completion_tokens",
+        "max_tokens",
+        "presence_penalty",
+        "response_format",
+        "seed",
+        "stop",
+        "structured_outputs",
+        "temperature",
+        "tool_choice",
+        "tools",
+        "top_logprobs",
+        "top_p",
+        "web_search_options"
+      ],
+      "top_provider": {
+        "context_length": 128000,
+        "is_moderated": false,
+        "max_completion_tokens": 16384
+      }
+    },
+    {
+      "architecture": {
+        "input_modalities": [
+          "text",
+          "image",
+          "file"
+        ],
+        "instruct_type": null,
+        "modality": "text+image+file->text",
+        "output_modalities": [
+          "text"
+        ],
+        "tokenizer": "GPT"
+      },
+      "canonical_slug": "openai/gpt-4o-mini-2024-07-18",
+      "context_length": 128000,
+      "created": 1721260800,
+      "default_parameters": {},
+      "description": "GPT-4o mini is OpenAI's newest model after [GPT-4 Omni](/models/openai/gpt-4o), supporting both text and image inputs with text outputs. As their most advanced small model, it is many multiples more affordable...",
+      "expiration_date": null,
+      "hugging_face_id": null,
+      "id": "openai/gpt-4o-mini-2024-07-18",
+      "knowledge_cutoff": "2023-10-31",
+      "links": {
+        "details": "/api/v1/models/openai/gpt-4o-mini-2024-07-18/endpoints"
+      },
+      "name": "OpenAI: GPT-4o-mini (2024-07-18)",
+      "per_request_limits": null,
+      "pricing": {
+        "completion": "0.0000006",
+        "input_cache_read": "0.000000075",
+        "prompt": "0.00000015"
+      },
+      "supported_parameters": [
+        "frequency_penalty",
+        "logit_bias",
+        "logprobs",
         "max_tokens",
         "presence_penalty",
         "response_format",
@@ -17410,51 +17223,6 @@
         "context_length": 8192,
         "is_moderated": false,
         "max_completion_tokens": 2048
-      }
-    },
-    {
-      "architecture": {
-        "input_modalities": [
-          "text"
-        ],
-        "instruct_type": "gemma",
-        "modality": "text->text",
-        "output_modalities": [
-          "text"
-        ],
-        "tokenizer": "Gemini"
-      },
-      "canonical_slug": "google/gemma-2-9b-it",
-      "context_length": 8192,
-      "created": 1719532800,
-      "default_parameters": {},
-      "description": "Gemma 2 9B by Google is an advanced, open-source language model that sets a new standard for efficiency and performance in its size class. Designed for a wide variety of...",
-      "expiration_date": null,
-      "hugging_face_id": "google/gemma-2-9b-it",
-      "id": "google/gemma-2-9b-it",
-      "knowledge_cutoff": "2024-06-30",
-      "links": {
-        "details": "/api/v1/models/google/gemma-2-9b-it/endpoints"
-      },
-      "name": "Google: Gemma 2 9B",
-      "per_request_limits": null,
-      "pricing": {
-        "completion": "0.00000009",
-        "prompt": "0.00000003"
-      },
-      "supported_parameters": [
-        "frequency_penalty",
-        "max_tokens",
-        "presence_penalty",
-        "repetition_penalty",
-        "temperature",
-        "top_k",
-        "top_p"
-      ],
-      "top_provider": {
-        "context_length": 8192,
-        "is_moderated": false,
-        "max_completion_tokens": null
       }
     },
     {
@@ -17585,7 +17353,6 @@
       "per_request_limits": null,
       "pricing": {
         "completion": "0.00001",
-        "input_cache_read": "0.00000125",
         "prompt": "0.0000025"
       },
       "supported_parameters": [
@@ -17608,7 +17375,7 @@
       ],
       "top_provider": {
         "context_length": 128000,
-        "is_moderated": true,
+        "is_moderated": false,
         "max_completion_tokens": 16384
       }
     },
@@ -17719,7 +17486,7 @@
       ],
       "top_provider": {
         "context_length": 128000,
-        "is_moderated": true,
+        "is_moderated": false,
         "max_completion_tokens": 4096
       }
     },
@@ -18212,7 +17979,6 @@
       },
       "supported_parameters": [
         "frequency_penalty",
-        "logit_bias",
         "max_tokens",
         "min_p",
         "presence_penalty",
@@ -18411,54 +18177,6 @@
         "input_modalities": [
           "text"
         ],
-        "instruct_type": "mistral",
-        "modality": "text->text",
-        "output_modalities": [
-          "text"
-        ],
-        "tokenizer": "Mistral"
-      },
-      "canonical_slug": "mistralai/mistral-7b-instruct-v0.1",
-      "context_length": 2824,
-      "created": 1695859200,
-      "default_parameters": {
-        "temperature": 0.3
-      },
-      "description": "A 7.3B parameter model that outperforms Llama 2 13B on all benchmarks, with optimizations for speed and context length.",
-      "expiration_date": null,
-      "hugging_face_id": "mistralai/Mistral-7B-Instruct-v0.1",
-      "id": "mistralai/mistral-7b-instruct-v0.1",
-      "knowledge_cutoff": "2023-09-30",
-      "links": {
-        "details": "/api/v1/models/mistralai/mistral-7b-instruct-v0.1/endpoints"
-      },
-      "name": "Mistral: Mistral 7B Instruct v0.1",
-      "per_request_limits": null,
-      "pricing": {
-        "completion": "0.00000019",
-        "prompt": "0.00000011"
-      },
-      "supported_parameters": [
-        "frequency_penalty",
-        "max_tokens",
-        "presence_penalty",
-        "repetition_penalty",
-        "seed",
-        "temperature",
-        "top_k",
-        "top_p"
-      ],
-      "top_provider": {
-        "context_length": 2824,
-        "is_moderated": false,
-        "max_completion_tokens": null
-      }
-    },
-    {
-      "architecture": {
-        "input_modalities": [
-          "text"
-        ],
         "instruct_type": "chatml",
         "modality": "text->text",
         "output_modalities": [
@@ -18502,6 +18220,54 @@
         "context_length": 4095,
         "is_moderated": true,
         "max_completion_tokens": 4096
+      }
+    },
+    {
+      "architecture": {
+        "input_modalities": [
+          "text"
+        ],
+        "instruct_type": "mistral",
+        "modality": "text->text",
+        "output_modalities": [
+          "text"
+        ],
+        "tokenizer": "Mistral"
+      },
+      "canonical_slug": "mistralai/mistral-7b-instruct-v0.1",
+      "context_length": 2824,
+      "created": 1695859200,
+      "default_parameters": {
+        "temperature": 0.3
+      },
+      "description": "A 7.3B parameter model that outperforms Llama 2 13B on all benchmarks, with optimizations for speed and context length.",
+      "expiration_date": null,
+      "hugging_face_id": "mistralai/Mistral-7B-Instruct-v0.1",
+      "id": "mistralai/mistral-7b-instruct-v0.1",
+      "knowledge_cutoff": "2023-09-30",
+      "links": {
+        "details": "/api/v1/models/mistralai/mistral-7b-instruct-v0.1/endpoints"
+      },
+      "name": "Mistral: Mistral 7B Instruct v0.1",
+      "per_request_limits": null,
+      "pricing": {
+        "completion": "0.00000019",
+        "prompt": "0.00000011"
+      },
+      "supported_parameters": [
+        "frequency_penalty",
+        "max_tokens",
+        "presence_penalty",
+        "repetition_penalty",
+        "seed",
+        "temperature",
+        "top_k",
+        "top_p"
+      ],
+      "top_provider": {
+        "context_length": 2824,
+        "is_moderated": false,
+        "max_completion_tokens": null
       }
     },
     {
@@ -18730,6 +18496,59 @@
         ],
         "tokenizer": "GPT"
       },
+      "canonical_slug": "openai/gpt-4",
+      "context_length": 8191,
+      "created": 1685232000,
+      "default_parameters": {},
+      "description": "OpenAI's flagship model, GPT-4 is a large-scale multimodal language model capable of solving difficult problems with greater accuracy than previous models due to its broader general knowledge and advanced reasoning...",
+      "expiration_date": null,
+      "hugging_face_id": null,
+      "id": "openai/gpt-4",
+      "knowledge_cutoff": "2021-09-30",
+      "links": {
+        "details": "/api/v1/models/openai/gpt-4/endpoints"
+      },
+      "name": "OpenAI: GPT-4",
+      "per_request_limits": null,
+      "pricing": {
+        "completion": "0.00006",
+        "prompt": "0.00003"
+      },
+      "supported_parameters": [
+        "frequency_penalty",
+        "logit_bias",
+        "logprobs",
+        "max_completion_tokens",
+        "max_tokens",
+        "presence_penalty",
+        "response_format",
+        "seed",
+        "stop",
+        "structured_outputs",
+        "temperature",
+        "tool_choice",
+        "tools",
+        "top_logprobs",
+        "top_p"
+      ],
+      "top_provider": {
+        "context_length": 8191,
+        "is_moderated": true,
+        "max_completion_tokens": 4096
+      }
+    },
+    {
+      "architecture": {
+        "input_modalities": [
+          "text"
+        ],
+        "instruct_type": null,
+        "modality": "text->text",
+        "output_modalities": [
+          "text"
+        ],
+        "tokenizer": "GPT"
+      },
       "canonical_slug": "openai/gpt-4-0314",
       "context_length": 8191,
       "created": 1685232000,
@@ -18818,59 +18637,6 @@
       ],
       "top_provider": {
         "context_length": 16385,
-        "is_moderated": true,
-        "max_completion_tokens": 4096
-      }
-    },
-    {
-      "architecture": {
-        "input_modalities": [
-          "text"
-        ],
-        "instruct_type": null,
-        "modality": "text->text",
-        "output_modalities": [
-          "text"
-        ],
-        "tokenizer": "GPT"
-      },
-      "canonical_slug": "openai/gpt-4",
-      "context_length": 8191,
-      "created": 1685232000,
-      "default_parameters": {},
-      "description": "OpenAI's flagship model, GPT-4 is a large-scale multimodal language model capable of solving difficult problems with greater accuracy than previous models due to its broader general knowledge and advanced reasoning...",
-      "expiration_date": null,
-      "hugging_face_id": null,
-      "id": "openai/gpt-4",
-      "knowledge_cutoff": "2021-09-30",
-      "links": {
-        "details": "/api/v1/models/openai/gpt-4/endpoints"
-      },
-      "name": "OpenAI: GPT-4",
-      "per_request_limits": null,
-      "pricing": {
-        "completion": "0.00006",
-        "prompt": "0.00003"
-      },
-      "supported_parameters": [
-        "frequency_penalty",
-        "logit_bias",
-        "logprobs",
-        "max_completion_tokens",
-        "max_tokens",
-        "presence_penalty",
-        "response_format",
-        "seed",
-        "stop",
-        "structured_outputs",
-        "temperature",
-        "tool_choice",
-        "tools",
-        "top_logprobs",
-        "top_p"
-      ],
-      "top_provider": {
-        "context_length": 8191,
         "is_moderated": true,
         "max_completion_tokens": 4096
       }
