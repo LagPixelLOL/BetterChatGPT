@@ -85,7 +85,7 @@
     "html2canvas": "^1.4.1",
     "i18next": "^22.4.11",
     "i18next-browser-languagedetector": "^7.0.1",
-    "i18next-http-backend": "^2.1.1",
+    "i18next-http-backend": "^3.0.6",
     "jspdf": "^4.0.0",
     "katex": "^0.16.4",
     "lodash": "^4.17.21",
@@ -102,7 +102,7 @@
     "rehype-katex": "^6.0.2",
     "remark-gfm": "^3.0.1",
     "remark-math": "^5.1.1",
-    "uuid": "^9.0.0",
+    "uuid": "^14.0.0",
     "zustand": "^4.3.6"
   },
   "devDependencies": {
