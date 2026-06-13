@@ -15,6 +15,9 @@ import { modelStreamSupport } from '@constants/modelLoader';
 
 import { v4 as uuidv4 } from 'uuid';
 
+// Bumped on every submit; in-flight streams stop once their id is no longer the latest.
+let latestGenerationId = 0;
+
 const useSubmit = () => {
   const { t, i18n } = useTranslation('api');
   const error = useStore((state) => state.error);
@@ -79,10 +82,13 @@ const useSubmit = () => {
     const chats = useStore.getState().chats;
     if (generating || !chats) return;
 
+    const generationId = ++latestGenerationId;
+    const assistantMessageId = uuidv4();
+
     const updatedChats: ChatInterface[] = structuredClone(chats);
 
     updatedChats[currentChatIndex].messages.push({
-      id: uuidv4(),
+      id: assistantMessageId,
       role: 'assistant',
       content: [
         {
@@ -174,11 +180,15 @@ const useSubmit = () => {
         }
 
         const updatedChats: ChatInterface[] = structuredClone(useStore.getState().chats as ChatInterface[]);
-        const updatedMessages = updatedChats[currentChatIndex].messages;
-        const updatedMessage = updatedMessages[updatedMessages.length - 1];
-        updatedMessage.reasoning_content = reasoningContent;
-        (updatedMessage.content[0] as TextContentInterface).text = messageContent;
-        setChats(updatedChats);
+        const updatedMessages = updatedChats[currentChatIndex]?.messages;
+        const updatedMessage = updatedMessages?.find(
+          (m) => m.id === assistantMessageId
+        );
+        if (updatedMessage && generationId === latestGenerationId) {
+          updatedMessage.reasoning_content = reasoningContent;
+          (updatedMessage.content[0] as TextContentInterface).text = messageContent;
+          setChats(updatedChats);
+        }
       } else {
         stream = await getChatCompletionStream(
           useStore.getState().apiEndpoint,
@@ -195,7 +205,7 @@ const useSubmit = () => {
           const reader = stream.getReader();
           let reading = true;
           let partial = '';
-          while (reading && useStore.getState().generating) {
+          while (reading && useStore.getState().generating && generationId === latestGenerationId) {
             const { done, value } = await reader.read();
             const result = parseEventSource(
               partial + new TextDecoder().decode(value)
@@ -253,8 +263,14 @@ const useSubmit = () => {
 
               const updatedChats = cloneChats();
               if (!updatedChats) return;
-              const updatedMessages = updatedChats[currentChatIndex].messages;
-              const updatedMessage = updatedMessages[updatedMessages.length - 1];
+              const updatedMessages = updatedChats[currentChatIndex]?.messages;
+              const updatedMessage = updatedMessages?.find(
+                (m) => m.id === assistantMessageId
+              );
+              if (!updatedMessage) {
+                reading = false;
+                break;
+              }
               if (updatedMessage.reasoning_content) {
                 updatedMessage.reasoning_content += reasoningContent;
               } else {
@@ -273,6 +289,9 @@ const useSubmit = () => {
           stream.cancel();
         }
       }
+
+      // A newer submit has superseded this one; don't finalize or touch shared state.
+      if (generationId !== latestGenerationId) return;
 
       // update tokens used in chatting
       const currChats = useStore.getState().chats;
@@ -342,9 +361,9 @@ const useSubmit = () => {
     } catch (e: unknown) {
       const err = (e as Error).message;
       console.log(err);
-      setError(err);
+      if (generationId === latestGenerationId) setError(err);
     }
-    setGenerating(false);
+    if (generationId === latestGenerationId) setGenerating(false);
   };
 
   return { handleSubmit, error };
