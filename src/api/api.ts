@@ -191,6 +191,7 @@ export const getChatCompletion = async (
   apiKey?: string,
   customHeaders?: Record<string, string>,
   apiVersionToUse?: string,
+  signal?: AbortSignal,
 ) => {
   var { endpoint, config, isResponsesApi, isOfficialOAIEndpoint, isOpenRouterEndpoint, isAnthropicEndpoint } = preprocess(endpoint, config);
 
@@ -204,6 +205,7 @@ export const getChatCompletion = async (
     method: 'POST',
     headers,
     body: assemblePayload(messages, config, isResponsesApi, isOfficialOAIEndpoint, isOpenRouterEndpoint, isAnthropicEndpoint),
+    signal,
   });
   if (!response.ok) throw new Error(await response.text());
 

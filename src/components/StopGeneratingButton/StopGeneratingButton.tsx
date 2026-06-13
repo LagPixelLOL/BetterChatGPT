@@ -1,25 +1,12 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import useStore from '@store/store';
-import { useTranslation } from 'react-i18next';
-import { modelStreamSupport } from '@constants/modelLoader';
 
 const StopGeneratingButton = () => {
-  const { t } = useTranslation();
   const setGenerating = useStore((state) => state.setGenerating);
   const generating = useStore((state) => state.generating);
 
-  const currentModel = useStore((state) =>
-    state.chats ? state.chats[state.currentChatIndex].config.model : ''
-  );
   const handleGeneratingStop = () => {
-    if (modelStreamSupport[currentModel]) {
-      setGenerating(false);
-    } else {
-      const confirmMessage = t('stopNonStreamGenerationWarning');
-      if (window.confirm(confirmMessage)) {
-        setGenerating(false);
-      }
-    }
+    setGenerating(false);
   };
 
   return generating ? (

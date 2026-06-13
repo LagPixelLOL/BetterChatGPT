@@ -130,14 +130,28 @@ const useSubmit = () => {
 
       let finishReason: string | undefined;
       if (!isStreamSupported) {
-        data = await getChatCompletion(
-          useStore.getState().apiEndpoint,
-          messages,
-          chats[currentChatIndex].config,
-          apiKey ? apiKey : undefined,
-          undefined,
-          useStore.getState().apiVersion
-        );
+        // Non-stream has no read loop to poll `generating`, so abort the fetch directly
+        // when the user stops (generating -> false) to actually cancel the request.
+        const controller = new AbortController();
+        const unsubscribe = useStore.subscribe((state) => {
+          if (!state.generating) controller.abort();
+        });
+        try {
+          data = await getChatCompletion(
+            useStore.getState().apiEndpoint,
+            messages,
+            chats[currentChatIndex].config,
+            apiKey ? apiKey : undefined,
+            undefined,
+            useStore.getState().apiVersion,
+            controller.signal
+          );
+        } catch (e: unknown) {
+          if (controller.signal.aborted) return; // user stopped; bail without error
+          throw e;
+        } finally {
+          unsubscribe();
+        }
 
         let reasoningContent: string;
         let messageContent: string;
