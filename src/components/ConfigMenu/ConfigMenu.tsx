@@ -404,6 +404,7 @@ export const ReasoningEffortSelector = ({
     { value: 'medium', label: t('reasoningEffort.medium') },
     { value: 'high', label: t('reasoningEffort.high') },
     { value: 'xhigh', label: t('reasoningEffort.xhigh') },
+    { value: 'max', label: t('reasoningEffort.max') },
   ];
 
   return (

@@ -6,7 +6,7 @@ import { Theme } from './theme';
 
 export type Content = 'text' | 'image_url';
 export type ImageDetail = 'auto' | 'low' | 'high';
-export type ReasoningEffort = 'null' | 'none' | 'minimal' | 'low' | 'medium' | 'high' | 'xhigh';
+export type ReasoningEffort = 'null' | 'none' | 'minimal' | 'low' | 'medium' | 'high' | 'xhigh' | 'max';
 export type Role = 'user' | 'assistant' | 'system';
 export const roles: Role[] = ['user', 'assistant', 'system'];
 

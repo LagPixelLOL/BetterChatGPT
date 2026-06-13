@@ -138,6 +138,9 @@ function assemblePayload(
         case 'xhigh':
           thinkingBudget = { 'type': 'enabled', 'budget_tokens': 65536 };
           break;
+        case 'max':
+          thinkingBudget = { 'type': 'enabled', 'budget_tokens': 128000 };
+          break;
         default:
           throw Error(`Invalid reasoning effort: ${reasoningEffort}`);
       }
