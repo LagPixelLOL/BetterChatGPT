@@ -26,7 +26,9 @@ const ScrollController = () => {
   const currentChatIndex = useStore((state) => state.currentChatIndex);
 
   const firstCallRef = useRef(true);
-  const debounceTimerRef = useRef<NodeJS.Timeout | undefined>(undefined);
+  const debounceTimerRef = useRef<ReturnType<typeof setTimeout> | undefined>(
+    undefined
+  );
 
   const observer = useCallback(({ scrollTop }: { scrollTop: number }) => {
     const updateChatScrollTop = () => {
