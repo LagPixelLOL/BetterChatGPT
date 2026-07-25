@@ -70,21 +70,23 @@
     "@types/react-dom": "^18.0.10",
     "@types/react-scroll-to-bottom": "^4.2.0",
     "@types/uuid": "^9.0.1",
-    "@vitejs/plugin-react-swc": "^4.0.1",
+    "@vitejs/plugin-react": "^6.0.4",
     "autoprefixer": "^10.4.13",
     "postcss": "^8.4.21",
-    "rollup": "^4.50.2",
     "tailwindcss": "^3.2.7",
     "typescript": "^7.0.2",
-    "vite": "^7.1.5",
+    "vite": "^8.1.5",
     "vite-console-forward-plugin": "^2.0.1",
-    "vite-plugin-wasm": "^3.5.0"
+    "vite-plugin-wasm": "^3.6.0"
+  },
+  "overrides": {
+    "vite-console-forward-plugin": {
+      "vite": "$vite"
+    }
   },
   "allowScripts": {
-    "@swc/core@1.13.5": true,
     "core-js@3.29.0": true,
     "core-js@3.18.3": true,
-    "core-js-pure@3.45.1": true,
-    "esbuild@0.28.1": true
+    "core-js-pure@3.45.1": true
   }
 }
