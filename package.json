@@ -3,7 +3,6 @@
   "private": true,
   "version": "1.27.0",
   "type": "module",
-  "main": "electron/index.cjs",
   "author": "Jing Hua <betterchatgpt@mail.tjh.sg>",
   "contributors": [
     {
@@ -35,53 +34,11 @@
   "scripts": {
     "dev": "vite",
     "build": "tsc && vite build",
-    "preview": "vite preview",
-    "electron": "concurrently -k \"BROWSER=none yarn dev\" \"wait-on tcp:5173 && electron .\"",
-    "pack": "yarn build && electron-builder --dir",
-    "make": "yarn build && electron-builder",
-    "debug": "concurrently -k \"cross-env BROWSER=none yarn dev\" \"wait-on tcp:5173 && electron --inspect=5858 .\""
-  },
-  "build": {
-    "appId": "better-chatgpt",
-    "productName": "Better ChatGPT",
-    "artifactName": "${os}-${name}-${version}-${arch}.${ext}",
-    "directories": {
-      "output": "release"
-    },
-    "dmg": {
-      "title": "${productName} ${version}",
-      "icon": "dist/favicon.avif"
-    },
-    "mac": {
-      "icon": "dist/favicon.avif",
-      "target": [
-        {
-          "target": "dmg",
-          "arch": [
-            "universal"
-          ]
-        }
-      ]
-    },
-    "linux": {
-      "target": [
-        "tar.gz",
-        "AppImage"
-      ],
-      "category": "Chat",
-      "icon": "dist/favicon.avif"
-    },
-    "win": {
-      "target": "NSIS",
-      "icon": "dist/favicon.avif"
-    }
+    "preview": "vite preview"
   },
   "dependencies": {
     "@dqbd/tiktoken": "^1.0.2",
     "@react-oauth/google": "^0.9.0",
-    "electron-is-dev": "^3.0.1",
-    "electron-squirrel-startup": "^1.0.1",
-    "electron-updater": "^6.6.2",
     "html2canvas": "^1.4.1",
     "i18next": "^22.4.11",
     "i18next-browser-languagedetector": "^7.0.1",
@@ -108,6 +65,7 @@
   "devDependencies": {
     "@tailwindcss/typography": "^0.5.9",
     "@types/lodash": "^4.14.192",
+    "@types/node": "^24.9.0",
     "@types/papaparse": "^5.3.7",
     "@types/react": "^18.0.27",
     "@types/react-dom": "^18.0.10",
@@ -115,26 +73,19 @@
     "@types/uuid": "^9.0.1",
     "@vitejs/plugin-react-swc": "^4.0.1",
     "autoprefixer": "^10.4.13",
-    "concurrently": "^8.0.1",
-    "cross-env": "^7.0.3",
-    "electron": "^41.2.0",
-    "electron-builder": "^26.0.12",
     "postcss": "^8.4.21",
     "rollup": "^4.50.2",
     "tailwindcss": "^3.2.7",
     "typescript": "^4.9.3",
     "vite": "^7.1.5",
     "vite-console-forward-plugin": "^2.0.1",
-    "vite-plugin-wasm": "^3.5.0",
-    "wait-on": "^7.0.1"
+    "vite-plugin-wasm": "^3.5.0"
   },
   "allowScripts": {
     "@swc/core@1.13.5": true,
     "core-js@3.29.0": true,
     "core-js@3.18.3": true,
     "core-js-pure@3.45.1": true,
-    "electron@41.2.0": true,
-    "electron-winstaller@5.4.0": true,
     "esbuild@0.28.1": true
   }
 }

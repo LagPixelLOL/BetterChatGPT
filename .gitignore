@@ -23,7 +23,5 @@ dist-ssr
 *.sln
 *.sw?
 
-release/
-
 .env
 models.json

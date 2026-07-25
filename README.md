@@ -55,21 +55,6 @@ Contributions are welcome! Feel free to submit [pull requests](https://github.co
 2. **API Key**: Enter your OpenAI API Key from [here](https://platform.openai.com/account/api-keys)
 3. **Proxy**: Use [ChatGPTAPIFree](https://github.com/ayaka14732/ChatGPTAPIFree) or host your own.
 
-## 🖥️ Desktop App
-
-Download from [Releases](https://github.com/animalnots/BetterChatGPT-PLUS/releases)
-
-| OS      | Download  |
-| ------- | --------- |
-| Windows | .exe      |
-| MacOS   | .dmg      |
-| Linux   | .AppImage |
-
-### Desktop Features:
-
-- Unlimited local storage
-- Runs locally
-
 ## 🛠️ Host Your Own Instance
 
 ### Vercel
@@ -96,11 +81,6 @@ Download from [Releases](https://github.com/animalnots/BetterChatGPT-PLUS/releas
 2. **Build**: `docker compose build`
 3. **Start**: `docker compose up -d`
 4. **Stop**: `docker compose down`
-
-### Build Desktop App
-
-1. Install [yarn/npm](https://www.npmjs.com/)
-2. **Build (Windows)**: `yarn make --win`
 
 ## ⭐️ Star & Support
 

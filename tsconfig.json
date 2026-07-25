@@ -28,6 +28,6 @@
       "@src/*": ["./src/*"]
     }
   },
-  "include": ["src", "electron/index.cjs"],
+  "include": ["src"],
   "references": [{ "path": "./tsconfig.node.json" }]
 }

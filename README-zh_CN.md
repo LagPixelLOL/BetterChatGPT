@@ -55,21 +55,6 @@
 2. **API 密钥**：输入你的 OpenAI API 密钥，从[这里](https://platform.openai.com/account/api-keys)获取。
 3. **代理**：使用 [ChatGPTAPIFree](https://github.com/ayaka14732/ChatGPTAPIFree) 或自行托管。
 
-## 🖥️ 桌面应用
-
-从 [发布页面](https://github.com/animalnots/BetterChatGPT-PLUS/releases) 下载
-
-| 操作系统 | 下载     |
-| -------- | -------- |
-| Windows  | .exe     |
-| MacOS    | .dmg     |
-| Linux    | .AppImage|
-
-### 桌面功能：
-
-- 无限本地存储
-- 本地运行
-
 ## 🛠️ 自行托管实例
 
 ### Vercel
@@ -96,11 +81,6 @@
 2. **构建**：`docker compose build`
 3. **启动**：`docker compose up -d`
 4. **停止**：`docker compose down`
-
-### 构建桌面应用
-
-1. 安装 [yarn/npm](https://www.npmjs.com/)
-2. **构建（Windows）**：`yarn make --win`
 
 ## ⭐️ 星标和支持
 
