@@ -85,8 +85,7 @@
     }
   },
   "allowScripts": {
-    "core-js@3.29.0": true,
-    "core-js@3.18.3": true,
-    "core-js-pure@3.45.1": true
+    "core-js": true,
+    "core-js-pure": true
   }
 }

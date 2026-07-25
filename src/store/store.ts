@@ -117,7 +117,7 @@ const useStore = create<StoreState>()(
             migrateV8_2(persistedState as LocalStorageInterfaceV8_2ToV9);
             break;
         }
-        return persistedState as StoreState;
+        return persistedState as ReturnType<typeof createPartializedState>;
       },
     }
   )
