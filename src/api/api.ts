@@ -117,6 +117,7 @@ function assemblePayload(
       } else {
         modifiedConfig.reasoning = { effort: reasoningEffort };
       }
+      modifiedConfig.cache_control = { type: 'ephemeral' };
     } else if (isAnthropicEndpoint) {
       var { reasoning_effort: reasoningEffort, ...modifiedConfig }: any = config;
       let thinkingBudget: { type: string, budget_tokens?: number };
