@@ -86,6 +86,17 @@ async function downloadAndProcessJson() {
         // await fs.writeFile(inputFilePath, jsonString, 'utf8');
         // console.log('Downloaded JSON has been saved to models.json');
 
+        // Exclude batch model variants. The ':batch' suffix is on `id`
+        // (e.g. 'openai/gpt-6-astra:batch'); `canonical_slug` is shared with
+        // the non-batch model and never carries the suffix.
+        if (Array.isArray(jsonData?.data)) {
+            const before = jsonData.data.length;
+            jsonData.data = jsonData.data.filter(
+                (model) => !model?.id?.endsWith(':batch')
+            );
+            console.log(`Excluded ${before - jsonData.data.length} batch model(s)`);
+        }
+
         // Sort the JSON data
         const sortedJsonData = sortObjectKeys(jsonData);
 
