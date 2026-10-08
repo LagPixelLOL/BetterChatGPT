@@ -61,26 +61,13 @@ Contributions are welcome! Feel free to submit [pull requests](https://github.co
 
 [Deploy with Vercel](https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2Fanimalnots%2FBetterChatGPT-PLUS)
 
-### GitHub Pages
-
-1. **Star & Fork**: [This Repo](https://github.com/animalnots/BetterChatGPT-PLUS)
-2. **Settings**: Navigate to `Settings` > `Pages`, select `GitHub Actions`
-3. **Actions**: Click `Actions`, `Deploy to GitHub Pages`, then `Run workflow`
-
 ### Local Setup
 
-1. Install [node.js](https://nodejs.org/en/) and [yarn/npm](https://www.npmjs.com/)
+1. Install [node.js](https://nodejs.org/en/) (includes npm)
 2. **Clone repo**: `git clone https://github.com/animalnots/BetterChatGPT-PLUS.git`
 3. Navigate: `cd BetterChatGPT-PLUS`
-4. **Install**: `yarn` or `npm install`
-5. **Launch**: `yarn dev` or `npm run dev`
-
-### Docker Compose
-
-1. Install [docker](https://www.docker.com/)
-2. **Build**: `docker compose build`
-3. **Start**: `docker compose up -d`
-4. **Stop**: `docker compose down`
+4. **Install**: `npm install`
+5. **Launch**: `npm run dev`
 
 ## ⭐️ Star & Support
 

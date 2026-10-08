@@ -61,26 +61,13 @@
 
 [使用 Vercel 部署](https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2Fanimalnots%2FBetterChatGPT-PLUS)
 
-### GitHub Pages
-
-1. **Star 和 Fork**：[这个仓库](https://github.com/animalnots/BetterChatGPT-PLUS)
-2. **设置**：导航到 `Settings` > `Pages`，选择 `GitHub Actions`
-3. **操作**：点击 `Actions`，`Deploy to GitHub Pages`，然后 `Run workflow`
-
 ### 本地设置
 
-1. 安装 [node.js](https://nodejs.org/en/) 和 [yarn/npm](https://www.npmjs.com/)
+1. 安装 [node.js](https://nodejs.org/en/)（自带 npm）
 2. **克隆仓库**：`git clone https://github.com/animalnots/BetterChatGPT-PLUS.git`
 3. 导航到：`cd BetterChatGPT-PLUS`
-4. **安装**：`yarn` 或 `npm install`
-5. **启动**：`yarn dev` 或 `npm run dev`
-
-### Docker Compose
-
-1. 安装 [docker](https://www.docker.com/)
-2. **构建**：`docker compose build`
-3. **启动**：`docker compose up -d`
-4. **停止**：`docker compose down`
+4. **安装**：`npm install`
+5. **启动**：`npm run dev`
 
 ## ⭐️ 星标和支持
 
