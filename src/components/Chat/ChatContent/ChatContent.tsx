@@ -1,5 +1,4 @@
-import React, { useEffect, useRef, useCallback } from 'react';
-import ScrollToBottom, { useScrollTo, useScrollToBottom, useObserveScrollPosition } from 'react-scroll-to-bottom';
+import React, { useEffect, useRef } from 'react';
 import useStore from '@store/store';
 import { useTranslation } from 'react-i18next';
 
@@ -11,56 +10,14 @@ import NewMessageButton from './Message/NewMessageButton';
 import CrossIcon from '@icon/CrossIcon';
 
 import useSubmit from '@hooks/useSubmit';
+import useChatScroll from '@hooks/useChatScroll';
 import DownloadChat from './DownloadChat';
 import CloneChat from './CloneChat';
 import ShareGPT from '@components/ShareGPT';
-import { TextContentInterface, MessageInterface, ChatInterface } from '@type/chat';
+import { TextContentInterface, MessageInterface } from '@type/chat';
 import countTokens, { limitMessageTokens } from '@utils/messageUtils';
 import { defaultModel, reduceMessagesToTotalToken } from '@constants/chat';
 import { toast } from 'react-toastify';
-
-const ScrollController = () => {
-  const scrollTo = useScrollTo();
-  const scrollToBottom = useScrollToBottom();
-  const setChats = useStore((state) => state.setChats);
-  const currentChatIndex = useStore((state) => state.currentChatIndex);
-
-  const firstCallRef = useRef(true);
-  const debounceTimerRef = useRef<ReturnType<typeof setTimeout> | undefined>(
-    undefined
-  );
-
-  const observer = useCallback(({ scrollTop }: { scrollTop: number }) => {
-    const updateChatScrollTop = () => {
-      const chats = useStore.getState().chats;
-      if (!chats || currentChatIndex < 0 || currentChatIndex >= chats.length) return;
-      const updatedChats: ChatInterface[] = structuredClone(chats);
-      updatedChats[currentChatIndex].scrollTop = scrollTop;
-      setChats(updatedChats);
-    };
-
-    if (firstCallRef.current) {
-      firstCallRef.current = false;
-      const chatScrollTop = useStore.getState().chats?.[currentChatIndex].scrollTop;
-      if (typeof chatScrollTop === 'number') {
-        // @ts-ignore
-        scrollTo(chatScrollTop, { behavior: 'auto' });
-      } else {
-        // @ts-ignore
-        scrollToBottom({ behavior: 'auto' });
-      }
-      clearTimeout(debounceTimerRef.current);
-      updateChatScrollTop();
-    } else {
-      clearTimeout(debounceTimerRef.current);
-      debounceTimerRef.current = setTimeout(updateChatScrollTop, 100);
-    }
-  }, [scrollTo, scrollToBottom, currentChatIndex]);
-
-  useObserveScrollPosition(observer);
-
-  return null;
-};
 
 const ChatContent = () => {
   const { t } = useTranslation();
@@ -87,7 +44,6 @@ const ChatContent = () => {
   const advancedMode = useStore((state) => state.advancedMode);
   const generating = useStore.getState().generating;
   const hideSideMenu = useStore((state) => state.hideSideMenu);
-  const autoScroll = useStore((state) => state.autoScroll);
   const model = useStore((state) =>
     state.chats &&
     state.chats.length > 0 &&
@@ -146,24 +102,17 @@ const ChatContent = () => {
 
   const { error } = useSubmit();
 
-  // Custom scroller function to control auto-scroll behavior
-  const firstLoadTimeRef = useRef(Date.now());
-  const customScroller = ({ maxValue }: { maxValue: number; minValue: number; offsetHeight: number; scrollHeight: number; scrollTop: number }) => {
-    return autoScroll && Date.now() - firstLoadTimeRef.current > 1000 ? maxValue : 0;
-  };
+  const { scrollRef, contentRef, scrollToTop, scrollToBottom } = useChatScroll();
 
   return (
-    <div className='flex-1 overflow-hidden'>
-      <ScrollToBottom
-        className='h-full dark:bg-gray-800'
-        followButtonClassName='hidden'
-        scroller={customScroller}
-        initialScrollBehavior='auto'
-        checkInterval={50}
-      >
-        <ScrollToTopButton />
-        <ScrollToBottomButton />
-        <div className='flex flex-col items-center text-sm dark:bg-gray-800'>
+    <div className='relative flex-1 overflow-hidden dark:bg-gray-800'>
+      <ScrollToTopButton onClick={scrollToTop} />
+      <ScrollToBottomButton onClick={scrollToBottom} />
+      <div className='h-full w-full overflow-y-auto' ref={scrollRef}>
+        <div
+          className='flex flex-col items-center text-sm dark:bg-gray-800'
+          ref={contentRef}
+        >
           <div
             className='flex flex-col items-center text-sm dark:bg-gray-800 w-full'
             ref={saveRef}
@@ -228,8 +177,7 @@ const ChatContent = () => {
           </div>
           <div className='w-full h-36'></div>
         </div>
-        <ScrollController />
-      </ScrollToBottom>
+      </div>
     </div>
   );
 };
